@@ -2,75 +2,20 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import CustomInput from '../components/CustomInput';
 import BreadCrumb from '../components/BreadCrumb';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export class GendersForm extends Component {
-	
-	constructor () {
-		super();
-		this.state = { name : "", errorMsg : {} };
-
-		this.sendData = this.sendData.bind(this);
-		this.validate = this.validate.bind(this);
-		this.setName = this.setName.bind(this);
-
-	}
-
-	validate () {
-
-		var error = {};
-		var bInvalid = false;
-		
-		if (this.state.name === "")
-		{
-			error.name = { msg : "Please insert a valid Song Name" };
-			bInvalid = true;
-		}
-		
-		this.setState({ errorMsg : error})
-
-		return bInvalid;
-	}
-
-	sendData (e) {
-
-		e.preventDefault();
-
-		if ( this.validate() )
-		{
-			return;
-		}
-
-		$.ajax({
-			url : "https://songs-bank-be.herokuapp.com/v1/genders",
-			contentType: 'application/json',
-			dataType:'json',
-			type:'post',
-			data: JSON.stringify({name:this.state.name}),
-			success: function(response) {
-				this.props.refreshTable(response);
-				this.setState({ name : "", errorMsg : {} });
-			}.bind(this),
-			error: function(response) {
-				console.log("erro");
-			}
-		});  
-
-	}
-
-	setName(evento) {
-		this.setState({name:evento.target.value});
-	}  
 
 	render () {
 		return (
 	        <div className="row">
                 <div className="col-lg-6">
                 
-                    <form role="form" onSubmit={this.sendData}>
+                    <form role="form">
 
-                        <CustomInput label="Song Name*" type="text" name="name" value={this.state.name} change={this.setName} error={this.state.errorMsg} />
-                       
-                        <button type="submit" className="btn btn-default">Submit Button</button>
+                        <CustomInput label="Song Name*" type="text" name="name" value={this.props.name} change={this.props.setName} error={this.props.errorMsg} />
 
                   </form>      
 
@@ -141,6 +86,97 @@ export class GendersTable extends Component {
 
 }	
 
+export class InsertDialog extends Component {
+	
+	constructor () {
+		super();
+		this.state = { name : "", open : false, errorMsg : {} };
+
+		this.sendData = this.sendData.bind(this);
+		this.validate = this.validate.bind(this);
+		this.setName = this.setName.bind(this);
+
+	}
+
+	validate () {
+
+		var error = {};
+		var bInvalid = false;
+		
+		if (this.state.name === "")
+		{
+			error.name = { msg : "Please insert a valid Song Name" };
+			bInvalid = true;
+		}
+		
+		this.setState({ errorMsg : error})
+
+		return bInvalid;
+	}
+
+	sendData (e) {
+
+		if ( this.validate() )
+		{
+			return false;
+		}
+
+		$.ajax({
+			url : "https://songs-bank-be.herokuapp.com/v1/genders",
+			contentType: 'application/json',
+			dataType:'json',
+			type:'post',
+			data: JSON.stringify({name:this.state.name}),
+			success: function(response) {
+				this.props.refreshTable(response);
+				this.setState({ name : "", errorMsg : {} });
+			}.bind(this),
+			error: function(response) {
+				console.log("erro");
+			}
+		});  
+
+		return true;
+
+	}
+
+	setName(evento) {
+		this.setState({name:evento.target.value});
+	}  
+
+	handleOpen = () => {
+		this.setState({open: true});
+	};
+
+	handleSubmit = () => {
+		if (this.sendData())
+		{
+			this.setState({open: false});	
+		}
+		
+	};
+
+	handleCancel = () => {
+		this.setState({open: false});	
+	}
+
+	render() {
+	    const actions = [
+	      <FlatButton label="Cancel" primary={true} onTouchTap={this.handleCancel} />,
+	      <FlatButton label="Submit" primary={true} keyboardFocused={true} onTouchTap={this.handleSubmit} />,
+	    ];
+
+	    return (
+	      <div>
+	        <RaisedButton label="Insert Gender" primary={true} onTouchTap={this.handleOpen} />
+	        <Dialog title="Insert Gender" actions={actions} modal={false} open={this.state.open} >
+				<GendersForm refreshTable={this.props.refreshTable} name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
+	        </Dialog>
+	      </div>
+	    );
+	}
+}
+
 export default class GendersBox extends Component {
 	
 	constructor () {
@@ -167,8 +203,8 @@ export default class GendersBox extends Component {
 		return (
 			<div>
 				<BreadCrumb label="Genders"/>
+				<InsertDialog refreshTable={this.refreshTable}/>
 				<div>
-				    <GendersForm refreshTable={this.refreshTable} />
 	                <GendersTable genders={this.state.genders} refreshTable={this.refreshTable} />    
 	            </div>    
 	        </div>
