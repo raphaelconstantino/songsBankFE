@@ -9,27 +9,29 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
+    this.state = {open: true};
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle = () => this.setState({open: true});
 
   render() {
     return (
 
         <div>        
             <div>
-                <AppBar title="My Songs Bank" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle}/>
+                <AppBar />
             </div>    
 
             <div>
 
-                <Menu open={this.state.open} handleToggle={this.handleToggle} />
+                <div className="col-lg-2">  
+                  <Menu open={this.state.open} handleToggle={this.handleToggle} />
+                </div>  
 
                 <div id="page-wrapper">
 
 
-                    <div className="container-fluid">
+                    <div className="container-fluid col-lg-10 pull-right">
 
                         {this.props.children}
 

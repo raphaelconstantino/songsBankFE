@@ -6,6 +6,7 @@ import BreadCrumb from '../components/BreadCrumb';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import ProgressPie from '../components/ProgressPie';
 
 export class SongsForm extends Component {
 
@@ -64,11 +65,11 @@ export class SongsTable extends Component {
                             <table className="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                    	<th>Review Lvl</th>
                                         <th>Song</th>
                                         <th>Artist</th>
                                         <th>Gender</th>
                                         <th>Status</th>
-                                        <th>Review Lvl</th>
                                         <th>Description</th>
                                         <th>Instrumment</th>
                                         <th></th>
@@ -80,11 +81,11 @@ export class SongsTable extends Component {
                                       this.props.songs.map(function (song) {
                                         return (
                                           <tr key={song._id}>
+                                          	<td><ProgressPie id={song._id}/> {/*song.lastReview*/}</td>
                                             <td>{song.name}</td>
                                             <td>{song.artist}</td>
                                             <td>{song.genders ? song.genders.name : "" }</td>
                                             <td>{song.status}</td>
-                                            <td>{song.lastReview}</td>
                                             <td>{song.description}</td>
                                             <td>{song.instrumments ? song.instrumments.name : "" }</td>
                                             <td><button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, song._id)} >Delete</button></td>
@@ -261,6 +262,9 @@ export default class SongsBox extends Component {
 	}
 
 	render () {
+
+
+
 		return (
 			<div>
 				<BreadCrumb label="Songs"/>
