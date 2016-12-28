@@ -12,15 +12,15 @@ export default class ProgressPie extends Component {
         backgroundBorderWidth: 15,
         fillColor : "#dcdcdc",
         fontColor : "#333",
-        percent: 75
+        percent: this.props.percentage
       });      
     }
 
     render() {
         return (
-          <div className="row">
-            <div className="col-lg-10">
-                <div id={this.props.id}></div>
+          <div>
+            <div>
+                <div className="col-md-8" id={this.props.id}></div>
             </div>
           </div>
         );

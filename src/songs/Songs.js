@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import moment from 'moment';
 import CustomInput from '../components/CustomInput';
 import CustomSelect from '../components/CustomSelect';
 import BreadCrumb from '../components/BreadCrumb';
@@ -54,6 +55,39 @@ export class SongsTable extends Component {
 		}); 
 	}
 
+	daysRemaining (date) {
+	    var eventdate = moment(date);
+	    var todaysdate = moment();
+	    return eventdate.diff(todaysdate, 'days');
+	}
+
+	getPercentage (val) {
+		
+		var total = 100;
+		var iPos = val * -1;
+		var iDif = 4;
+		var iResult = 0;
+
+		if (iPos > 7)
+		{
+			iDif = 7;
+		} else if (iPos > 4)
+		{
+			iDif = 5;
+		}
+
+		val = val * iDif;
+		
+		iResult = (total + val);
+
+		if (iResult < 0)
+		{
+			iResult = 0;
+		}
+
+		return iResult;
+	}
+
 	render () {
 
 		return (
@@ -81,7 +115,7 @@ export class SongsTable extends Component {
                                       this.props.songs.map(function (song) {
                                         return (
                                           <tr key={song._id}>
-                                          	<td><ProgressPie id={song._id}/> {/*song.lastReview*/}</td>
+                                          	<td className="col-md-2"><ProgressPie id={song._id} percentage={this.getPercentage(this.daysRemaining(song.lastReview))}/> </td>
                                             <td>{song.name}</td>
                                             <td>{song.artist}</td>
                                             <td>{song.genders ? song.genders.name : "" }</td>
