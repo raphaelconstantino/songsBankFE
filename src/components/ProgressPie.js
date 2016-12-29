@@ -1,28 +1,22 @@
-/*https://github.com/pguso/jquery-plugin-circliful*/
+/*https://github.com/joshjg/react-canvas-knob*/
 
 import React, { Component } from 'react';
+import Knob from 'react-canvas-knob';
 
 export default class ProgressPie extends Component {
 
-    componentDidMount () {
-      var idVal = this.props.id;
-      window.$("#" + idVal).circliful({
-        animationStep: 15,
-        foregroundBorderWidth: 10,
-        backgroundBorderWidth: 15,
-        fillColor : "#dcdcdc",
-        fontColor : "#333",
-        percent: this.props.percentage
-      });      
-    }
+  handleChange () {
+    return;
+  }
 
-    render() {
-        return (
-          <div>
-            <div>
-                <div className="col-md-8" id={this.props.id}></div>
-            </div>
-          </div>
-        );
-    }
+  render() {
+    return (
+        <Knob 
+          value={this.props.percentage} 
+          onChange={this.handleChange} 
+          width={60} 
+          height={60}
+          readOnly={true}/>  
+    );
+  }
 }
