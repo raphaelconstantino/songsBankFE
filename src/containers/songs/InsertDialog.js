@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import SongsForm from './SongsForm';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import CustomDialog from '../../components/CustomDialog';
 import HttpService from '../../util/HttpService';
 
 export default class InsertDialog extends Component {
 	
 	constructor () {
 		super();
-		this.state = { name : "", artist : "", status : "", complexity : "", genders: "", instrumments: "", description : "", open : false, errorMsg : {} };
+		this.state = { name : "", artist : "", status : "", complexity : "", genders: "", instrumments: "", description : "", errorMsg : {} };
 
 		this.sendData = this.sendData.bind(this);
 		this.validate = this.validate.bind(this);
@@ -70,33 +68,9 @@ export default class InsertDialog extends Component {
 		this.setState(field);
 	}
 
-
-	handleOpen = () => {
-		this.setState({open: true});
-	};
-
-	handleSubmit = () => {
-		if (this.sendData())
-		{
-			this.setState({open: false});	
-		}
-		
-	};
-
-	handleCancel = () => {
-		this.setState({open: false});	
-	}
-
 	render() {
-	    const actions = [
-	      <FlatButton label="Cancel" primary={true} onTouchTap={this.handleCancel} />,
-	      <FlatButton label="Submit" primary={true} keyboardFocused={true} onTouchTap={this.handleSubmit} />,
-	    ];
-
-	    return (
-	      <div>
-	        <RaisedButton label="Insert Song" primary={true} onTouchTap={this.handleOpen} />
-	        <Dialog title="Insert Song" actions={actions} modal={false} open={this.state.open} autoScrollBodyContent={true}>
+		return (
+			<CustomDialog refreshTable={this.props.refreshTable} label="Insert Song" sendData={this.sendData}>
 				<SongsForm 
 					refreshTable={this.props.refreshTable} 
 					name={this.state.name} 
@@ -112,10 +86,10 @@ export default class InsertDialog extends Component {
 					listInstrumments={this.props.instrumments}
 					setField={this.setField} 
 					errorMsg={this.state.errorMsg} />
-	        </Dialog>
-	      </div>
+		    </CustomDialog>
 	    );
-	}
+	}	
+
 }
 
 InsertDialog.propTypes = {
