@@ -36,7 +36,7 @@ export default class CustomDialog extends Component {
 	    return (
 	      <div>
 	        <RaisedButton label={this.props.label} primary={true} onTouchTap={this.handleOpen} />
-	        <Dialog title={this.props.label} actions={actions} modal={false} open={this.state.open} >
+	        <Dialog title={this.props.label} actions={actions} modal={false} open={this.state.open} autoScrollBodyContent={true} >
 				 {this.props.children}
 	        </Dialog>
 	      </div>
