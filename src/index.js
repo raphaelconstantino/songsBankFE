@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import SongsBox from './songs/Songs';
-import GendersBox from './genders/Genders';
-import InstrumentsBox from './instruments/Instruments';
+import SongsBox from './containers/songs/Songs';
+import GendersBox from './containers/genders/Genders';
+import InstrumentsBox from './containers/instruments/Instruments';
 import {Router, Route, browserHistory} from 'react-router';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
