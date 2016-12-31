@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './css/bootstrap.min.css';
-import './css/sb-admin.css';
-
 import AppBar from 'material-ui/AppBar';
 import Menu from './components/Menu';
 
