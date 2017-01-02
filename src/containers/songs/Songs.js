@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
-import InsertDialog from './InsertDialog';
+import UpsertDialog from './UpsertDialog';
 import BreadCrumb from '../../components/BreadCrumb';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class SongsBox extends Component {
 	
@@ -53,19 +54,24 @@ export default class SongsBox extends Component {
 
 	render () {
 
-
-
 		return (
 			<div>
 				<BreadCrumb label="Songs"/>
-				<InsertDialog 
+				<UpsertDialog 
 					refreshTable={this.refreshTable} 
 					instrumments={this.state.instrumments} 
 					genders={this.state.genders} 
 					status={this.state.status}
-					complexity={this.state.complexity} />
+					complexity={this.state.complexity} 
+					button={ <RaisedButton label="Insert Song" primary={true}/> } />
 				<div>
-	                <SongsTable songs={this.state.songs} refreshTable={this.refreshTable} />    
+	                <SongsTable 
+		                songs={this.state.songs}
+		                refreshTable={this.refreshTable} 
+						instrumments={this.state.instrumments} 
+						genders={this.state.genders} 
+						status={this.state.status}
+						complexity={this.state.complexity} />    
 	            </div>    
 	        </div>
 		);

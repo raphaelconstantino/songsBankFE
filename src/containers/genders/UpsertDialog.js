@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import GendersForm from './GendersForm';
-import CustomDialog from '../../components/CustomDialog';
+import CustomDialogContainer from '../../components/CustomDialogContainer';
 import HttpService from '../../util/HttpService';
 
-export default class InsertDialog extends Component {
+export default class UpsertDialog extends Component {
 	
 	constructor () {
 		super();
@@ -38,11 +38,23 @@ export default class InsertDialog extends Component {
 			return false;
 		}
 
-		HttpService.post("v1/genders", {name:this.state.name})
-			.then(response => {
-				this.props.refreshTable(response);
-				this.setState({ name : "", errorMsg : {} });
-			});		
+		let oData = {name : this.state.name};
+
+		if (this.props.obj)
+		{
+		    HttpService.put("v1/genders/" + this.props.obj._id, oData)
+		      .then(response => {
+					this.props.refreshTable(response);
+					this.setState({ name : "", errorMsg : {} });
+				}); 
+		} else
+		{
+			HttpService.post("v1/genders", oData)
+				.then(response => {
+					this.props.refreshTable(response);
+					this.setState({ name : "", errorMsg : {} });
+				});		
+		}		
 
 		return true;
 
@@ -50,17 +62,25 @@ export default class InsertDialog extends Component {
 
 	setName(evento) {
 		this.setState({name:evento.target.value});
+	}
+
+	componentWillMount () {
+		if (this.props.obj)
+		{
+			this.setState(this.props.obj);
+		}
 	}  
 
 	render() {
 		return (
-			<CustomDialog refreshTable={this.props.refreshTable} label="Insert Gender" sendData={this.sendData}>
+			<CustomDialogContainer refreshTable={this.props.refreshTable} label="Insert Gender" sendData={this.sendData} button={this.props.button}>
 				<GendersForm refreshTable={this.props.refreshTable} name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
-		    </CustomDialog>
+		    </CustomDialogContainer>
 	    );
 	}
 }
 
-InsertDialog.propTypes = {
+UpsertDialog.propTypes = {
     refreshTable : React.PropTypes.func.isRequired,
+    obj : React.PropTypes.object,
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import {TableHeaderColumn} from 'react-bootstrap-table';
+import UpsertDialog from './UpsertDialog';
 import ProgressPie from '../../components/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
@@ -26,9 +27,18 @@ export default class SongsTable extends Component {
 
     createButtons (cell, row) {
         return (<div>
-                    <button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, row._id)} >Delete</button>
-                    &nbsp;
-                    <button type="button" className="btn btn-info btn-sm" onClick={this.reviewSong.bind(this, row)} >Review</button>
+                    <button type="button" className="btn btn-success btn-sm" onClick={this.reviewSong.bind(this, row)} >Review</button>
+                    <UpsertDialog 
+                    	refreshTable={this.props.refreshTable} 
+						instrumments={this.props.instrumments} 
+						genders={this.props.genders} 
+						status={this.props.status}
+						complexity={this.props.complexity}
+                    	obj={row}
+		                button={<button label="Edit" type="button" className="btn btn-info btn-sm">Edit</button>} />
+	                <div>
+	                  <button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, row._id)} >Delete</button>
+	                </div>	
                 </div>)
     }
 
@@ -78,7 +88,6 @@ export default class SongsTable extends Component {
 	}
 
 	render () {
-
 		return (
 
             <CustomTable label="Songs Table" list={this.props.songs}>
@@ -101,5 +110,9 @@ export default class SongsTable extends Component {
 
 SongsTable.propTypes = {
     refreshTable : React.PropTypes.func.isRequired,
-    songs : React.PropTypes.array.isRequired	
+    songs : React.PropTypes.array.isRequired,
+    instrumments : React.PropTypes.array.isRequired,
+    genders : React.PropTypes.array.isRequired,
+    status : React.PropTypes.array.isRequired,
+    complexity : React.PropTypes.array.isRequired
 };

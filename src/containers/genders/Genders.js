@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GendersTable from './GendersTable';
-import InsertDialog from './InsertDialog';
+import UpsertDialog from './UpsertDialog';
 import BreadCrumb from '../../components/BreadCrumb';
 import HttpService from '../../util/HttpService';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class GendersBox extends Component {
 	
@@ -27,7 +28,7 @@ export default class GendersBox extends Component {
 		return (
 			<div>
 				<BreadCrumb label="Genders"/>
-				<InsertDialog refreshTable={this.refreshTable}/>
+				<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> }/>
 				<div>
 	                <GendersTable genders={this.state.genders} refreshTable={this.refreshTable} />    
 	            </div>    

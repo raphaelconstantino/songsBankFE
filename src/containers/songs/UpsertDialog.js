@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SongsForm from './SongsForm';
-import CustomDialog from '../../components/CustomDialog';
+import CustomDialogContainer from '../../components/CustomDialogContainer';
 import HttpService from '../../util/HttpService';
 
-export default class InsertDialog extends Component {
+export default class UpsertDialog extends Component {
 	
 	constructor () {
 		super();
@@ -48,13 +48,25 @@ export default class InsertDialog extends Component {
 			return false;
 		}
 
-		let oData = {name : this.state.name, description : this.state.description, lastReview : new Date(), artist : this.state.artist, status:this.state.status, complexity : this.state.complexity, genders : this.state.genders, instrumments : this.state.instrumments}
+		let oData = {name : this.state.name, description : this.state.description, artist : this.state.artist, status:this.state.status, complexity : this.state.complexity, genders : this.state.genders, instrumments : this.state.instrumments}
 
-		HttpService.post("v1/songs", oData)
-			.then(response => {
-				this.props.refreshTable(response);
-				this.setState({ name : "", errorMsg : {} });
-			});				
+		if (this.props.obj)
+		{
+			oData.lastReview = this.state.lastReview;
+		    HttpService.put("v1/songs/" + this.props.obj._id, oData)
+		      .then(response => {
+					this.props.refreshTable(response);
+					this.setState({ name : "", errorMsg : {} });
+				}); 
+		} else
+		{
+			oData.lastReview = new Date();
+			HttpService.post("v1/songs", oData)
+				.then(response => {
+					this.props.refreshTable(response);
+					this.setState({ name : "", errorMsg : {} });
+				});
+		}						
 
 
 		return true;
@@ -68,9 +80,19 @@ export default class InsertDialog extends Component {
 		this.setState(field);
 	}
 
+	componentWillMount () {
+		if (this.props.obj)
+		{
+			let obj = JSON.parse(JSON.stringify(this.props.obj));
+			obj.genders = obj.genders._id;
+			obj.instrumments = obj.instrumments._id;
+			this.setState(obj);
+		}
+	}  	
+
 	render() {
 		return (
-			<CustomDialog refreshTable={this.props.refreshTable} label="Insert Song" sendData={this.sendData}>
+			<CustomDialogContainer refreshTable={this.props.refreshTable} label="Insert Song" sendData={this.sendData} button={this.props.button}>
 				<SongsForm 
 					refreshTable={this.props.refreshTable} 
 					name={this.state.name} 
@@ -86,13 +108,13 @@ export default class InsertDialog extends Component {
 					listInstrumments={this.props.instrumments}
 					setField={this.setField} 
 					errorMsg={this.state.errorMsg} />
-		    </CustomDialog>
+		    </CustomDialogContainer>
 	    );
 	}	
 
 }
 
-InsertDialog.propTypes = {
+UpsertDialog.propTypes = {
     refreshTable : React.PropTypes.func.isRequired,
     genders : React.PropTypes.array.isRequired,
     instrumments : React.PropTypes.array.isRequired,
