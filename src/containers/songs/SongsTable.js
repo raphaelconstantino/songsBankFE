@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import UpsertDialog from './UpsertDialog';
@@ -7,6 +7,15 @@ import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
 
 export default class SongsTable extends Component {
+
+	static propTypes = {
+		refreshTable : PropTypes.func.isRequired,
+		songs : PropTypes.array.isRequired,
+		instrumments : PropTypes.array.isRequired,
+		genders : PropTypes.array.isRequired,
+		status : PropTypes.array.isRequired,
+		complexity : PropTypes.array.isRequired
+	}
 
 	deleteSong (_id) {
 
@@ -107,12 +116,3 @@ export default class SongsTable extends Component {
 	}
 
 }
-
-SongsTable.propTypes = {
-    refreshTable : React.PropTypes.func.isRequired,
-    songs : React.PropTypes.array.isRequired,
-    instrumments : React.PropTypes.array.isRequired,
-    genders : React.PropTypes.array.isRequired,
-    status : React.PropTypes.array.isRequired,
-    complexity : React.PropTypes.array.isRequired
-};

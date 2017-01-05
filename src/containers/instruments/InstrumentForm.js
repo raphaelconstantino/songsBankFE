@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CustomInput from '../../components/CustomInput';
 
 export default class InstrumentForm extends Component {
+	
+	static propTypes = {
+		name: PropTypes.string.isRequired,
+		setName : PropTypes.func.isRequired,
+		errorMsg : PropTypes.object
+	}	
 	
 	render () {
 		return (
@@ -22,9 +28,3 @@ export default class InstrumentForm extends Component {
 	}
 
 }	
-
-InstrumentForm.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    setName : React.PropTypes.func.isRequired,
-    errorMsg : React.PropTypes.object
-};
