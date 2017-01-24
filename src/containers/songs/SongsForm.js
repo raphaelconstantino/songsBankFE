@@ -1,8 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomSelect from '../../components/CustomSelect';
 
 export default class SongsForm extends Component {
+
+	static propTypes = {
+		name: PropTypes.string.isRequired,
+		artist: PropTypes.string.isRequired,
+		status: PropTypes.string.isRequired,
+		listStatus : PropTypes.array.isRequired,
+		description : PropTypes.string.isRequired,
+		complexity : PropTypes.string.isRequired,
+		listComplexity : PropTypes.array.isRequired,
+		genders : PropTypes.string.isRequired,
+		listGenders : PropTypes.array.isRequired,
+		instrumments : PropTypes.string.isRequired,
+		listInstrumments : PropTypes.array.isRequired,
+		setField : PropTypes.func.isRequired,
+		errorMsg : PropTypes.object
+	}
 
 	render () {
 		return (
@@ -29,19 +45,3 @@ export default class SongsForm extends Component {
 	}
 
 }
-
-SongsForm.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    artist: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string.isRequired,
-    listStatus : React.PropTypes.array.isRequired,
-    description : React.PropTypes.string.isRequired,
-    complexity : React.PropTypes.string.isRequired,
-    listComplexity : React.PropTypes.array.isRequired,
-    genders : React.PropTypes.string.isRequired,
-    listGenders : React.PropTypes.array.isRequired,
-    instrumments : React.PropTypes.string.isRequired,
-    listInstrumments : React.PropTypes.array.isRequired,
-    setField : React.PropTypes.func.isRequired,
-    errorMsg : React.PropTypes.object
-};

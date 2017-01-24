@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CustomDialog from './CustomDialog';
 
 export default class CustomDialogContainer extends Component {
@@ -9,6 +9,11 @@ export default class CustomDialogContainer extends Component {
 
 	}
 
+	static propTypes = {
+		label : PropTypes.string.isRequired,
+		sendData : PropTypes.func.isRequired
+	}
+	
 	handleOpen = () => {
 		this.setState({open: true});
 	};
@@ -39,8 +44,3 @@ export default class CustomDialogContainer extends Component {
 	    );
 	}
 }
-
-CustomDialogContainer.propTypes = {
-    label : React.PropTypes.string.isRequired,
-    sendData : React.PropTypes.func.isRequired
-};

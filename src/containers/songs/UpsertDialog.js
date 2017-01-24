@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SongsForm from './SongsForm';
 import CustomDialogContainer from '../../components/CustomDialogContainer';
 import HttpService from '../../util/HttpService';
@@ -13,6 +13,14 @@ export default class UpsertDialog extends Component {
 		this.validate = this.validate.bind(this);
 		this.setField = this.setField.bind(this);
 
+	}
+	
+	static propTypes = {
+		refreshTable : PropTypes.func.isRequired,
+		genders : PropTypes.array.isRequired,
+		instrumments : PropTypes.array.isRequired,
+		complexity : PropTypes.array.isRequired,
+		status : PropTypes.array.isRequired,
 	}
 
 	validate () {
@@ -56,7 +64,7 @@ export default class UpsertDialog extends Component {
 		    HttpService.put("v1/songs/" + this.props.obj._id, oData)
 		      .then(response => {
 					this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
+					this.setState({ name : "", artist : "", status : "", complexity : "", genders: "", instrumments: "", description : "", errorMsg : {} });
 				}); 
 		} else
 		{
@@ -64,7 +72,7 @@ export default class UpsertDialog extends Component {
 			HttpService.post("v1/songs", oData)
 				.then(response => {
 					this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
+					this.setState({name : "", artist : "", status : "", complexity : "", genders: "", instrumments: "", description : "", errorMsg : {} });
 				});
 		}						
 
@@ -113,11 +121,3 @@ export default class UpsertDialog extends Component {
 	}	
 
 }
-
-UpsertDialog.propTypes = {
-    refreshTable : React.PropTypes.func.isRequired,
-    genders : React.PropTypes.array.isRequired,
-    instrumments : React.PropTypes.array.isRequired,
-    complexity : React.PropTypes.array.isRequired,
-    status : React.PropTypes.array.isRequired,
-};

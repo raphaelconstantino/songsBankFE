@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import InstrumentForm from './InstrumentForm';
 import CustomDialogContainer from '../../components/CustomDialogContainer';
 import HttpService from '../../util/HttpService';
@@ -13,6 +13,10 @@ export default class UpsertDialog extends Component {
 		this.validate = this.validate.bind(this);
 		this.setName = this.setName.bind(this);
 
+	}
+	
+	static propTypes = {
+		refreshTable : PropTypes.func.isRequired,
 	}
 
 	validate () {
@@ -81,7 +85,3 @@ export default class UpsertDialog extends Component {
 	}
 
 }	
-
-UpsertDialog.propTypes = {
-    refreshTable : React.PropTypes.func.isRequired,
-};

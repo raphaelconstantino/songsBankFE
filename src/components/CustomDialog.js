@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class CustomDialog extends Component {
+
+	static propTypes = {
+		title : PropTypes.string.isRequired,
+		handleCancel : PropTypes.func.isRequired,
+		handleSubmit : PropTypes.func.isRequired,
+		open : PropTypes.bool.isRequired 
+	}
 
 	render() {
 	    const actions = [
@@ -19,10 +26,3 @@ export default class CustomDialog extends Component {
 	    );
 	}
 }
-
-CustomDialog.propTypes = {
-    title : React.PropTypes.string.isRequired,
-  	handleCancel : React.PropTypes.func.isRequired,
-  	handleSubmit : React.PropTypes.func.isRequired,
-  	open : React.PropTypes.bool.isRequired 
-};

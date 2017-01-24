@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import GendersForm from './GendersForm';
 import CustomDialogContainer from '../../components/CustomDialogContainer';
 import HttpService from '../../util/HttpService';
@@ -15,6 +15,11 @@ export default class UpsertDialog extends Component {
 
 	}
 
+	static propTypes = {
+		refreshTable : PropTypes.func.isRequired,
+		obj : PropTypes.object
+	}
+	
 	validate () {
 
 		let error = {};
@@ -79,8 +84,3 @@ export default class UpsertDialog extends Component {
 	    );
 	}
 }
-
-UpsertDialog.propTypes = {
-    refreshTable : React.PropTypes.func.isRequired,
-    obj : React.PropTypes.object,
-};
