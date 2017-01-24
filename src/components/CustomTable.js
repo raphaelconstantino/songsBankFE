@@ -12,7 +12,6 @@ export default class CustomTable extends Component {
 
       <div className="row">
           <div className="col-lg-12">
-              <h2>{this.props.label}</h2>
               <div className="table-responsive">
                 <BootstrapTable data={this.props.list} keyField='_id' striped hover>
                   {this.props.children}
@@ -29,6 +28,5 @@ export default class CustomTable extends Component {
 }	
 
 CustomTable.propTypes = {
-    label : React.PropTypes.string.isRequired,
     list : React.PropTypes.array.isRequired
 };

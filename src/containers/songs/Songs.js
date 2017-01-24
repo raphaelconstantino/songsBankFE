@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
 import UpsertDialog from './UpsertDialog';
-import BreadCrumb from '../../components/BreadCrumb';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export default class SongsBox extends Component {
@@ -56,7 +55,7 @@ export default class SongsBox extends Component {
 
 		return (
 			<div>
-				<BreadCrumb label="Songs"/>
+				<h2>Songs</h2>	
 				<UpsertDialog 
 					refreshTable={this.refreshTable} 
 					instrumments={this.state.instrumments} 

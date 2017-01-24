@@ -9,7 +9,6 @@ table .filter {
     font-size : 12px !important;
 }
 
-/* SONGS */
-.song-chart {
-  width: 6em !important;
+#songs-table table tr td:first-child, #songs-table table tr th:first-child {
+  width : 6em;
 }

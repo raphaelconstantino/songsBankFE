@@ -26,7 +26,7 @@ export default class GendersTable extends Component {
 	render () {
 
 		return (
-      <CustomTable label="Genders Table" list={this.props.genders}>
+      <CustomTable list={this.props.genders}>
         <TableHeaderColumn dataField='name'>Gender Name</TableHeaderColumn>
         <TableHeaderColumn dataFormat={this.createButtons.bind(this)}></TableHeaderColumn>
       </CustomTable>		

@@ -26,7 +26,7 @@ export default class InstrumentTable extends Component {
 	render () {
 
     return (
-      <CustomTable label="Instruments Table" list={this.props.instrumments}>
+      <CustomTable list={this.props.instrumments}>
         <TableHeaderColumn dataField='name'>Gender Name</TableHeaderColumn>
         <TableHeaderColumn dataFormat={this.createButtons.bind(this)}></TableHeaderColumn>
       </CustomTable>    

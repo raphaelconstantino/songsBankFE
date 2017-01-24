@@ -9,8 +9,8 @@ export default class Menu extends Component {
   render() {
     return (
       <div>
-        <Drawer open={this.props.open}>
-            <AppBar title="My Songs Bank"/>
+        <Drawer width={200} open={this.props.open}>
+            <AppBar title="S-Bank"/>
             <MenuItem onTouchTap={this.props.handleToggle}><Link to="/dashboard"><i className="fa fa-fw fa-table"></i> Dashboard</Link></MenuItem>
             <MenuItem onTouchTap={this.props.handleToggle}><Link to="/songs"><i className="fa fa-fw fa-table"></i> Songs</Link></MenuItem>
             <MenuItem onTouchTap={this.props.handleToggle}><Link to="/genders"><i className="fa fa-fw fa-table"></i> Genders</Link></MenuItem>

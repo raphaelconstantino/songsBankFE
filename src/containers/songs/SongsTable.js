@@ -90,17 +90,19 @@ export default class SongsTable extends Component {
 	render () {
 		return (
 
-            <CustomTable label="Songs Table" list={this.props.songs}>
-                <TableHeaderColumn dataFormat={this.createProgressPie.bind(this)}></TableHeaderColumn>
-                <TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Song</TableHeaderColumn>
-                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Artist</TableHeaderColumn>
-                <TableHeaderColumn dataFormat={this.getGenders}>Gender</TableHeaderColumn>
-                <TableHeaderColumn dataField="complexity" dataSort={ true }>Complexity</TableHeaderColumn>
-                <TableHeaderColumn dataField="status" dataSort={ true }>Status</TableHeaderColumn>
-                <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
-                <TableHeaderColumn dataFormat={this.getInstrumments}>Instrumment</TableHeaderColumn>
-                <TableHeaderColumn dataFormat={this.createButtons.bind(this)}></TableHeaderColumn>
-            </CustomTable>        
+			<div id="songs-table">
+	            <CustomTable list={this.props.songs}>
+	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)}></TableHeaderColumn>
+	                <TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Song</TableHeaderColumn>
+	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Artist</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.getGenders}>Gender</TableHeaderColumn>
+	                <TableHeaderColumn dataField="complexity" dataSort={ true }>Complexity</TableHeaderColumn>
+	                <TableHeaderColumn dataField="status" dataSort={ true }>Status</TableHeaderColumn>
+	                <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.getInstrumments}>Instrumment</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)}></TableHeaderColumn>
+	            </CustomTable>   
+	        </div>         
 
 		);
 

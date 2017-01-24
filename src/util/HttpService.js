@@ -1,8 +1,8 @@
 export default class HttpService {
 
     static getHost () {
-        //return "https://songs-bank-be.herokuapp.com/";
-        return "http://localhost:8080/";
+        return "https://songs-bank-be.herokuapp.com/";
+        //return "http://localhost:8080/";
     }
 
     static _handleErrors(res) {

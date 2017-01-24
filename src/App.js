@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/bootstrap.min.css';
-import AppBar from 'material-ui/AppBar';
+import './css/app.css';
 import Menu from './components/Menu';
 
 class App extends Component {   
@@ -15,10 +15,7 @@ class App extends Component {
   render() {
     return (
 
-        <div>        
-            <div>
-                <AppBar />
-            </div>    
+        <div>           
 
             <div>
 
@@ -29,7 +26,7 @@ class App extends Component {
                 <div id="page-wrapper">
 
 
-                    <div className="container-fluid col-lg-10 pull-right">
+                    <div className="container-fluid pull-right app-container">
 
                         {this.props.children}
 
