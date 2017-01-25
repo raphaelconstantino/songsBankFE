@@ -26,8 +26,8 @@ export default class SongsTable extends Component {
 
 	reviewSong (obj) {
 		
-		//let oData = {name : obj.name, description : obj.description, lastReview : "2016-12-29T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
-		let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-15T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		//let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
 
 		HttpService.put("v1/songs/" + obj._id, oData)
 			.then(response => this.props.refreshTable(response));	
@@ -51,8 +51,32 @@ export default class SongsTable extends Component {
     }
 
     createProgressPie (cell, row) {
+        
+    	if (row.status !== "Learned" && row.status !==  "Learning")
+    	{
+    		return;
+    	}
+
         return <ProgressPie id={row._id} percentage={this.getPercentage(this.daysRemaining(row.lastReview))}/> 
     }
+
+    fnStatus (fieldValue, row, rowIdx, colIdx) {
+    	if ( (row.status === "Learned" || row.status ===  "Learning") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
+    	{
+			return 'red-row';
+    	}
+    	
+    	if (row.status === "Learned")
+    	{
+    		return 'green-row';
+    	}
+
+    	if (row.status ===  "Learning"){
+    		return 'yellow-row';
+    	}
+
+		return "";
+	}
 
     getGenders (cell, row) {
         return (row.genders ? row.genders.name : "")
@@ -100,15 +124,15 @@ export default class SongsTable extends Component {
 
 			<div id="songs-table">
 	            <CustomTable list={this.props.songs}>
-	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)}></TableHeaderColumn>
-	                <TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Song</TableHeaderColumn>
-	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true }>Artist</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.getGenders}>Gender</TableHeaderColumn>
-	                <TableHeaderColumn dataField="complexity" dataSort={ true }>Complexity</TableHeaderColumn>
-	                <TableHeaderColumn dataField="status" dataSort={ true }>Status</TableHeaderColumn>
-	                <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.getInstrumments}>Instrumment</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)}></TableHeaderColumn>
+	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
+	                <TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Song</TableHeaderColumn>
+	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
+	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Complexity</TableHeaderColumn>
+	                <TableHeaderColumn dataField="status" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Status</TableHeaderColumn>
+	                <TableHeaderColumn dataField="description" columnClassName={ this.fnStatus.bind(this) }>Description</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} columnClassName={ this.fnStatus.bind(this) }></TableHeaderColumn>
 	            </CustomTable>   
 	        </div>         
 

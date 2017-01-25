@@ -13,6 +13,18 @@ table td {
 	overflow : inherit !important;
 }
 
+.green-row {
+	background-color : #BCED91;
+}
+
+.yellow-row {
+	background-color : #ffffb2;
+}
+
+.red-row {
+	background-color : #F08080;
+}
+
 #songs-table table tr td:first-child, #songs-table table tr th:first-child {
   width : 6em;
 }
