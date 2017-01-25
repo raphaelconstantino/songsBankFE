@@ -45,9 +45,8 @@ export default class SongsTable extends Component {
 						complexity={this.props.complexity}
                     	obj={row}
 		                button={<button label="Edit" type="button" className="btn btn-info btn-sm">Edit</button>} />
-	                <div>
 	                  <button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, row._id)} >Delete</button>
-	                </div>	
+	                
                 </div>)
     }
 

@@ -19,7 +19,7 @@ export default class GendersTable extends Component {
 	}
 
 	createButtons (cell, row, obj) {
-		return (<div className="btn-group">
+		return (<div>
 				  <UpsertDialog 
 					refreshTable={this.props.refreshTable} 
 					obj={row} 

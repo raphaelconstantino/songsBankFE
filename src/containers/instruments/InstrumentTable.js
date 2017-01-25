@@ -3,6 +3,7 @@ import {TableHeaderColumn} from 'react-bootstrap-table';
 import CustomTable from '../../components/CustomTable';
 import UpsertDialog from './UpsertDialog';
 import HttpService from '../../util/HttpService';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 export default class InstrumentTable extends Component {
 
@@ -19,13 +20,15 @@ export default class InstrumentTable extends Component {
 	}
 
 	createButtons (cell, row, obj) {
-		return (<div>
-			  <UpsertDialog 
-				refreshTable={this.props.refreshTable} 
-				obj={row} 
-				button={<button label="Edit" type="button" className="btn btn-info btn-sm">Edit</button>}/>
-				<button type="button" className="btn btn-danger btn-sm" onClick={this.deleteInstrument.bind(this, row._id)} >Delete</button>
-			</div>);  
+		return (
+			  <DropdownButton bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
+				  <UpsertDialog 
+					refreshTable={this.props.refreshTable} 
+					obj={row} 
+					button={<MenuItem eventKey="1" label="Edit">Edit</MenuItem>}/>
+					 <MenuItem eventKey="1" onClick={this.deleteInstrument.bind(this, row._id)} >Delete</MenuItem>
+				</DropdownButton>	
+			);  
 	}  
 
 	render () {

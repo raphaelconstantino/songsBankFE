@@ -40,7 +40,7 @@ export default class CustomDialogContainer extends Component {
 					 {this.props.children}
 		        </CustomDialog>
 		    </div>    
-	      </span>
+	      </span>	
 	    );
 	}
 }
