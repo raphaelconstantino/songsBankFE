@@ -64,7 +64,7 @@ export default class SongsTable extends Component {
 					status={this.props.status}
 					complexity={this.props.complexity}
 					obj={row} 
-					button={<a role="menuitem" tabindex="-1" href="#">Edit</a>}/>
+					button={<a role="menuitem" href="#">Edit</a>}/>
 				{this.fnCreateLearnedButton(row)}
 				<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
@@ -142,6 +142,17 @@ export default class SongsTable extends Component {
 		return iResult;
 	}
 
+	fnConvertStatus () {
+		var obj = {};
+		
+		this.props.status.map(function(o, i) {
+			return obj[o._id] = o.name;
+			
+		});
+		
+		return obj;
+	}
+
 	render () {
 		return (
 
@@ -152,7 +163,7 @@ export default class SongsTable extends Component {
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
 	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Complexity</TableHeaderColumn>
-	                <TableHeaderColumn dataField="status" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Status</TableHeaderColumn>
+	                <TableHeaderColumn dataField="status" dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
 	                <TableHeaderColumn dataField="description" columnClassName={ this.fnStatus.bind(this) }>Description</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} columnClassName={ this.fnStatus.bind(this) }></TableHeaderColumn>
