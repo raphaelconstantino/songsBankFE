@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import {TableHeaderColumn} from 'react-bootstrap-table';
-import UpsertDialog from './UpsertDialog';
 import ProgressPie from '../../components/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
@@ -37,16 +36,7 @@ export default class SongsTable extends Component {
     createButtons (cell, row) {
         return (<div>
                     <button type="button" className="btn btn-success btn-sm" onClick={this.reviewSong.bind(this, row)} >Review</button>
-                    <UpsertDialog 
-                    	refreshTable={this.props.refreshTable} 
-						instrumments={this.props.instrumments} 
-						genders={this.props.genders} 
-						status={this.props.status}
-						complexity={this.props.complexity}
-                    	obj={row}
-		                button={<button label="Edit" type="button" className="btn btn-info btn-sm">Edit</button>} />
-	                  <button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, row._id)} >Delete</button>
-	                
+	                <button type="button" className="btn btn-danger btn-sm" onClick={this.deleteSong.bind(this, row._id)} >Delete</button>
                 </div>)
     }
 

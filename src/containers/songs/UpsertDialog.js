@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SongsForm from './SongsForm';
-import CustomDialogContainer from '../../components/CustomDialogContainer';
+import CustomDialog from '../../components/CustomDialog';
 import HttpService from '../../util/HttpService';
 
 export default class UpsertDialog extends Component {
@@ -22,7 +22,7 @@ export default class UpsertDialog extends Component {
 		complexity : PropTypes.array.isRequired,
 		status : PropTypes.array.isRequired,
 	}
-
+	
 	validate () {
 
 		let error = {};
@@ -88,19 +88,9 @@ export default class UpsertDialog extends Component {
 		this.setState(field);
 	}
 
-	componentWillMount () {
-		if (this.props.obj)
-		{
-			let obj = JSON.parse(JSON.stringify(this.props.obj));
-			obj.genders = obj.genders._id;
-			obj.instrumments = obj.instrumments._id;
-			this.setState(obj);
-		}
-	}  	
-
 	render() {
 		return (
-			<CustomDialogContainer refreshTable={this.props.refreshTable} label="Insert Song" sendData={this.sendData} button={this.props.button}>
+			<CustomDialog title="Insert Song" sendData={this.sendData} button={this.props.button}>
 				<SongsForm 
 					refreshTable={this.props.refreshTable} 
 					name={this.state.name} 
@@ -116,7 +106,7 @@ export default class UpsertDialog extends Component {
 					listInstrumments={this.props.instrumments}
 					setField={this.setField} 
 					errorMsg={this.state.errorMsg} />
-		    </CustomDialogContainer>
+			</CustomDialog>
 	    );
 	}	
 

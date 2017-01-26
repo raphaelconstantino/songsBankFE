@@ -4,22 +4,43 @@ import FlatButton from 'material-ui/FlatButton';
 
 export default class CustomDialog extends Component {
 
-	static propTypes = {
-		title : PropTypes.string.isRequired,
-		handleCancel : PropTypes.func.isRequired,
-		handleSubmit : PropTypes.func.isRequired,
-		open : PropTypes.bool.isRequired 
+	constructor () {
+		super();
+		this.state = { open : false };
+
 	}
 
+	static propTypes = {
+		title : PropTypes.string.isRequired,
+		sendData : PropTypes.func.isRequired,
+	}
+
+	handleOpen = () => {
+		this.setState({open: true});
+	};
+
+	handleSubmit = () => {
+		if (this.props.sendData())
+		{
+			this.setState({open: false});
+		}
+		
+	};
+
+	handleCancel = () => {
+		this.setState({open: false});	
+	};
+	
 	render() {
 	    const actions = [
-	      <FlatButton label="Cancel" primary={true} onTouchTap={this.props.handleCancel} />,
-	      <FlatButton label="Submit" primary={true} keyboardFocused={true} onTouchTap={this.props.handleSubmit} />,
+	      <FlatButton label="Cancel" primary={true} onTouchTap={this.handleCancel} />,
+	      <FlatButton label="Submit" primary={true} keyboardFocused={true} onTouchTap={this.handleSubmit} />,
 	    ];
 
 	    return (
 	    	<div>
-		        <Dialog title={this.props.title} actions={actions} modal={false} open={this.props.open} autoScrollBodyContent={true} >
+				<span onTouchTap={this.handleOpen}>{this.props.button}</span>
+		        <Dialog title={this.props.title} actions={actions} modal={false} open={this.state.open} autoScrollBodyContent={true} >
 					 {this.props.children}
 		        </Dialog>
 		    </div>    

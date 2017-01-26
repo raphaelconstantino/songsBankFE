@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import InstrumentForm from './InstrumentForm';
-import CustomDialogContainer from '../../components/CustomDialogContainer';
+import CustomDialog from '../../components/CustomDialog';
 import HttpService from '../../util/HttpService';
 
 export default class UpsertDialog extends Component {
@@ -64,23 +64,16 @@ export default class UpsertDialog extends Component {
 
 	}
 
-	componentWillMount () {
-		if (this.props.obj)
-		{
-			this.setState(this.props.obj);
-		}
-	}  
-
-
 	setName(evento) {
 		this.setState({name:evento.target.value});
 	}  
 
 	render() {
 		return (
-			<CustomDialogContainer refreshTable={this.props.refreshTable} label="Insert Instrument" sendData={this.sendData} button={this.props.button}>
-				<InstrumentForm refreshTable={this.props.refreshTable} name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
-		    </CustomDialogContainer>
+			<CustomDialog title="Insert Instrument" sendData={this.sendData} button={this.props.button}>
+				 <InstrumentForm refreshTable={this.props.refreshTable} name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
+			</CustomDialog>			
+		
 	    );
 	}
 
