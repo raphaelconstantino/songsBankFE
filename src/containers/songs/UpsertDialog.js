@@ -21,6 +21,7 @@ export default class UpsertDialog extends Component {
 		instrumments : PropTypes.array.isRequired,
 		complexity : PropTypes.array.isRequired,
 		status : PropTypes.array.isRequired,
+		obj : PropTypes.object
 	}
 	
 	validate () {

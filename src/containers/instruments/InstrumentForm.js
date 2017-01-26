@@ -6,7 +6,7 @@ export default class InstrumentForm extends Component {
 	static propTypes = {
 		name: PropTypes.string.isRequired,
 		setName : PropTypes.func.isRequired,
-		errorMsg : PropTypes.object
+		errorMsg : PropTypes.object,
 	}	
 	
 	render () {

@@ -17,6 +17,7 @@ export default class UpsertDialog extends Component {
 
 	static propTypes = {
 		refreshTable : PropTypes.func.isRequired,
+		obj : PropTypes.object
 	}
 		
 	
