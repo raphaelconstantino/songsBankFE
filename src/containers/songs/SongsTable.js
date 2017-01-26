@@ -19,6 +19,15 @@ export default class SongsTable extends Component {
 		complexity : PropTypes.array.isRequired
 	}
 
+	fnCreateLearnedButton (row) {
+		if (row.status !== "Learned")
+		{
+			return (<MenuItem eventKey="1" onClick={this.markLearned.bind(this, row)} >Mark as Learned</MenuItem>)
+		}
+		
+		return "";
+	}
+	
 	deleteSong (_id) {
 
     	HttpService.del("v1/songs/" + _id)
@@ -26,6 +35,15 @@ export default class SongsTable extends Component {
 
 	}
 
+	markLearned (obj) {
+		
+		let oData = {name : obj.name, description : obj.description, lastReview : obj.lastReview, artist : obj.artist, status : "Learned", complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+
+		HttpService.put("v1/songs/" + obj._id, oData)
+			.then(response => this.props.refreshTable(response));	
+
+	}
+	
 	reviewSong (obj) {
 		
 		let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-17T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
@@ -46,7 +64,8 @@ export default class SongsTable extends Component {
 					status={this.props.status}
 					complexity={this.props.complexity}
 					obj={row} 
-					button={<MenuItem eventKey="1" label="Edit">Edit</MenuItem>}/>
+					button={<a role="menuitem" tabindex="-1" href="#">Edit</a>}/>
+				{this.fnCreateLearnedButton(row)}
 				<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
 			  </DropdownButton>	

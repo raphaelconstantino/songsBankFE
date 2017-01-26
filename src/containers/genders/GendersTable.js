@@ -24,7 +24,7 @@ export default class GendersTable extends Component {
 					<UpsertDialog 
 						refreshTable={this.props.refreshTable} 
 						obj={row} 
-						button={<MenuItem eventKey="1" label="Edit">Edit</MenuItem>}/>
+						button={<a role="menuitem" tabindex="-1" href="#">Edit</a>}/>
 					<MenuItem eventKey="1" onClick={this.deleteGender.bind(this, row._id)} >Delete</MenuItem>
 				</DropdownButton>	
 			)

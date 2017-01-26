@@ -56,13 +56,15 @@ export default class SongsBox extends Component {
 		return (
 			<div>
 				<h2>Songs</h2>	
-				<UpsertDialog 
-					refreshTable={this.refreshTable} 
-					instrumments={this.state.instrumments} 
-					genders={this.state.genders} 
-					status={this.state.status}
-					complexity={this.state.complexity} 
-					button={ <RaisedButton label="Insert Song" primary={true}/> } />
+				<ul>
+					<UpsertDialog 
+						refreshTable={this.refreshTable} 
+						instrumments={this.state.instrumments} 
+						genders={this.state.genders} 
+						status={this.state.status}
+						complexity={this.state.complexity} 
+						button={ <RaisedButton label="Insert Song" primary={true}/> } />
+				</ul>		
 				<div>
 	                <SongsTable 
 		                songs={this.state.songs}

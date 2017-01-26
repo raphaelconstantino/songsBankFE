@@ -27,7 +27,9 @@ export default class GendersBox extends Component {
 		return (
 			<div>
 				<h2>Genders</h2>
-				<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> }/>
+				<ul>	
+					<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> }/>
+				</ul>	
 				<div>
 	                <GendersTable genders={this.state.genders} refreshTable={this.refreshTable} />    
 	            </div>    
