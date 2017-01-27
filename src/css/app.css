@@ -12,8 +12,13 @@ table .filter {
     font-size : 12px !important;
 }
 
-table td {
-	overflow : inherit !important;
+td {
+	overflow : visible !important;
+}
+
+.react-bs-container-body, .table-responsive {
+	overflow-x: visible !important;
+	overflow-y: visible !important;
 }
 
 .green-row {

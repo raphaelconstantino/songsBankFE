@@ -25,7 +25,7 @@ export default class InstrumentTable extends Component {
 				<UpsertDialog 
 					refreshTable={this.props.refreshTable} 
 					obj={row} 
-					button={<a role="menuitem" tabindex="-1" href="#">Edit</a>}/>
+					button={<a role="menuitem" href="#">Edit</a>}/>
 				<MenuItem eventKey="1" onClick={this.deleteInstrument.bind(this, row._id)} >Delete</MenuItem>
 			  </DropdownButton>	
 			);  
