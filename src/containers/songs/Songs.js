@@ -3,6 +3,7 @@ import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
 import UpsertDialog from './UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import SongsUtil from './SongsUtil';
 
 export default class SongsBox extends Component {
 	
@@ -38,13 +39,7 @@ export default class SongsBox extends Component {
 
 		this.setState({complexity : listComplexity});
 
-		let listStatus = [
-			{_id : "To Learn", name : "To Learn"},
-			{_id : "Learning", name : "Learning"},
-			{_id : "Learned", name : "Learned"}
-		];
-
-		this.setState({status : listStatus});
+		this.setState({status : SongsUtil.getStatus()});
 	} 
 
 	refreshTable (response) {

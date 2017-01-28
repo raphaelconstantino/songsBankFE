@@ -20,7 +20,7 @@ export default class SongsTable extends Component {
 	}
 
 	fnCreateLearnedButton (row) {
-		if (row.status !== "Learned")
+		if (row.status !== "2")
 		{
 			return (<MenuItem eventKey="1" onClick={this.markLearned.bind(this, row)} >Mark as Learned</MenuItem>)
 		}
@@ -75,7 +75,7 @@ export default class SongsTable extends Component {
 
     createProgressPie (cell, row) {
         
-    	if (row.status !== "Learned" && row.status !==  "Learning")
+    	if (row.status !== "2")
     	{
     		return;
     	}
@@ -84,17 +84,17 @@ export default class SongsTable extends Component {
     }
 
     fnStatus (fieldValue, row, rowIdx, colIdx) {
-    	if ( (row.status === "Learned" || row.status ===  "Learning") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
+		if ( (row.status === "2" || row.status ===  "1") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
     	{
 			return 'red-row';
     	}
     	
-    	if (row.status === "Learned")
+    	if (row.status === "2")
     	{
     		return 'green-row';
     	}
 
-    	if (row.status ===  "Learning"){
+    	if (row.status ===  "1"){
     		return 'yellow-row';
     	}
 
@@ -107,7 +107,11 @@ export default class SongsTable extends Component {
 
     getInstrumments (cell, row) {
         return (row.instrumments ? row.instrumments.name : "")
-    }    
+    }
+
+	getStatus (cell, row) {
+		return this.fnConvertStatus()[row.status];
+	}    
 
 	daysRemaining (date) {
 	    let eventdate = moment(date);
@@ -149,7 +153,7 @@ export default class SongsTable extends Component {
 			return obj[o._id] = o.name;
 			
 		});
-		
+
 		return obj;
 	}
 
@@ -163,7 +167,7 @@ export default class SongsTable extends Component {
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
 	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Complexity</TableHeaderColumn>
-	                <TableHeaderColumn dataField="status" dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
+					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
 	                <TableHeaderColumn dataField="description" columnClassName={ this.fnStatus.bind(this) }>Description</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} columnClassName={ this.fnStatus.bind(this) }></TableHeaderColumn>
