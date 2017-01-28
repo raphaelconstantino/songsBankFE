@@ -46,7 +46,7 @@ export default class SongsTable extends Component {
 	
 	reviewSong (obj) {
 		
-		let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-17T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-15T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
 		//let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
 
 		HttpService.put("v1/songs/" + obj._id, oData)
@@ -56,7 +56,7 @@ export default class SongsTable extends Component {
 
     createButtons (cell, row) {
 		return (
-			  <DropdownButton bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
+			  <DropdownButton bsSize="small" bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
 				<UpsertDialog 
 					refreshTable={this.props.refreshTable} 
 					instrumments={this.props.instrumments} 
@@ -84,21 +84,33 @@ export default class SongsTable extends Component {
     }
 
     fnStatus (fieldValue, row, rowIdx, colIdx) {
+		
+		let sClass = "";
+
+		if (colIdx === 1)
+		{
+			sClass = "colName";
+		} else if (colIdx === 4)
+		{
+			sClass = "colLvl";
+		}
+
+
 		if ( (row.status === "2" || row.status ===  "1") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
     	{
-			return 'red-row';
+			return 'red-row ' + sClass;
     	}
     	
     	if (row.status === "2")
     	{
-    		return 'green-row';
+    		return 'green-row ' + sClass;
     	}
 
     	if (row.status ===  "1"){
-    		return 'yellow-row';
+    		return 'yellow-row ' + sClass;
     	}
 
-		return "";
+		return sClass;
 	}
 
     getGenders (cell, row) {
@@ -163,12 +175,11 @@ export default class SongsTable extends Component {
 			<div id="songs-table">
 	            <CustomTable list={this.props.songs}>
 	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
-	                <TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Song</TableHeaderColumn>
+					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Song</TableHeaderColumn>
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
-	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Complexity</TableHeaderColumn>
+	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Lvl</TableHeaderColumn>
 					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
-	                <TableHeaderColumn dataField="description" columnClassName={ this.fnStatus.bind(this) }>Description</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} columnClassName={ this.fnStatus.bind(this) }></TableHeaderColumn>
 	            </CustomTable>   

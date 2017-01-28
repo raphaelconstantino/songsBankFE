@@ -33,6 +33,16 @@ td {
 	background-color : #F08080;
 }
 
+/* Songs */
+
+#songs-table .colName {
+	width : 20%;
+}
+
+#songs-table  .colLvl {
+	width : 6%;
+}
+
 #songs-table table tr td:first-child, #songs-table table tr th:first-child {
   width : 6em;
 }

@@ -14,8 +14,8 @@ export default class ProgressPie extends Component {
         <Knob 
           value={this.props.percentage} 
           onChange={this.handleChange} 
-          width={60} 
-          height={60}
+          width={50} 
+          height={50}
           readOnly={true}/>  
     );
   }
