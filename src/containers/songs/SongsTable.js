@@ -53,8 +53,8 @@ export default class SongsTable extends Component {
 			reviewCount = 0;
 		}
 
-		//let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-15T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments, reviewCount : ++reviewCount};
-		let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-15T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments, reviewCount : ++reviewCount};
+		//let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
 
 		HttpService.put("v1/songs/" + obj._id, oData)
 			.then(response => this.props.refreshTable(response));	
@@ -121,7 +121,7 @@ export default class SongsTable extends Component {
 	}
 
     getGenders (cell, row) {
-		return (row.genders ? row.genders.name : "")
+        return (row.genders ? row.genders.name : "")
     }
 
     getInstrumments (cell, row) {
@@ -176,17 +176,6 @@ export default class SongsTable extends Component {
 		return obj;
 	}
 
-	fnConvertGenders () {
-		var obj = {};
-		
-		this.props.genders.map(function(o, i) {
-			return obj[o.name] = o.name;
-			
-		});
-		
-		return obj;
-	}
-
 	render () {
 		return (
 
@@ -195,7 +184,7 @@ export default class SongsTable extends Component {
 	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
 					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Song</TableHeaderColumn>
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
-	                <TableHeaderColumn dataField='genders' filterFormatted formatExtraData={ this.fnConvertGenders() } dataFormat={this.getGenders } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertGenders() } }>Gender</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
 	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Lvl</TableHeaderColumn>
 					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
