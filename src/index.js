@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import DashboardBox from './containers/dashboard/Dashboard';
 import SongsBox from './containers/songs/Songs';
 import GendersBox from './containers/genders/Genders';
 import InstrumentsBox from './containers/instruments/Instruments';
@@ -19,7 +20,7 @@ ReactDOM.render(
   	<Router history={browserHistory}>
 	  	<Route path="/" component={App} >
 		  	<Route path="/songs" component={SongsBox} />
-		  	<Route path="/dashboard" />
+		  	<Route path="/dashboard" component={DashboardBox}/>
 		  	<Route path="/genders" component={GendersBox} />
 		  	<Route path="/instruments" component={InstrumentsBox} />
 		</Route>  	
