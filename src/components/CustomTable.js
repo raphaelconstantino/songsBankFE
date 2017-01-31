@@ -7,7 +7,8 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 export default class CustomTable extends Component {
 
 	static propTypes = {
-		list : PropTypes.array.isRequired
+		list : PropTypes.array.isRequired,
+		trClassName : PropTypes.func
 	}
 
 	render () {
@@ -16,7 +17,7 @@ export default class CustomTable extends Component {
 	      <div className="row">
 	          <div className="col-lg-12">
 	              <div className="table-responsive">
-	                <BootstrapTable data={this.props.list} keyField='_id' striped hover>
+	                <BootstrapTable data={this.props.list} trClassName={this.props.trClassName} keyField='_id' striped hover>
 	                  {this.props.children}
 	                </BootstrapTable>
 	              </div>

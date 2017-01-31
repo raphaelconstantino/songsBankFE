@@ -3,10 +3,6 @@ ol, ul {
 	list-style: none;
 }
 
-.app-container {
-  width : 87% !important;
-}
-
 table .filter {
     height : 26px !important;
     font-size : 12px !important;
@@ -22,15 +18,15 @@ td {
 }
 
 .green-row {
-	background-color : #BCED91;
+	background-color : #BCED91 !important;
 }
 
 .yellow-row {
-	background-color : #ffffb2;
+	background-color : #ffffb2 !important;
 }
 
 .red-row {
-	background-color : #F08080;
+	background-color : #F08080 !important;
 }
 
 /* Songs */
@@ -43,6 +39,7 @@ td {
 	width : 6%;
 }
 
-#songs-table table tr td:first-child, #songs-table table tr th:first-child {
+#songs-table .song-chart {
   width : 6em;
+  background : #FFF !important;
 }

@@ -4,6 +4,7 @@ import {TableHeaderColumn} from 'react-bootstrap-table';
 import ProgressPie from '../../components/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
+import Util from '../../util/Util';
 import UpsertDialog from './UpsertDialog';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
@@ -90,34 +91,24 @@ export default class SongsTable extends Component {
         return <ProgressPie id={row._id} percentage={this.getPercentage(this.daysRemaining(row.lastReview))}/> 
     }
 
-    fnStatus (fieldValue, row, rowIdx, colIdx) {
-		
-		let sClass = "";
-
-		if (colIdx === 1)
-		{
-			sClass = "colName";
-		} else if (colIdx === 4)
-		{
-			sClass = "colLvl";
-		}
+    fnStatus (row, rowIdx) {
 
 
 		if ( (row.status === "2" || row.status ===  "1") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
     	{
-			return 'red-row ' + sClass;
+			return 'red-row';
     	}
     	
     	if (row.status === "2")
     	{
-    		return 'green-row ' + sClass;
+    		return 'green-row';
     	}
 
     	if (row.status ===  "1"){
-    		return 'yellow-row ' + sClass;
+    		return 'yellow-row';
     	}
 
-		return sClass;
+		return "";
 	}
 
     getGenders (cell, row) {
@@ -180,15 +171,15 @@ export default class SongsTable extends Component {
 		return (
 
 			<div id="songs-table">
-	            <CustomTable list={this.props.songs}>
-	                <TableHeaderColumn className="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
-					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Song</TableHeaderColumn>
-	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Artist</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.getGenders} columnClassName={ this.fnStatus.bind(this) }>Gender</TableHeaderColumn>
-	                <TableHeaderColumn dataField="complexity" dataSort={ true } columnClassName={ this.fnStatus.bind(this) }>Lvl</TableHeaderColumn>
-					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } columnClassName={ this.fnStatus.bind(this) } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.getInstrumments} columnClassName={ this.fnStatus.bind(this) }>Instrumment</TableHeaderColumn>
-	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} columnClassName={ this.fnStatus.bind(this) }></TableHeaderColumn>
+	            <CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
+	                <TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
+					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
+	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
+	                <TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
+					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
+	                <TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
+	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
 	            </CustomTable>   
 	        </div>         
 

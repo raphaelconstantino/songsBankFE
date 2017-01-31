@@ -19,14 +19,14 @@ class App extends Component {
 
             <div>
 
-                <div className="col-lg-2">  
+                <div>  
                   <Menu open={this.state.open} handleToggle={this.handleToggle} />
                 </div>  
 
                 <div id="page-wrapper">
 
 
-                    <div className="container-fluid pull-right app-container">
+                    <div className="container-fluid pull-right app-container col-12 col-sm-12 col-md-10 col-lg-11">
 
                         {this.props.children}
 
