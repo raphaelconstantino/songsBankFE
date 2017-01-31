@@ -1,6 +1,6 @@
 export default class Util {
 
-    static 	fnGetResponsiveClasses (extraClass) {
+  static 	fnGetHideSmClass (extraClass) {
 		return "hidden-xs hidden-sm " + extraClass;
 	}
 

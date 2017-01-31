@@ -9,7 +9,7 @@ export default class Menu extends Component {
 
   render() {
     return (
-      <div className={Util.fnGetResponsiveClasses()}>
+      <div className={Util.fnGetHideSmClass()}>
         <Drawer width={170} open={this.props.open}>
             <AppBar title="S-Bank"/>
             <MenuItem onTouchTap={this.props.handleToggle}><Link to="/dashboard"><i className="fa fa-fw fa-table"></i> Dashboard</Link></MenuItem>

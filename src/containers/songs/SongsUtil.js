@@ -9,9 +9,7 @@ export default class SongsUtil {
     }
 
     static getStatusLabel (filterVal) {
-        let arr = this.getStatus().filter(function (arVal) {
-            return arVal._id === filterVal;
-        });
+        let arr = this.getStatus().filter(arVal => arVal._id === filterVal);
 
         if (!arr.length)
         {

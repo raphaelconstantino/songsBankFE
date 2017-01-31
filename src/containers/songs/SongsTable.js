@@ -159,10 +159,7 @@ export default class SongsTable extends Component {
 	fnConvertStatus () {
 		var obj = {};
 		
-		this.props.status.map(function(o, i) {
-			return obj[o._id] = o.name;
-			
-		});
+		this.props.status.map((o, i) => obj[o._id] = o.name);
 
 		return obj;
 	}
@@ -175,10 +172,10 @@ export default class SongsTable extends Component {
 	                <TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
 					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
-	                <TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
-					<TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
+	                <TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
 					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
-	                <TableHeaderColumn className={Util.fnGetResponsiveClasses} columnClassName={ Util.fnGetResponsiveClasses } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
+	                <TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
 	                <TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
 	            </CustomTable>   
 	        </div>         
