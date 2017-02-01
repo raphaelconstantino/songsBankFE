@@ -40,9 +40,13 @@ export default class DashboardBox extends Component {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
+						enabled: true,
+						format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+						style: {
+							color: 'black'
+						},
+						connectorColor: 'silver'
+                    }
                 }
             },
             series: [{
