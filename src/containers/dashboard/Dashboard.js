@@ -17,12 +17,12 @@ export default class DashboardBox extends Component {
 
 	}
 
-	fnConvertToPieGraphObj () {
-		return this.state.gendersCount.map((o, i) => { return {name : o._id, y : o.total} });
+	fnConvertToPieGraphObj (obj) {
+		return this.state.gendersCount.map((o, i) => { return {name : o[obj].name, y : o.total} });
 	}
 
-	fnConvertToBarGraphObj () {
-		return this.state.gendersCount.map((o, i) => { return {name : o._id, data : [o.total]} });
+	fnConvertToBarGraphObj (obj) {
+		return this.state.gendersCount.map((o, i) => { return {name : o[obj].name, data : [o.total]} });
 	}
 
     render () {
@@ -31,10 +31,10 @@ export default class DashboardBox extends Component {
 			<div>
 				<h2>Dashboard</h2>
 				<div className="col-md-6">
-					<BarChart data={this.fnConvertToBarGraphObj()} name="Genders"></BarChart>
+					<BarChart data={this.fnConvertToBarGraphObj('genders')} name="Genders"></BarChart>
 				</div>	
-				<div className="col-md-4">
-					<PieChart data={this.fnConvertToPieGraphObj()} name="Genders"></PieChart>
+				<div className="col-md-6">
+					<PieChart data={this.fnConvertToPieGraphObj('genders')} name="Genders"></PieChart>
 				</div>	
 	        </div>
 		);
