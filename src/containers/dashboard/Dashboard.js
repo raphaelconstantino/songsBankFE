@@ -1,6 +1,6 @@
-/* https://github.com/kirjs/react-highcharts */
 import React, { Component } from 'react';
-import ReactHighcharts from 'react-highcharts';
+import PieChart from '../../components/PieChart'
+import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
 
 export default class DashboardBox extends Component {
@@ -17,49 +17,25 @@ export default class DashboardBox extends Component {
 
 	}
 
-	fnConvertToGraphObj () {
+	fnConvertToPieGraphObj () {
 		return this.state.gendersCount.map((o, i) => { return {name : o._id, y : o.total} });
 	}
 
+	fnConvertToBarGraphObj () {
+		return this.state.gendersCount.map((o, i) => { return {name : o._id, data : [o.total]} });
+	}
+
     render () {
-		const config = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: 'Songs Genders'
-            },
-            tooltip: {
-                pointFormat: '<b>{point.y}</b> songs: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-						enabled: true,
-						format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-						style: {
-							color: 'black'
-						},
-						connectorColor: 'silver'
-                    }
-                }
-            },
-            series: [{
-                name: 'Genders',
-                colorByPoint: true,
-                data: this.fnConvertToGraphObj()
-            }]
-        }
 
 		return (
 			<div>
 				<h2>Dashboard</h2>
-				<ReactHighcharts config={config}></ReactHighcharts>
+				<div className="col-md-6">
+					<BarChart data={this.fnConvertToBarGraphObj()} name="Genders"></BarChart>
+				</div>	
+				<div className="col-md-4">
+					<PieChart data={this.fnConvertToPieGraphObj()} name="Genders"></PieChart>
+				</div>	
 	        </div>
 		);
 	}
