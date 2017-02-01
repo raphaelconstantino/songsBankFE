@@ -1,6 +1,6 @@
-/* https://github.com/reactjs/react-chartjs */
+/* https://github.com/kirjs/react-highcharts */
 import React, { Component } from 'react';
-import {Pie} from 'react-chartjs';
+import ReactHighcharts from 'react-highcharts';
 import HttpService from '../../util/HttpService';
 
 export default class DashboardBox extends Component {
@@ -18,29 +18,44 @@ export default class DashboardBox extends Component {
 	}
 
 	fnConvertToGraphObj () {
-		return this.state.gendersCount.map((o, i) => { return {label : o._id, value : o.total} });
+		return this.state.gendersCount.map((o, i) => { return {name : o._id, y : o.total} });
 	}
 
     render () {
-
-		var data = this.fnConvertToGraphObj();
-
+		const config = {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Songs Genders'
+            },
+            tooltip: {
+                pointFormat: '<b>{point.y}</b> songs: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Genders',
+                colorByPoint: true,
+                data: this.fnConvertToGraphObj()
+            }]
+        }
 
 		return (
 			<div>
 				<h2>Dashboard</h2>
-				<div className="col-md-3">
-					<h3>Genders</h3>
-					<Pie data={data} options={null} width="600" height="250"/>
-				</div>
-				<div className="col-md-3">
-					<h3>Instrumments</h3>
-					<Pie data={data} options={null} width="600" height="250"/>
-				</div>
-				<div className="col-md-3">
-					<h3>Status</h3>
-					<Pie data={data} options={null} width="600" height="250"/>
-				</div>						
+				<ReactHighcharts config={config}></ReactHighcharts>
 	        </div>
 		);
 	}
