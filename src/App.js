@@ -26,7 +26,7 @@ class App extends Component {
                 <div id="page-wrapper">
 
 
-                    <div className="container-fluid pull-right app-container col-12 col-sm-12 col-md-10 col-lg-11">
+                    <div className="container-fluid pull-right app-container col-12 col-sm-12 col-md-10 col-lg-10">
 
                         {this.props.children}
 

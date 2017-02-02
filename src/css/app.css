@@ -17,18 +17,6 @@ td {
 	overflow-y: visible !important;
 }
 
-.green-row {
-	background-color : #BCED91 !important;
-}
-
-.yellow-row {
-	background-color : #ffffb2 !important;
-}
-
-.red-row {
-	background-color : #F08080 !important;
-}
-
 /* Songs */
 
 #songs-table .colName {

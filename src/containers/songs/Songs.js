@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
-import UpsertDialog from './UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import SongsUtil from './SongsUtil';
+import {Link} from 'react-router'
 
 export default class SongsBox extends Component {
 	
@@ -52,13 +52,7 @@ export default class SongsBox extends Component {
 			<div>
 				<h2>Songs</h2>	
 				<ul>
-					<UpsertDialog 
-						refreshTable={this.refreshTable} 
-						instrumments={this.state.instrumments} 
-						genders={this.state.genders} 
-						status={this.state.status}
-						complexity={this.state.complexity} 
-						button={ <RaisedButton label="Insert Song" primary={true}/> } />
+					 <Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
 				</ul>		
 				<div>
 	                <SongsTable 

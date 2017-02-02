@@ -17,7 +17,8 @@ export default class SongsForm extends Component {
 		instrumments : PropTypes.string.isRequired,
 		listInstrumments : PropTypes.array.isRequired,
 		setField : PropTypes.func.isRequired,
-		errorMsg : PropTypes.object
+		errorMsg : PropTypes.object,
+		sendData : PropTypes.func.isRequired
 	}
 
 	render () {
@@ -25,7 +26,7 @@ export default class SongsForm extends Component {
 	        <div className="row">
                 <div className="col-lg-12">
                 
-                    <form role="form">
+                    <form role="form" onSubmit={this.props.sendData}>
 
                         <CustomInput label="Song Name*" type="text" name="name" value={this.props.name} change={this.props.setField.bind(this, "name")} error={this.props.errorMsg} />
                         <CustomInput label="Artist Name*" type="text" name="artist" value={this.props.artist} change={this.props.setField.bind(this, "artist")} error={this.props.errorMsg} />
@@ -34,7 +35,7 @@ export default class SongsForm extends Component {
 						<CustomSelect label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.listComplexity} />
 						<CustomSelect label="Gender" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.listGenders} />
 						<CustomSelect label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
-
+						<button type="submit">Submit</button>
                   </form>      
 
                 </div>

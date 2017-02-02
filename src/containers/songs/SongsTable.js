@@ -5,8 +5,8 @@ import ProgressPie from '../../components/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
 import Util from '../../util/Util';
-import UpsertDialog from './UpsertDialog';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
+import {Link} from 'react-router'
 
 
 export default class SongsTable extends Component {
@@ -38,7 +38,7 @@ export default class SongsTable extends Component {
 
 	markLearned (obj) {
 		
-		let oData = {name : obj.name, description : obj.description, lastReview : obj.lastReview, artist : obj.artist, status : "Learned", complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		let oData = {name : obj.name, description : obj.description, lastReview : obj.lastReview, artist : obj.artist, status : "2", complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
 
 		HttpService.put("v1/songs/" + obj._id, oData)
 			.then(response => this.props.refreshTable(response));	
@@ -65,14 +65,7 @@ export default class SongsTable extends Component {
     createButtons (cell, row) {
 		return (
 			  <DropdownButton bsSize="small" bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
-				<UpsertDialog 
-					refreshTable={this.props.refreshTable} 
-					instrumments={this.props.instrumments} 
-					genders={this.props.genders} 
-					status={this.props.status}
-					complexity={this.props.complexity}
-					obj={row} 
-					button={<a role="menuitem" href="#">Edit</a>}/>
+				<li><Link to={"/insertSong?id=" + row._id}>Edit</Link></li>
 				{this.fnCreateLearnedButton(row)}
 				<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
@@ -96,16 +89,16 @@ export default class SongsTable extends Component {
 
 		if ( (row.status === "2" || row.status ===  "1") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
     	{
-			return 'red-row';
+			return 'danger';
     	}
     	
     	if (row.status === "2")
     	{
-    		return 'green-row';
+    		return 'success';
     	}
 
     	if (row.status ===  "1"){
-    		return 'yellow-row';
+    		return 'warning';
     	}
 
 		return "";

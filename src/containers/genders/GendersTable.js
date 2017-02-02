@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
-import UpsertDialog from './UpsertDialog';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 export default class GendersTable extends Component {
@@ -20,11 +19,7 @@ export default class GendersTable extends Component {
 	}
 
 	createButtons (cell, row, obj) {
-		return (<DropdownButton bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
-					<UpsertDialog 
-						refreshTable={this.props.refreshTable} 
-						obj={row} 
-						button={<a role="menuitem" href="#">Edit</a>}/>
+		return (<DropdownButton bsSize="small"  bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
 					<MenuItem eventKey="1" onClick={this.deleteGender.bind(this, row._id)} >Delete</MenuItem>
 				</DropdownButton>	
 			)
