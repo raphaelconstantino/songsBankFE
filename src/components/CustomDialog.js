@@ -38,12 +38,12 @@ export default class CustomDialog extends Component {
 	    ];
 
 	    return (
-	    	<li onTouchTap={this.handleOpen}>
+	    	<span onTouchTap={this.handleOpen}>
 				{this.props.button}
 		        <Dialog title={this.props.title} actions={actions} modal={false} open={this.state.open} autoScrollBodyContent={true} >
 					 {this.props.children}
 		        </Dialog>
-		    </li>    
+		    </span>    
 	    );
 	}
 }

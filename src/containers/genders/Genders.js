@@ -27,9 +27,9 @@ export default class GendersBox extends Component {
 		return (
 			<div>
 				<h2>Genders</h2>
-				<ul>	
+				<div className="margin-vert">	
 					<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> }/>
-				</ul>	
+				</div>	
 				<div>
 	                <GendersTable genders={this.state.genders} refreshTable={this.refreshTable} />    
 	            </div>    
