@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import SongsForm from './SongsForm';
 import SongsUtil from './SongsUtil';
 import HttpService from '../../util/HttpService';
+import {Link} from 'react-router'
 
 export default class InsertSongBox extends Component {
 	
@@ -146,8 +147,13 @@ export default class InsertSongBox extends Component {
 
 	render () {
 		return (
-			<div>
+			<div class="row">
 				<h2>Insert Song</h2>
+
+				<div className="margin-vert">	
+					<Link to="/songs">Back to List</Link>
+				</div>	
+				
 				<SongsForm 
 					name={this.state.name} 
 					artist={this.state.artist}

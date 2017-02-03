@@ -51,9 +51,9 @@ export default class SongsBox extends Component {
 		return (
 			<div>
 				<h2>Songs</h2>	
-				<ul>
-					 <Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
-				</ul>		
+				<div className="margin-vert">	
+					<Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
+				</div>	
 				<div>
 	                <SongsTable 
 		                songs={this.state.songs}

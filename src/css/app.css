@@ -17,6 +17,10 @@ td {
 	overflow-y: visible !important;
 }
 
+.margin-vert {
+	margin : 20px 0;
+}
+
 /* Songs */
 
 #songs-table .colName {
