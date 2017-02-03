@@ -20,6 +20,15 @@ export default class SongsTable extends Component {
 		complexity : PropTypes.array.isRequired
 	}
 
+	fnCreateReviewButton (row) {
+		if (row.status === "2")
+		{
+			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>);
+		}
+
+		return "";	
+	}
+
 	fnCreateLearnedButton (row) {
 		if (row.status !== "2")
 		{
@@ -62,12 +71,18 @@ export default class SongsTable extends Component {
 
 	}
 
+	createDetailLink (cell, row) {
+		return (
+			<Link to={"/songDetail?id=" + row._id}>{row.name}</Link>
+		)
+	}
+
     createButtons (cell, row) {
 		return (
 			  <DropdownButton bsSize="small" bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
 				<li><Link to={"/insertSong?id=" + row._id}>Edit</Link></li>
+				{this.fnCreateReviewButton(row)}
 				{this.fnCreateLearnedButton(row)}
-				<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
 			  </DropdownButton>	
 			);          
@@ -163,7 +178,7 @@ export default class SongsTable extends Component {
 			<div id="songs-table">
 	            <CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
 	                <TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
-					<TableHeaderColumn dataField='name' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
+					<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)} filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
 	                <TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
 	                <TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>

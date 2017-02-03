@@ -148,12 +148,13 @@ export default class InsertSongBox extends Component {
 	render () {
 		return (
 			<div class="row">
-				<h2>Insert Song</h2>
 
 				<div className="margin-vert">	
 					<Link to="/songs">Back to List</Link>
 				</div>	
-				
+
+				<h2>Insert Song</h2>
+
 				<SongsForm 
 					name={this.state.name} 
 					artist={this.state.artist}
