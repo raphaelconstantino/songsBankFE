@@ -80,6 +80,7 @@ export default class SongsTable extends Component {
     createButtons (cell, row) {
 		return (
 			  <DropdownButton bsSize="small" bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
+				<li><Link to={"/songDetail?id=" + row._id}>Detail</Link></li>
 				<li><Link to={"/insertSong?id=" + row._id}>Edit</Link></li>
 				{this.fnCreateReviewButton(row)}
 				{this.fnCreateLearnedButton(row)}
