@@ -1,9 +1,15 @@
 /*https://github.com/joshjg/react-canvas-knob*/
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Knob from 'react-canvas-knob';
 
 export default class ProgressPie extends Component {
+
+  static propTypes = {
+    percentage : PropTypes.number.isRequired,
+    width : PropTypes.number.isRequired,
+    height : PropTypes.number.isRequired
+  }
 
   handleChange () {
     return;
@@ -14,8 +20,8 @@ export default class ProgressPie extends Component {
         <Knob 
           value={this.props.percentage} 
           onChange={this.handleChange} 
-          width={50} 
-          height={50}
+          width={this.props.width} 
+          height={this.props.height}
           readOnly={true}/>  
     );
   }

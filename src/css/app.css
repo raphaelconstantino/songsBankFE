@@ -17,6 +17,14 @@ td {
 	overflow-y: visible !important;
 }
 
+.padding-vert {
+	padding : 20px 0;
+}
+
+.margin-vert-down {
+	margin : 0 0 20px0 ;
+}
+
 .margin-vert {
 	margin : 20px 0;
 }
@@ -34,4 +42,9 @@ td {
 #songs-table .song-chart {
   width : 6em;
   background : #FFF !important;
+}
+
+/* Song Detail */
+#detail-items dt {
+	text-align : left;
 }

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
+import {Link} from 'react-router';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import ProgressPie from '../../components/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
 import Util from '../../util/Util';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
-import {Link} from 'react-router'
+import SongsUtil from './SongsUtil';
 
 
 export default class SongsTable extends Component {
@@ -46,10 +46,10 @@ export default class SongsTable extends Component {
 	}
 
 	markLearned (obj) {
-		
-		let oData = {name : obj.name, description : obj.description, lastReview : obj.lastReview, artist : obj.artist, status : "2", complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+	
+		obj.status = "2";
 
-		HttpService.put("v1/songs/" + obj._id, oData)
+		HttpService.put("v1/songs/" + obj._id, obj)
 			.then(response => this.props.refreshTable(response));	
 
 	}
@@ -63,10 +63,10 @@ export default class SongsTable extends Component {
 			reviewCount = 0;
 		}
 
-		//let oData = {name : obj.name, description : obj.description, lastReview : "2017-01-15T01:18:50.200Z", artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments, reviewCount : ++reviewCount};
-		let oData = {name : obj.name, description : obj.description, lastReview : new Date(), artist : obj.artist, status : obj.status, complexity : obj.complexity, genders : obj.genders, instrumments : obj.instrumments};
+		obj.lastReview = new Date();
+		obj.reviewCount = ++reviewCount;
 
-		HttpService.put("v1/songs/" + obj._id, oData)
+		HttpService.put("v1/songs/" + obj._id, obj)
 			.then(response => this.props.refreshTable(response));	
 
 	}
@@ -97,13 +97,13 @@ export default class SongsTable extends Component {
     		return;
     	}
 
-        return <ProgressPie id={row._id} percentage={this.getPercentage(this.daysRemaining(row.lastReview))}/> 
+        return <ProgressPie height={50} width={50} id={row._id} percentage={SongsUtil.getPercentage(SongsUtil.daysRemaining(row.lastReview))}/> 
     }
 
     fnStatus (row, rowIdx) {
 
 
-		if ( (row.status === "2" || row.status ===  "1") && this.getPercentage(this.daysRemaining(row.lastReview)) < 50)
+		if ( (row.status === "2" || row.status ===  "1") && SongsUtil.getPercentage(SongsUtil.daysRemaining(row.lastReview)) < 50)
     	{
 			return 'danger';
     	}
@@ -131,39 +131,6 @@ export default class SongsTable extends Component {
 	getStatus (cell, row) {
 		return this.fnConvertStatus()[row.status];
 	}    
-
-	daysRemaining (date) {
-	    let eventdate = moment(date);
-	    let todaysdate = moment();
-	    return eventdate.diff(todaysdate, 'days');
-	}
-
-	getPercentage (val) {
-		
-		let total = 100;
-		let iPos = val * -1;
-		let iDif = 4;
-		let iResult = 0;
-
-		if (iPos > 7)
-		{
-			iDif = 7;
-		} else if (iPos > 4)
-		{
-			iDif = 5;
-		}
-
-		let finalVal = val * iDif;
-		
-		iResult = (total + finalVal);
-
-		if (iResult < 0)
-		{
-			iResult = 0;
-		}
-
-		return iResult;
-	}
 
 	fnConvertStatus () {
 		var obj = {};

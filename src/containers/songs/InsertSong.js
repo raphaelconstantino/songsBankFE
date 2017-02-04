@@ -20,6 +20,8 @@ export default class InsertSongBox extends Component {
             genders: "", 
             instrumments: "", 
             description : "", 
+			video : "",
+			lyrics : "",
             errorMsg : {}
         };
 
@@ -71,7 +73,7 @@ export default class InsertSongBox extends Component {
 			return false;
 		}
 
-		let oData = {name : this.state.name, description : this.state.description, artist : this.state.artist, status:this.state.status, complexity : this.state.complexity, genders : this.state.genders, instrumments : this.state.instrumments}
+		let oData = {name : this.state.name, description : this.state.description, artist : this.state.artist, status:this.state.status, complexity : this.state.complexity, genders : this.state.genders, instrumments : this.state.instrumments, video : this.state.video, lyrics : this.state.lyrics}
 
 		if (this.props.location.query.id)
 		{
@@ -111,8 +113,14 @@ export default class InsertSongBox extends Component {
                     {
                         if (response.hasOwnProperty(o))
                         {
-                            var obj = {}
-                            obj[o] = response[o]
+							var obj = {}
+							if (o === "instrumments" || o === "genders")
+							{
+								obj[o] = response[o].name;
+							} else {
+								obj[o] = response[o];
+							}
+                            
                             this.setState(obj); 
                         }       
                     }
@@ -165,6 +173,8 @@ export default class InsertSongBox extends Component {
 					status={this.state.status}
 					listStatus={this.state.statusList}
 					description={this.state.description}
+					video={this.state.video}
+					lyrics={this.state.lyrics}
 					instrumments={this.state.instrumments}
 					listInstrumments={this.state.instrummentsList}
 					setField={this.setField} 
