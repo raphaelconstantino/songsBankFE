@@ -35,7 +35,7 @@ export default class SongsForm extends Component {
 						<CustomSelect label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.listComplexity} />
 						<CustomSelect label="Gender" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.listGenders} />
 						<CustomSelect label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
-						<button type="submit">Submit</button>
+						<button className="btn btn-info" type="submit">Submit</button>
                   </form>      
 
                 </div>
