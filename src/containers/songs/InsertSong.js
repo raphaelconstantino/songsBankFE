@@ -147,7 +147,7 @@ export default class InsertSongBox extends Component {
 
 	render () {
 		return (
-			<div class="row">
+			<div>
 
 				<div className="margin-vert">	
 					<Link to="/songs">Back to List</Link>
