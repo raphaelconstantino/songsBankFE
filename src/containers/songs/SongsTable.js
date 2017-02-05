@@ -103,7 +103,7 @@ export default class SongsTable extends Component {
     fnStatus (row, rowIdx) {
 
 
-		if ( (row.status === "2" || row.status ===  "1") && SongsUtil.getPercentage(SongsUtil.daysRemaining(row.lastReview)) < 50)
+		if ( (row.status === "2") && SongsUtil.getPercentage(SongsUtil.daysRemaining(row.lastReview)) < 50)
     	{
 			return 'danger';
     	}

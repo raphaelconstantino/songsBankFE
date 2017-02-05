@@ -7,7 +7,7 @@ export default class DashboardBox extends Component {
 
 	constructor () {
 		super();
-		this.state = { gendersCount : []};
+		this.state = { gendersCount : [], instrummentCount : []};
 	}
 
 	componentDidMount() {
@@ -15,14 +15,17 @@ export default class DashboardBox extends Component {
 		HttpService.get("v1/gendersCount")
 			.then(response => this.setState({gendersCount : response}));
 
+		HttpService.get("v1/instrummentCount")
+			.then(response => this.setState({instrummentCount : response}));
+
 	}
 
-	fnConvertToPieGraphObj (obj) {
-		return this.state.gendersCount.map((o, i) => { return {name : o[obj].name, y : o.total} });
+	fnConvertToPieGraphObj (obj, objName) {
+		return obj.map((o, i) => { return {name : o[objName].name, y : o.total} });
 	}
 
-	fnConvertToBarGraphObj (obj) {
-		return this.state.gendersCount.map((o, i) => { return {name : o[obj].name, data : [o.total]} });
+	fnConvertToBarGraphObj (obj, objName) {
+		return obj.map((o, i) => { return {name : o[objName].name, data : [o.total]} });
 	}
 
     render () {
@@ -30,12 +33,21 @@ export default class DashboardBox extends Component {
 		return (
 			<div>
 				<h2>Dashboard</h2>
-				<div className="col-md-6">
-					<BarChart data={this.fnConvertToBarGraphObj('genders')} name="Genders"></BarChart>
+				<div className="row">
+					<div className="col-md-6">
+						<PieChart data={this.fnConvertToPieGraphObj(this.state.gendersCount, 'genders')} name="Genders"></PieChart>
+					</div>	
+					<div className="col-md-6">
+						<PieChart data={this.fnConvertToPieGraphObj(this.state.instrummentCount, 'instrumments')} name="Instrumments"></PieChart>
+					</div>						
 				</div>	
-				<div className="col-md-6">
-					<PieChart data={this.fnConvertToPieGraphObj('genders')} name="Genders"></PieChart>
+				
+				<div className="row">
+					<div className="col-md-6">
+						<BarChart data={this.fnConvertToBarGraphObj(this.state.gendersCount, 'genders')} name="Genders"></BarChart>
+					</div>	
 				</div>	
+
 	        </div>
 		);
 	}
