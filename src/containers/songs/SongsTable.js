@@ -84,6 +84,7 @@ export default class SongsTable extends Component {
 				<li><Link to={"/insertSong?id=" + row._id}>Edit</Link></li>
 				{this.fnCreateReviewButton(row)}
 				{this.fnCreateLearnedButton(row)}
+				 <MenuItem divider />
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
 			  </DropdownButton>	
 			);          
