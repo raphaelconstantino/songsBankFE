@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomSelect from '../../components/CustomSelect';
+import DatePicker from 'material-ui/DatePicker';
 
 export default class SongsForm extends Component {
 
@@ -37,6 +38,10 @@ export default class SongsForm extends Component {
 						<CustomSelect label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.listComplexity} />
 						<CustomSelect label="Gender" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.listGenders} />
 						<CustomSelect label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
+						<div className="form-group">	
+							<label>Last Time Played</label>
+							<DatePicker hintText="Last Time Played" />
+						</div>		
 						<CustomInput label="Video" type="text" name="video" value={this.props.video} change={this.props.setField.bind(this, "video")} />
 						<div className="form-group">	
 							<label>Lyrics</label>
