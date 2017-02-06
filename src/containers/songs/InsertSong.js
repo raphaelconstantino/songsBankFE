@@ -116,7 +116,7 @@ export default class InsertSongBox extends Component {
 							var obj = {}
 							if (o === "instrumments" || o === "genders")
 							{
-								obj[o] = response[o].name;
+								obj[o] = response[o]._id;
 							} else {
 								obj[o] = response[o];
 							}
