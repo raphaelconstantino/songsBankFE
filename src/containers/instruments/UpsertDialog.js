@@ -17,6 +17,7 @@ export default class UpsertDialog extends Component {
 	
 	static propTypes = {
 		refreshTable : PropTypes.func.isRequired,
+		setMsgSuccess : PropTypes.func.isRequired,
 		obj : PropTypes.object
 	}
 
@@ -49,6 +50,7 @@ export default class UpsertDialog extends Component {
 		{
 		    HttpService.put("v1/instrumments/" + this.props.obj._id, oData)
 		      .then(response => {
+				  this.props.setMsgSuccess(`Instrument ${oData.name} updated succesfully.`);
 					this.props.refreshTable(response);
 					this.setState({ name : "", errorMsg : {} });
 				}); 
@@ -56,6 +58,7 @@ export default class UpsertDialog extends Component {
 		{
 			HttpService.post("v1/instrumments", oData)
 				.then(response => {
+					this.props.setMsgSuccess(`Instrument ${oData.name} added succesfully.`);
 					this.props.refreshTable(response);
 					this.setState({ name : "", errorMsg : {} });
 				});		

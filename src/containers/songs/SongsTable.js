@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { DropdownButton, MenuItem, Alert } from 'react-bootstrap';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 import {Link} from 'react-router';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import ProgressPie from '../../components/ProgressPie';
@@ -13,6 +13,7 @@ export default class SongsTable extends Component {
 
 	static propTypes = {
 		refreshTable : PropTypes.func.isRequired,
+		setMsgSuccess : PropTypes.func.isRequired,
 		songs : PropTypes.array.isRequired,
 		instrumments : PropTypes.array.isRequired,
 		genders : PropTypes.array.isRequired,
@@ -38,10 +39,13 @@ export default class SongsTable extends Component {
 		return "";
 	}
 	
-	deleteSong (_id) {
+	deleteSong (_id, name) {
 
     	HttpService.del("v1/songs/" + _id)
-     	 .then(response => this.props.refreshTable(response) ); 
+     	 .then(response => {
+			  this.props.setMsgSuccess(`Song ${name} deleted succesfully.`);
+			  return this.props.refreshTable(response) 
+			}); 
 
 	}
 
@@ -50,7 +54,10 @@ export default class SongsTable extends Component {
 		obj.status = "2";
 
 		HttpService.put("v1/songs/" + obj._id, obj)
-			.then(response => this.props.refreshTable(response));	
+			.then(response => {
+				this.props.setMsgSuccess(`Song ${obj.name} marked as learned succesfully.`);
+				return this.props.refreshTable(response) 
+			});	
 
 	}
 	
@@ -67,7 +74,10 @@ export default class SongsTable extends Component {
 		obj.reviewCount = ++reviewCount;
 
 		HttpService.put("v1/songs/" + obj._id, obj)
-			.then(response => this.props.refreshTable(response));	
+			.then(response => {
+				this.props.setMsgSuccess(`Song ${obj.name} reviwed succesfully.`);
+				return this.props.refreshTable(response) 
+			});	
 
 	}
 
@@ -85,7 +95,7 @@ export default class SongsTable extends Component {
 				{this.fnCreateReviewButton(row)}
 				{this.fnCreateLearnedButton(row)}
 				 <MenuItem divider />
-				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id)} >Delete</MenuItem>
+				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id, row.name)} >Delete</MenuItem>
 			  </DropdownButton>	
 			);          
 
@@ -141,36 +151,20 @@ export default class SongsTable extends Component {
 		return obj;
 	}
 
-	fnCreateMessage () {
-		console.log(this.props.location)
-		/*if (this.props.params.songName)
-		{	
-			return (<Alert bsStyle="success">
-				Song <strong>{this.props.params.songName}</strong> added succesfully.
-			</Alert>);
-		}*/
-
-		return "";	
-		
-	}
-
 	render () {
 		return (
-			<div>
-				{this.fnCreateMessage()}
-				<div id="songs-table">
-					<CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
-						<TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
-						<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)} filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
-						<TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
-						<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
-						<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
-						<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
-						<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
-						<TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
-					</CustomTable>   
-				</div>         
-			</div>
+			<div id="songs-table">
+				<CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
+					<TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
+					<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)} filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
+					<TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
+					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
+					<TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
+				</CustomTable>   
+			</div>         
 		);
 
 	}

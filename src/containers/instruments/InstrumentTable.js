@@ -8,20 +8,24 @@ export default class InstrumentTable extends Component {
 
 	static propTypes = {
 		refreshTable : PropTypes.func.isRequired,
+		setMsgSuccess : PropTypes.func.isRequired,
 		instrumments : PropTypes.array.isRequired
 	}
 
-	deleteInstrument (_id) {
+	deleteInstrument (_id, name) {
 
 		HttpService.del("v1/instrumments/" + _id)
-		  .then(response => this.props.refreshTable(response) ); 
+		   .then(response => {
+			  this.props.setMsgSuccess(`Instrumment ${name} deleted succesfully.`);
+			  return this.props.refreshTable(response) 
+			}); 
 
 	}
 
 	createButtons (cell, row, obj) {
 		return (
 			  <DropdownButton bsSize="small"  bsStyle={"primary"} title={"Actions"} key={0} id={`dropdown-basic-${0}`}>
-				<MenuItem eventKey="1" onClick={this.deleteInstrument.bind(this, row._id)} >Delete</MenuItem>
+				<MenuItem eventKey="1" onClick={this.deleteInstrument.bind(this, row._id, row.name)} >Delete</MenuItem>
 			  </DropdownButton>	
 			);  
 	}  
