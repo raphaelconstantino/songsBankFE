@@ -94,14 +94,14 @@ export default class InsertSongBox extends Component {
 			//oData.lastReview = this.state.lastReview;
 		    HttpService.put("v1/songs/" + this.props.location.query.id, oData)
 		      .then(response => {
-					this.context.router.push('/songs');
+					this.context.router.push('/songs?songName=' + oData.name);
 				}); 
 		} else
 		{
 			//oData.lastReview = new Date();
 			HttpService.post("v1/songs", oData)
 				.then(response => {
-					this.context.router.push('/songs');
+					this.context.router.push('/songs?songName=' + oData.name);
 				});
 		}						
 
