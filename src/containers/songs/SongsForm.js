@@ -11,6 +11,7 @@ export default class SongsForm extends Component {
 		video : PropTypes.string.isRequired,
 		lyrics : PropTypes.string,
 		status: PropTypes.string.isRequired,
+		lastReview : PropTypes.object,
 		listStatus : PropTypes.array.isRequired,
 		description : PropTypes.string.isRequired,
 		complexity : PropTypes.string.isRequired,
@@ -20,6 +21,7 @@ export default class SongsForm extends Component {
 		instrumments : PropTypes.string.isRequired,
 		listInstrumments : PropTypes.array.isRequired,
 		setField : PropTypes.func.isRequired,
+		setLastReview : PropTypes.func.isRequired,
 		errorMsg : PropTypes.object,
 		sendData : PropTypes.func.isRequired
 	}
@@ -40,7 +42,7 @@ export default class SongsForm extends Component {
 						<CustomSelect label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
 						<div className="form-group">	
 							<label>Last Time Played</label>
-							<DatePicker hintText="Last Time Played" />
+							<DatePicker hintText="Last Time Played" autoOk value={this.props.lastReview} onChange={this.props.setLastReview.bind(this)} />
 						</div>		
 						<CustomInput label="Video" type="text" name="video" value={this.props.video} change={this.props.setField.bind(this, "video")} />
 						<div className="form-group">	

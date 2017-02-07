@@ -3,6 +3,7 @@ import SongsForm from './SongsForm';
 import SongsUtil from './SongsUtil';
 import HttpService from '../../util/HttpService';
 import {Link} from 'react-router'
+import moment from 'moment';
 
 export default class InsertSongBox extends Component {
 	
@@ -22,10 +23,12 @@ export default class InsertSongBox extends Component {
             description : "", 
 			video : "",
 			lyrics : "",
+			lastReview : new Date(),
             errorMsg : {}
         };
 
         this.sendData = this.sendData.bind(this);
+		this.setLastReview = this.setLastReview.bind(this);
 		this.validate = this.validate.bind(this);
 		this.setField = this.setField.bind(this);
 	}
@@ -66,25 +69,36 @@ export default class InsertSongBox extends Component {
 
 	sendData (e) {
         
-        e.preventDefault();    
+        e.preventDefault();   
 
 		if ( this.validate() )
 		{
 			return false;
 		}
 
-		let oData = {name : this.state.name, description : this.state.description, artist : this.state.artist, status:this.state.status, complexity : this.state.complexity, genders : this.state.genders, instrumments : this.state.instrumments, video : this.state.video, lyrics : this.state.lyrics}
+		let oData = {
+			name : this.state.name, 
+			description : this.state.description, 
+			artist : this.state.artist, 
+			status : this.state.status, 
+			complexity : this.state.complexity, 
+			genders : this.state.genders, 
+			instrumments : this.state.instrumments, 
+			video : this.state.video, 
+			lyrics : this.state.lyrics, 
+			lastReview : this.state.lastReview
+		}
 
 		if (this.props.location.query.id)
 		{
-			oData.lastReview = this.state.lastReview;
+			//oData.lastReview = this.state.lastReview;
 		    HttpService.put("v1/songs/" + this.props.location.query.id, oData)
 		      .then(response => {
 					this.context.router.push('/songs');
 				}); 
 		} else
 		{
-			oData.lastReview = new Date();
+			//oData.lastReview = new Date();
 			HttpService.post("v1/songs", oData)
 				.then(response => {
 					this.context.router.push('/songs');
@@ -94,6 +108,11 @@ export default class InsertSongBox extends Component {
 
 		return true;
 
+	}
+
+	setLastReview (o, val)
+	{
+		this.setState({lastReview : val});
 	}
 
 	setField (fieldName, e)
@@ -117,6 +136,8 @@ export default class InsertSongBox extends Component {
 							if (o === "instrumments" || o === "genders")
 							{
 								obj[o] = response[o]._id;
+							} else if (o === "lastReview") {
+								obj[o] = moment(response[o]).toDate();
 							} else {
 								obj[o] = response[o];
 							}
@@ -177,7 +198,9 @@ export default class InsertSongBox extends Component {
 					lyrics={this.state.lyrics}
 					instrumments={this.state.instrumments}
 					listInstrumments={this.state.instrummentsList}
+					lastReview={this.state.lastReview}
 					setField={this.setField} 
+					setLastReview={this.setLastReview}
 					errorMsg={this.state.errorMsg} 
                     sendData={this.sendData}/>
 	        </div>
