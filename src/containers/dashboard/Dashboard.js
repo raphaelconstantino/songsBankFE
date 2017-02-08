@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SongsUtil from '../songs/SongsUtil'
 import PieChart from '../../components/PieChart'
 import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
@@ -7,11 +8,14 @@ export default class DashboardBox extends Component {
 
 	constructor () {
 		super();
-		this.state = { gendersCount : [], instrummentCount : []};
+		this.state = { gendersCount : [], instrummentCount : [], statusCount : []};
 	}
 
 	componentDidMount() {
 		
+		HttpService.get("v1/statusCount")
+			.then(response => this.setState({statusCount : response}));
+
 		HttpService.get("v1/gendersCount")
 			.then(response => this.setState({gendersCount : response}));
 
@@ -24,8 +28,8 @@ export default class DashboardBox extends Component {
 		return obj.map((o, i) => { return {name : o[objName].name, y : o.total} });
 	}
 
-	fnConvertToBarGraphObj (obj, objName) {
-		return obj.map((o, i) => { return {name : o[objName].name, data : [o.total]} });
+	fnConvertToBarGraphObj (obj) {
+		return obj.map((o, i) => { return {name : SongsUtil.getStatusLabel(o._id), data : [o.count]} });
 	}
 
     render () {
@@ -44,7 +48,7 @@ export default class DashboardBox extends Component {
 				
 				<div className="row">
 					<div className="col-md-6">
-						<BarChart data={this.fnConvertToBarGraphObj(this.state.gendersCount, 'genders')} name="Genders"></BarChart>
+						<BarChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></BarChart>
 					</div>	
 				</div>	
 
