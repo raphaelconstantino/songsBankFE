@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
+import SongsFilter from './SongsFilter';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
 import SongsUtil from './SongsUtil';
@@ -10,9 +11,18 @@ export default class SongsBox extends Component {
 	
 	constructor () {
 		super();
-		this.state = { songs : [], genders : [], instrumments : [], complexity : [], status : [], msgSuccess : ""};
+		this.state = { songs : [], gendersList : [], genders : "", instrummentsList : [], instrumments : "",  complexityList : [], complexity : "", statusList : [], status : "", msgSuccess : ""};
 		this.refreshTable = this.refreshTable.bind(this);
 		this.setMsgSuccess = this.setMsgSuccess.bind(this);
+		this.setField = this.setField.bind(this);
+		this.reloadTable = this.reloadTable.bind(this);
+	}
+
+	setField (fieldName, e)
+	{
+		let field = {};
+		field[fieldName] = e.target.value ;
+		this.setState(field);
 	}
 
 	componentDidMount() {
@@ -21,10 +31,10 @@ export default class SongsBox extends Component {
 			.then(response => this.setState({songs : response}));
 
 		HttpService.get("v1/genders")
-			.then(response => this.setState({genders : response}));
+			.then(response => this.setState({gendersList : response}));
 
 		HttpService.get("v1/instrumments")
-			.then(response => this.setState({instrumments : response}));
+			.then(response => this.setState({instrummentsList : response}));
 
 		let listComplexity = [
 			{_id : 1, name : "1"},
@@ -39,12 +49,16 @@ export default class SongsBox extends Component {
 			{_id : 10, name : "10"}
 		];
 
-		this.setState({complexity : listComplexity});
+		this.setState({complexityList : listComplexity});
 
-		this.setState({status : SongsUtil.getStatus()});
+		this.setState({statusList : SongsUtil.getStatus()});
 
 		this.setState({msgSuccess : this.props.location.query.songName});
 	} 
+
+	reloadTable () {
+		console.log(this.state);
+	}
 
 	refreshTable (response) {
 		this.setState({songs : response});
@@ -75,14 +89,25 @@ export default class SongsBox extends Component {
 					<Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
 				</div>
 				{this.fnCreateMessage()}	
+				
+				<div>
+					<SongsFilter 
+						instrummentsList={this.state.instrummentsList} 
+						instrumments={this.state.instrumments} 
+						gendersList={this.state.gendersList} 
+						genders={this.state.genders} 
+						statusList={this.state.statusList}
+						status={this.state.status}
+						complexityList={this.state.complexityList}
+						complexity={this.state.complexity} 
+						setField={this.setField} 
+						reloadTable={this.reloadTable} />
+				</div>	
+				
 				<div>
 	                <SongsTable 
 		                songs={this.state.songs}
 		                refreshTable={this.refreshTable} 
-						instrumments={this.state.instrumments} 
-						genders={this.state.genders} 
-						status={this.state.status}
-						complexity={this.state.complexity} 
 						setMsgSuccess={this.setMsgSuccess} />    
 	            </div>    
 	        </div>

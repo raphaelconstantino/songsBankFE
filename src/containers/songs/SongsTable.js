@@ -14,11 +14,7 @@ export default class SongsTable extends Component {
 	static propTypes = {
 		refreshTable : PropTypes.func.isRequired,
 		setMsgSuccess : PropTypes.func.isRequired,
-		songs : PropTypes.array.isRequired,
-		instrumments : PropTypes.array.isRequired,
-		genders : PropTypes.array.isRequired,
-		status : PropTypes.array.isRequired,
-		complexity : PropTypes.array.isRequired
+		songs : PropTypes.array.isRequired
 	}
 
 	fnCreateReviewButton (row) {
@@ -140,27 +136,19 @@ export default class SongsTable extends Component {
     }
 
 	getStatus (cell, row) {
-		return this.fnConvertStatus()[row.status];
-	}    
-
-	fnConvertStatus () {
-		var obj = {};
-		
-		this.props.status.map((o, i) => obj[o._id] = o.name);
-
-		return obj;
-	}
+        return (SongsUtil.getStatusLabel(row.status))
+    }
 
 	render () {
 		return (
 			<div id="songs-table">
 				<CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
 					<TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
-					<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)} filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Song</TableHeaderColumn>
-					<TableHeaderColumn dataField='artist' filter={{type: 'TextFilter', defaultValue: ''}} dataSort={ true } >Artist</TableHeaderColumn>
+					<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)}>Song</TableHeaderColumn>
+					<TableHeaderColumn dataField='artist'>Artist</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
-					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity" dataSort={ true } >Lvl</TableHeaderColumn>
-					<TableHeaderColumn dataField='status' dataFormat={this.getStatus.bind(this)} dataSort={ true } filter={{ type: 'SelectFilter', options: this.fnConvertStatus() } }>Status</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity">Lvl</TableHeaderColumn>
+					<TableHeaderColumn dataFormat={this.getStatus.bind(this)}>Status</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
 					<TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
 				</CustomTable>   
