@@ -6,7 +6,7 @@ export default class CustomSelect extends Component {
 
 		return (
 
-			<div className="form-group">
+			<div className={this.props.className + " form-group"} >
 			    <label>{this.props.label}</label>
 			    <select value={this.props.value} className="form-control" name={this.props.name} onChange={this.props.change}>
 			    	<option value="">Select</option>

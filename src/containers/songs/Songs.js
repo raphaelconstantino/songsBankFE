@@ -25,10 +25,15 @@ export default class SongsBox extends Component {
 		this.setState(field);
 	}
 
+	fetchSongsList (param = "") {
+		
+		HttpService.get("v1/songs" + param)
+			.then(response => this.setState({songs : response}));
+	}
+
 	componentDidMount() {
 
-		HttpService.get("v1/songs")
-			.then(response => this.setState({songs : response}));
+		this.fetchSongsList();
 
 		HttpService.get("v1/genders")
 			.then(response => this.setState({gendersList : response}));
@@ -57,7 +62,30 @@ export default class SongsBox extends Component {
 	} 
 
 	reloadTable () {
-		console.log(this.state);
+		
+		var query = "?";
+		
+		if (this.state.status)
+		{
+			query += "status=" + this.state.status + "&";
+		}		
+
+		if (this.state.genders)
+		{
+			query += "genders=" + this.state.genders + "&";
+		}		
+		
+		if (this.state.instrumments)
+		{
+			query += "instrumments=" + this.state.instrumments + "&";
+		}		
+	
+		if (this.state.complexity)
+		{
+			query += "complexity=" + this.state.complexity + "&";
+		}		
+
+		this.fetchSongsList(query);
 	}
 
 	refreshTable (response) {

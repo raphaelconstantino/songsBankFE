@@ -20,10 +20,14 @@ export default class SongsFilter extends Component {
         return (
             <div>
 
-                <h4>Filters</h4>
-
-                <CustomSelect label="Status" value={this.props.status} name="status" change={this.props.setField.bind(this, "status")} list={this.props.statusList}/>
-                <button onClick={this.props.reloadTable.bind(this)}>Go</button>
+                <CustomSelect className="col-md-2" label="Status" value={this.props.status} name="status" change={this.props.setField.bind(this, "status")} list={this.props.statusList}/>
+                <CustomSelect className="col-md-3" label="Genders" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.gendersList}/>
+                <CustomSelect className="col-md-3" label="Instrumments" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.instrummentsList}/>
+                <CustomSelect className="col-md-2" label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.complexityList}/>
+                
+                <div className="col-md-2 form-group">	
+                     <button className="btn btn-info" onClick={this.props.reloadTable.bind(this)}>Go</button>
+                </div>
 
 
             </div>
