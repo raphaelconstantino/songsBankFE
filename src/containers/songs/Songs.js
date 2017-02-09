@@ -118,20 +118,18 @@ export default class SongsBox extends Component {
 				</div>
 				{this.fnCreateMessage()}	
 				
-				<div>
-					<SongsFilter 
-						instrummentsList={this.state.instrummentsList} 
-						instrumments={this.state.instrumments} 
-						gendersList={this.state.gendersList} 
-						genders={this.state.genders} 
-						statusList={this.state.statusList}
-						status={this.state.status}
-						complexityList={this.state.complexityList}
-						complexity={this.state.complexity} 
-						setField={this.setField} 
-						reloadTable={this.reloadTable} />
-				</div>	
-				
+				<SongsFilter 
+					instrummentsList={this.state.instrummentsList} 
+					instrumments={this.state.instrumments} 
+					gendersList={this.state.gendersList} 
+					genders={this.state.genders} 
+					statusList={this.state.statusList}
+					status={this.state.status}
+					complexityList={this.state.complexityList}
+					complexity={this.state.complexity} 
+					setField={this.setField} 
+					reloadTable={this.reloadTable} />
+			
 				<div>
 	                <SongsTable 
 		                songs={this.state.songs}

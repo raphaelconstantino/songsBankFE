@@ -44,6 +44,10 @@ td {
   background : #FFF !important;
 }
 
+.btn-filter {
+	padding-top : 1.5em;
+}
+
 /* Song Detail */
 #detail-items dt {
 	text-align : left;

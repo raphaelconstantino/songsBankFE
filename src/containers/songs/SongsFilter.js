@@ -25,7 +25,7 @@ export default class SongsFilter extends Component {
                 <CustomSelect className="col-md-3" label="Instrumments" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.instrummentsList}/>
                 <CustomSelect className="col-md-2" label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.complexityList}/>
                 
-                <div className="col-md-2 form-group">	
+                <div className="col-md-2 form-group btn-filter">	
                      <button className="btn btn-info" onClick={this.props.reloadTable.bind(this)}>Go</button>
                 </div>
 
