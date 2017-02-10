@@ -1,10 +1,5 @@
 export default class HttpService {
 
-    static getHost () {
-        return "https://songs-bank-be.herokuapp.com/";
-        //return "http://localhost:8080/";
-    }
-
     static _handleErrors(res) {
         if(!res.ok) throw new Error(res.statusText);
         return res;
@@ -13,7 +8,7 @@ export default class HttpService {
 
     static get (url) {
 
-        return fetch(HttpService.getHost() + url)
+        return fetch("/" + url)
             .then(res => this._handleErrors(res))
             .then(res => res.json());
         
@@ -21,7 +16,7 @@ export default class HttpService {
     
     static post(url, data) {
 
-        return fetch(HttpService.getHost() + url, {
+        return fetch("/" + url, {
             headers: { 'Content-type' : 'application/json'},
             method: 'post',
             body: JSON.stringify(data)
@@ -33,7 +28,7 @@ export default class HttpService {
 
     static del(url) {
 
-        return fetch(HttpService.getHost() + url, {
+        return fetch("/" + url, {
             method: 'delete'
         })
         .then(res => this._handleErrors(res))
@@ -43,7 +38,7 @@ export default class HttpService {
 
     static put(url, data) {
 
-        return fetch(HttpService.getHost() + url, {
+        return fetch("/" + url, {
             headers: { 'Content-type' : 'application/json'},
             method: 'put',
             body: JSON.stringify(data)

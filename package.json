@@ -2,6 +2,7 @@
   "name": "songsBank",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://songs-bank-be.herokuapp.com",
   "devDependencies": {
     "babel-core": "^6.21.0",
     "immutability-helper": "^2.0.0",
