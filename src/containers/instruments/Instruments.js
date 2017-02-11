@@ -4,6 +4,9 @@ import InstrumentTable from './InstrumentTable';
 import UpsertDialog from './UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
+import TopNavBar from '../../components/TopNavBar';
+import Card from '../../components/Card';
+import CardHeader from '../../components/CardHeader';
 
 export default class GendersBox extends Component {
 	
@@ -42,15 +45,24 @@ export default class GendersBox extends Component {
 
 	render () {
 		return (
-			<div>
-				<h2>Instruments</h2>
-				{this.fnCreateMessage()}	
-				<div className="margin-vert">	
-					<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
-				</div>	
-				<div>
-	                <InstrumentTable instrumments={this.state.instrumments} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
-	            </div>    
+			<div className="main-panel" id="page-wrapper">
+
+				<TopNavBar title="Instruments List" url="/instruments"/>
+
+				<Card>
+
+					<CardHeader title="Instruments List" category="List of instruments" />
+
+						<div className="card-content table-responsive">
+							{this.fnCreateMessage()}	
+							<div className="margin-vert">	
+								<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
+							</div>	
+							<div>
+								<InstrumentTable instrumments={this.state.instrumments} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
+							</div> 
+						</div>	
+				</Card>
 	        </div>
 		);
 	}

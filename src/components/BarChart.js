@@ -15,9 +15,7 @@ export default class BarChart extends Component {
             chart: {
                 type: 'column'
             },
-            title: {
-                text: this.props.name
-            },
+            title: false,
             xAxis: {
                 categories: [this.props.name],
                 title: {

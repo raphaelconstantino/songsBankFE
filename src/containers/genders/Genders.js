@@ -4,6 +4,9 @@ import UpsertDialog from './UpsertDialog';
 import HttpService from '../../util/HttpService';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
+import TopNavBar from '../../components/TopNavBar';
+import Card from '../../components/Card';
+import CardHeader from '../../components/CardHeader';
 
 export default class GendersBox extends Component {
 	
@@ -43,15 +46,25 @@ export default class GendersBox extends Component {
 
 	render () {
 		return (
-			<div>
-				<h2>Genders</h2>
-				{this.fnCreateMessage()}	
-				<div className="margin-vert">	
-					<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
-				</div>	
-				<div>
-	                <GendersTable genders={this.state.genders} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
-	            </div>    
+			<div className="main-panel" id="page-wrapper">
+				
+				<TopNavBar title="Gender List" url="/genders"/>
+
+				<Card>
+
+					<CardHeader title="Genders List" category="List of genders" />
+
+					<div className="card-content table-responsive">
+						{this.fnCreateMessage()}	
+						<div className="margin-vert">	
+							<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
+						</div>	
+						<div>
+							<GendersTable genders={this.state.genders} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
+						</div>    
+					</div>	
+
+				</Card>
 	        </div>
 		);
 	}

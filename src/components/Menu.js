@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import Util from '../util/Util';
-import {Link} from 'react-router'
+import NavLink from './NavLink.js';
 
 export default class Menu extends Component {
 
   render() {
+    
     return (
-      <div className={Util.fnGetHideSmClass()}>
-        <Drawer width={170} open={this.props.open}>
-            <AppBar title="S-Bank"/>
-            <MenuItem onTouchTap={this.props.handleToggle}><Link to="/dashboard"><i className="fa fa-fw fa-table"></i> Dashboard</Link></MenuItem>
-            <MenuItem onTouchTap={this.props.handleToggle}><Link to="/songs"><i className="fa fa-fw fa-table"></i> Songs</Link></MenuItem>
-            <MenuItem onTouchTap={this.props.handleToggle}><Link to="/genders"><i className="fa fa-fw fa-table"></i> Genders</Link></MenuItem>
-            <MenuItem onTouchTap={this.props.handleToggle}><Link to="/instruments"><i className="fa fa-fw fa-table"></i> Instruments</Link></MenuItem>     
-        </Drawer>
+      <div className="sidebar" data-color="blue" data-image="../img/sidebar-1.jpg">
+
+        <div className="logo">
+          <a href="/" className="simple-text">
+            Songs Bank
+          </a>
+        </div>
+
+        <div className="sidebar-wrapper">
+          <ul className="nav">
+              <NavLink to="/dashboard">
+                <i className="material-icons">dashboard</i> <p>Dashboard</p>
+              </NavLink>
+              <NavLink to="/songs">
+                <i className="material-icons">dashboard</i> <p>Songs</p>
+              </NavLink>
+              <NavLink to="/genders">                
+                <i className="material-icons">dashboard</i><p>Genders</p>
+              </NavLink>
+              <NavLink to="/instruments">                
+                <i className="material-icons">dashboard</i><p>Instruments</p>
+              </NavLink>
+          </ul>
+        </div> 
+
+        <div className="sidebar-background"></div>
+
       </div>
     );
   }

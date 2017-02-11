@@ -18,9 +18,7 @@ export default class PieChart extends Component {
                 plotShadow: false,
                 type: 'pie'
             },
-            title: {
-                text: this.props.name
-            },
+            title: false,
             tooltip: {
                 pointFormat: '<b>{point.y}</b> songs: <b>{point.percentage:.1f}%</b>'
             },
@@ -29,13 +27,9 @@ export default class PieChart extends Component {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-						enabled: true,
-						format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-						style: {
-							color: 'black'
-						},
-						connectorColor: 'silver'
-                    }
+						enabled: false,
+                    },
+                    showInLegend: true
                 }
             },
             series: [{

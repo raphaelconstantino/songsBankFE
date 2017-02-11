@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
 import SongsFilter from './SongsFilter';
+import TopNavBar from '../../components/TopNavBar';
+import Card from '../../components/Card';
+import CardHeader from '../../components/CardHeader';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
 import SongsUtil from './SongsUtil';
@@ -111,31 +114,42 @@ export default class SongsBox extends Component {
 	render () {
 
 		return (
-			<div>
-				<h2>Songs</h2>	
-				<div className="margin-vert">	
-					<Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
-				</div>
-				{this.fnCreateMessage()}	
+			<div className="main-panel" id="page-wrapper">
 				
-				<SongsFilter 
-					instrummentsList={this.state.instrummentsList} 
-					instrumments={this.state.instrumments} 
-					gendersList={this.state.gendersList} 
-					genders={this.state.genders} 
-					statusList={this.state.statusList}
-					status={this.state.status}
-					complexityList={this.state.complexityList}
-					complexity={this.state.complexity} 
-					setField={this.setField} 
-					reloadTable={this.reloadTable} />
-			
-				<div>
-	                <SongsTable 
-		                songs={this.state.songs}
-		                refreshTable={this.refreshTable} 
-						setMsgSuccess={this.setMsgSuccess} />    
-	            </div>    
+				<TopNavBar title="Songs List" url="/songs" />
+
+				<Card>
+					
+					<CardHeader title="Songs Table" category="All songs list" />
+
+					<div className="card-content table-responsive">
+
+						<div className="margin-vert">	
+							<Link to="/insertSong"><RaisedButton label="Insert Song" primary={true} /></Link>
+						</div>
+						
+						{this.fnCreateMessage()}
+
+						<SongsFilter 
+							instrummentsList={this.state.instrummentsList} 
+							instrumments={this.state.instrumments} 
+							gendersList={this.state.gendersList} 
+							genders={this.state.genders} 
+							statusList={this.state.statusList}
+							status={this.state.status}
+							complexityList={this.state.complexityList}
+							complexity={this.state.complexity} 
+							setField={this.setField} 
+							reloadTable={this.reloadTable} />
+					</div>	
+
+					<SongsTable 
+						songs={this.state.songs}
+						refreshTable={this.refreshTable} 
+						setMsgSuccess={this.setMsgSuccess} />  
+
+				</Card>	
+
 	        </div>
 		);
 	}

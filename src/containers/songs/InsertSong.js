@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import SongsForm from './SongsForm';
 import SongsUtil from './SongsUtil';
 import HttpService from '../../util/HttpService';
-import {Link} from 'react-router'
 import moment from 'moment';
+import TopNavBar from '../../components/TopNavBar';
+import Card from '../../components/Card';
+import CardHeader from '../../components/CardHeader';
 
 export default class InsertSongBox extends Component {
 	
@@ -174,33 +176,38 @@ export default class InsertSongBox extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className="main-panel" id="page-wrapper">
 
-				<div className="margin-vert">	
-					<Link to="/songs">Back to List</Link>
-				</div>	
+				<TopNavBar title="Songs List" url="/songs" />
 
-				<h2>Insert Song</h2>
+				<Card>
 
-				<SongsForm 
-					name={this.state.name} 
-					artist={this.state.artist}
-					genders={this.state.genders}
-					listGenders={this.state.gendersList}
-					complexity={this.state.complexity} 
-					listComplexity={this.state.complexityList}
-					status={this.state.status}
-					listStatus={this.state.statusList}
-					description={this.state.description}
-					video={this.state.video}
-					lyrics={this.state.lyrics}
-					instrumments={this.state.instrumments}
-					listInstrumments={this.state.instrummentsList}
-					lastReview={this.state.lastReview}
-					setField={this.setField} 
-					setLastReview={this.setLastReview}
-					errorMsg={this.state.errorMsg} 
-                    sendData={this.sendData}/>
+					<CardHeader title="Insert Song" category="Add a new song to your list" />
+
+					<div className="card-content table-responsive">
+
+						<SongsForm 
+							name={this.state.name} 
+							artist={this.state.artist}
+							genders={this.state.genders}
+							listGenders={this.state.gendersList}
+							complexity={this.state.complexity} 
+							listComplexity={this.state.complexityList}
+							status={this.state.status}
+							listStatus={this.state.statusList}
+							description={this.state.description}
+							video={this.state.video}
+							lyrics={this.state.lyrics}
+							instrumments={this.state.instrumments}
+							listInstrumments={this.state.instrummentsList}
+							lastReview={this.state.lastReview}
+							setField={this.setField} 
+							setLastReview={this.setLastReview}
+							errorMsg={this.state.errorMsg} 
+							sendData={this.sendData}/>
+					</div>		
+
+				</Card>		
 	        </div>
 		);
 	}
