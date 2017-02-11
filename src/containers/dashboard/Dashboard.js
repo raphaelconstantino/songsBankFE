@@ -66,12 +66,12 @@ export default class DashboardBox extends Component {
 									<i className="material-icons">store</i>
 								</div>
 								<div className="card-content">
-									<p className="category">Revenue</p>
-									<h3 className="title">$34,245</h3>
+									<p className="category">Played Songs</p>
+									<h3 className="title">231x</h3>
 								</div>
 								<div className="card-footer">
 									<div className="stats">
-										<i className="material-icons">date_range</i> Last 24 Hours
+										<i className="material-icons">date_range</i> Last 30 days
 									</div>
 								</div>
 							</div>
