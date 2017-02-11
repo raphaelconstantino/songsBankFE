@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SongsUtil from '../songs/SongsUtil'
 import PieChart from '../../components/PieChart'
-import BarChart from '../../components/BarChart'
+//import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
 import TopNavBar from '../../components/TopNavBar';
 import CardHeader from '../../components/CardHeader';
@@ -32,7 +32,7 @@ export default class DashboardBox extends Component {
 	}
 
 	fnConvertToBarGraphObj (obj) {
-		return obj.map((o, i) => { return {name : SongsUtil.getStatusLabel(o._id), data : [o.count]} });
+		return obj.map((o, i) => { return {name : SongsUtil.getStatusLabel(o._id), y : o.count} });
 	}
 
     render () {
@@ -78,22 +78,70 @@ export default class DashboardBox extends Component {
 					</div>
 
 					<div className="col-md-9">
+						<div className="card">
+							<CardHeader title="Top Played" category="Most played Songs" color="red"/>
+							<table className="table table-hover">
+                                <thead className="text-danger">
+                                    <tr>
+                                        <th>Song</th>
+                                        <th>Artist</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Love of My Life</td>
+                                        <td>Queen</td>
+                                        <td>Learned</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Let Her Go</td>
+                                        <td>The Lumineers</td>
+                                        <td>Learned</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Norwegean Woord</td>
+                                        <td>The Beatles</td>
+                                        <td>Learned</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Longe de Você</td>
+                                        <td>Charlie Brown Jr.</td>
+                                        <td>Learned</td>
+                                    </tr>
+                                    <tr>
+                                        <td>New Slang</td>
+                                        <td>The Shings</td>
+                                        <td>Learning</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quero ser Feliz Também</td>
+                                        <td>Natiruts</td>
+                                        <td>Learned</td>
+                                    </tr>																																				                                   																	
+                                </tbody>
+                            </table>
+						</div>	
+					</div>	
+
+					<div className="col-md-4">
 						<div className="card">	
-							<CardHeader title="Status" category="Number of Status" />
-							<BarChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></BarChart>
+							<CardHeader title="Status" category="Number of Status" color="purple"/>
+							{/*<BarChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></BarChart>*/}
+							<PieChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></PieChart>																	
 						</div>	
 					</div>
 
-					<div className="col-md-6">
+					<div className="col-md-4">
 						<div className="card">
 							<CardHeader title="Genders" category="Number of Genders" />
 							<PieChart data={this.fnConvertToPieGraphObj(this.state.gendersCount, 'genders')} name="Genders"></PieChart>																	
 						</div>
 					</div>
 
-					<div className="col-md-6">
+					<div className="col-md-4">
 						<div className="card">
-							<CardHeader title="Instruments" category="Number of Instruments" />
+							<CardHeader title="Instruments" category="Number of Instruments" color="orange"/>
 							<PieChart data={this.fnConvertToPieGraphObj(this.state.instrummentCount, 'instrumments')} name="Instrumments"></PieChart>
 						</div>
 					</div>
