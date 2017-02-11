@@ -20,13 +20,13 @@ export default class Menu extends Component {
                 <i className="material-icons">dashboard</i> <p>Dashboard</p>
               </NavLink>
               <NavLink to="/songs">
-                <i className="material-icons">dashboard</i> <p>Songs</p>
+                <i className="material-icons">music_note</i> <p>Songs</p>
               </NavLink>
               <NavLink to="/genders">                
-                <i className="material-icons">dashboard</i><p>Genders</p>
+                <i className="material-icons">style</i><p>Genders</p>
               </NavLink>
               <NavLink to="/instruments">                
-                <i className="material-icons">dashboard</i><p>Instruments</p>
+                <i className="material-icons">content_paste</i><p>Instruments</p>
               </NavLink>
           </ul>
         </div> 
