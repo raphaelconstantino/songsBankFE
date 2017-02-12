@@ -79,9 +79,9 @@ export default class DashboardBox extends Component {
 
 					<div className="col-md-9">
 						<div className="card">
-							<CardHeader title="Top Played" category="Most played Songs" color="red"/>
+							<CardHeader title="Top Played" category="Most played Songs" color="blue"/>
 							<table className="table table-hover">
-                                <thead className="text-danger">
+                                <thead className="text-info">
                                     <tr>
                                         <th>Song</th>
                                         <th>Artist</th>
@@ -134,7 +134,7 @@ export default class DashboardBox extends Component {
 
 					<div className="col-md-4">
 						<div className="card">
-							<CardHeader title="Genders" category="Number of Genders" />
+							<CardHeader title="Genders" category="Number of Genders" color="red"/>
 							<PieChart data={this.fnConvertToPieGraphObj(this.state.gendersCount, 'genders')} name="Genders"></PieChart>																	
 						</div>
 					</div>
