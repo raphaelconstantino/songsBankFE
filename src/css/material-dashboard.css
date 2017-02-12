@@ -477,14 +477,7 @@ h2.title {
   background: rgba(200, 200, 200, 0.2);
   color: #3C4858;
 }
-.sidebar .nav li.active > a,
-.off-canvas-sidebar .nav li.active > a {
-  color: #FFFFFF;
-}
-.sidebar .nav li.active > a i,
-.off-canvas-sidebar .nav li.active > a i {
-  color: #FFFFFF;
-}
+
 .sidebar .nav p,
 .off-canvas-sidebar .nav p {
   margin: 0;
@@ -605,11 +598,7 @@ h2.title {
 .off-canvas-sidebar.has-image:after {
   opacity: .77;
 }
-.sidebar[data-color="blue"] .nav li.active a,
-.off-canvas-sidebar[data-color="blue"] .nav li.active a {
-  background-color: #00bcd4;
-  box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
-}
+
 .sidebar[data-color="green"] .nav li.active a,
 .off-canvas-sidebar[data-color="green"] .nav li.active a {
   background-color: #4caf50;
@@ -5059,4 +5048,65 @@ footer .btn {
     margin-left: -20px;
     margin-right: -20px;
   }
+}
+
+.nav-container {
+    position: relative;
+}
+
+.moving-tab {
+    position: absolute;
+    padding: 10px 15px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    top: 0px;
+    left: 0px;
+    border-radius: 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 10px 15px;
+}
+
+.sidebar[data-color="blue"] .moving-tab,
+.off-canvas-sidebar[data-color="blue"] .moving-tab {
+  background-color: #00bcd4;
+  box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
+}
+
+.moving-tab i {
+    font-size: 24px;
+    float: left;
+    margin-right: 15px;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.moving-tab p {
+    margin: 0;
+    line-height: 30px;
+}
+
+.moving-Dashboard {
+  width : 230px;
+  transform : translate3d(0px, 0px, 0px);
+  transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)
+}
+
+.moving-Songs {
+  width : 230px;
+  transform : translate3d(0px, 60px, 0px);
+  transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)
+}
+
+.moving-Genders {
+  width : 230px;
+  transform : translate3d(0px, 120px, 0px);
+  transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)
+}
+
+.moving-Instruments {
+  width : 230px;
+  transform : translate3d(0px, 180px, 0px);
+  transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)
 }

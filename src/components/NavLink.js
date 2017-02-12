@@ -4,7 +4,8 @@ import {Link} from "react-router";
 export default class NavLink extends Component {
   
     static contextTypes = {
-        router: React.PropTypes.object
+        router: React.PropTypes.object,
+        onClick: React.PropTypes.func,
     }
     
     render () {
