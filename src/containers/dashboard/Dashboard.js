@@ -27,6 +27,19 @@ export default class DashboardBox extends Component {
 
 	}
 
+	fnTotalSongs () {
+		return this.state.statusCount.reduce((a, b) => (a + b.count), 0 )
+	}
+
+	fnTotalLearned () {
+		let arr = this.state.statusCount.filter((obj) => (obj._id === "2") )
+		if (arr.length)
+		{
+			return arr[0].count;
+		}
+
+	}
+
 	fnConvertToPieGraphObj (obj, objName) {
 		return obj.map((o, i) => { return {name : o[objName].name, y : o.total} });
 	}
@@ -52,7 +65,7 @@ export default class DashboardBox extends Component {
 								</div>
 								<div className="card-content">
 									<p className="category">Learned Songs</p>
-									<h3 className="title">35/50<small>songs</small></h3>
+									<h3 className="title">{this.fnTotalLearned() }/{ this.fnTotalSongs() }<small>songs</small></h3>
 								</div>
 								<div className="card-footer">
 									<div className="stats">
