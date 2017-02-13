@@ -18,7 +18,7 @@ export default class SongsFilter extends Component {
 
     render () {
         return (
-            <div>
+            <div className="hidden-xs hidden-sm">
 
                 <CustomSelect className="col-md-2" label="Status" value={this.props.status} name="status" change={this.props.setField.bind(this, "status")} list={this.props.statusList}/>
                 <CustomSelect className="col-md-3" label="Genders" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.gendersList}/>
