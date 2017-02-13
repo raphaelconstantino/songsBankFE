@@ -11,11 +11,14 @@ export default class DashboardBox extends Component {
 
 	constructor () {
 		super();
-		this.state = { gendersCount : [], instrummentCount : [], statusCount : []};
+		this.state = { gendersCount : [], instrummentCount : [], statusCount : [], topSongs : []};
 	}
 
 	componentDidMount() {
 		
+		HttpService.get("v1/topPlayed")
+			.then(response => this.setState({topSongs : response}));
+
 		HttpService.get("v1/statusCount")
 			.then(response => this.setState({statusCount : response}));
 
@@ -102,36 +105,8 @@ export default class DashboardBox extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Love of My Life</td>
-                                        <td>Queen</td>
-                                        <td>Learned</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Let Her Go</td>
-                                        <td>The Lumineers</td>
-                                        <td>Learned</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Norwegean Woord</td>
-                                        <td>The Beatles</td>
-                                        <td>Learned</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Longe de Você</td>
-                                        <td>Charlie Brown Jr.</td>
-                                        <td>Learned</td>
-                                    </tr>
-                                    <tr>
-                                        <td>New Slang</td>
-                                        <td>The Shings</td>
-                                        <td>Learning</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Quero ser Feliz Também</td>
-                                        <td>Natiruts</td>
-                                        <td>Learned</td>
-                                    </tr>																																				                                   																	
+									{this.state.topSongs.map((o) => <tr><td>{o.name}</td><td>{o.artist}</td><td>{SongsUtil.getStatusLabel(o.status)}</td></tr>)}
+                                    																																			                                   																	
                                 </tbody>
                             </table>
 						</div>	
