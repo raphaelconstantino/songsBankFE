@@ -26,6 +26,15 @@ export default class SongsTable extends Component {
 		return "";	
 	}
 
+	fnCreatePracticeButton (row) {
+		if (row.status === "1")
+		{
+			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Practice</MenuItem>);
+		}
+
+		return "";	
+	}
+
 	fnCreateLearnedButton (row) {
 		if (row.status !== "2")
 		{
@@ -89,6 +98,7 @@ export default class SongsTable extends Component {
 				<li><Link to={"/songDetail?id=" + row._id}>Detail</Link></li>
 				<li><Link to={"/insertSong?id=" + row._id}>Edit</Link></li>
 				{this.fnCreateReviewButton(row)}
+				{this.fnCreatePracticeButton(row)}
 				{this.fnCreateLearnedButton(row)}
 				 <MenuItem divider />
 				<MenuItem eventKey="1" onClick={this.deleteSong.bind(this, row._id, row.name)} >Delete</MenuItem>
