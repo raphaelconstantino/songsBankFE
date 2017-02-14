@@ -35,15 +35,17 @@ export default class SongsForm extends Component {
 
                         <CustomInput label="Song Name*" type="text" name="name" value={this.props.name} change={this.props.setField.bind(this, "name")} error={this.props.errorMsg} />
                         <CustomInput label="Artist Name*" type="text" name="artist" value={this.props.artist} change={this.props.setField.bind(this, "artist")} error={this.props.errorMsg} />
-                        <CustomSelect label="Status*" value={this.props.status} name="status" change={this.props.setField.bind(this, "status")} list={this.props.listStatus} error={this.props.errorMsg}/>
                         <CustomInput label="Description" type="text" name="description" value={this.props.description} change={this.props.setField.bind(this, "description")} />
-						<CustomSelect label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.listComplexity} />
-						<CustomSelect label="Gender" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.listGenders} />
-						<CustomSelect label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
-						<div className="form-group">	
-							<label>Last Time Played</label>
-							<DatePicker hintText="Last Time Played" autoOk value={this.props.lastReview} onChange={this.props.setLastReview.bind(this)} />
-						</div>		
+						<div className="row">	
+							<CustomSelect className="col-md-3" label="Gender" value={this.props.genders} name="genders" change={this.props.setField.bind(this, "genders")} list={this.props.listGenders} />
+							<CustomSelect className="col-md-3" label="Instrument" value={this.props.instrumments} name="instrumments" change={this.props.setField.bind(this, "instrumments")} list={this.props.listInstrumments} />
+							<CustomSelect className="col-md-2" label="Status*" value={this.props.status} name="status" change={this.props.setField.bind(this, "status")} list={this.props.listStatus} error={this.props.errorMsg}/>
+							<CustomSelect className="col-md-2" label="Complexity" value={this.props.complexity} name="complexity" change={this.props.setField.bind(this, "complexity")} list={this.props.listComplexity} />
+							<div className="form-group col-md-2">	
+								<label>Last Time Played</label>
+								<DatePicker hintText="Last Time Played" autoOk value={this.props.lastReview} onChange={this.props.setLastReview.bind(this)} />
+							</div>
+						</div>			
 						<CustomInput label="Video" type="text" name="video" value={this.props.video} change={this.props.setField.bind(this, "video")} />
 						<div className="form-group">	
 							<label>Lyrics</label>

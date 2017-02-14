@@ -18,7 +18,7 @@ class App extends Component {
 
         <div className="wrapper">           
 
-          <Menu open={this.state.open} handleToggle={this.handleToggle} />
+          <Menu open={this.state.open} handleToggle={this.handleToggle} pathName={this.props.location.pathname} />
 
           {this.props.children}
            
