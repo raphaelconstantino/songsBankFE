@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SongsUtil from '../songs/SongsUtil'
+import DashboardTopPlayed from './DashboardTopPlayed'
+import DashboardCardStats from './DashboardCardStats'
 import PieChart from '../../components/PieChart'
 //import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
@@ -51,6 +53,12 @@ export default class DashboardBox extends Component {
 		return obj.map((o, i) => { return {name : SongsUtil.getStatusLabel(o._id), y : o.count} });
 	}
 
+	fnCreateCardVal () {
+		return (
+			<h3 className="title">{this.fnTotalLearned() }/{ this.fnTotalSongs() }<small>songs</small></h3>
+		)
+	}
+
     render () {
 
 		return (
@@ -62,55 +70,21 @@ export default class DashboardBox extends Component {
 
 					<div className="col-md-3">
 						
-						<div className="card card-stats">
-								<div className="card-header" data-background-color="orange">
-									<i className="material-icons">content_copy</i>
-								</div>
-								<div className="card-content">
-									<p className="category">Learned Songs</p>
-									<h3 className="title">{this.fnTotalLearned() }/{ this.fnTotalSongs() }<small>songs</small></h3>
-								</div>
-								<div className="card-footer">
-									<div className="stats">
-										<i className="material-icons text-danger">warning</i> <a href="#pablo">Songs List</a>
-									</div>
-								</div>
-							</div>
+							<DashboardCardStats 
+								color="orange" 
+								icon="content_copy" 
+								title="Learned Songs" 
+								text={this.fnCreateCardVal()} />
 
-							<div className="card card-stats">
-								<div className="card-header" data-background-color="green">
-									<i className="material-icons">store</i>
-								</div>
-								<div className="card-content">
-									<p className="category">Played Songs</p>
-									<h3 className="title">231x</h3>
-								</div>
-								<div className="card-footer">
-									<div className="stats">
-										<i className="material-icons">date_range</i> Last 30 days
-									</div>
-								</div>
-							</div>
+							<DashboardCardStats 
+								color="green" 
+								icon="store" 
+								title="Played Songs" 
+								text={(<h3 className="title">231x</h3>)} />								
+
 					</div>
 
-					<div className="col-md-9">
-						<div className="card">
-							<CardHeader title="Top Played" category="Most played Songs" color="blue"/>
-							<table className="table table-hover">
-                                <thead className="text-info">
-                                    <tr>
-                                        <th>Song</th>
-                                        <th>Artist</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									{this.state.topSongs.map((o) => <tr><td>{o.name}</td><td>{o.artist}</td><td>{SongsUtil.getStatusLabel(o.status)}</td></tr>)}
-                                    																																			                                   																	
-                                </tbody>
-                            </table>
-						</div>	
-					</div>	
+					<DashboardTopPlayed topSongs={this.state.topSongs} />
 
 					<div className="col-md-4">
 						<div className="card">	
