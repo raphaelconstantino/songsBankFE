@@ -25,16 +25,6 @@ export default class SongDetailBox extends Component {
         {
 		    HttpService.get("v1/songs/" + this.props.location.query.id)
 			    .then(response => this.setState({ song : response }));
-        } else if (this.props.location.query.songName)
-        {
-            	HttpService.get(`v1/songs?name=${this.props.location.query.songName}`)
-			    .then(response => {
-                    if (response.length) {
-                        this.setState({ song : response[0]} )
-                    } else {
-                        this.context.router.push(`/songs?songName=No song ${this.props.location.query.songName} found on database.`);
-                    }    
-                });
         }
     }
 

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import HttpService from '../util/HttpService';
 
 export default class FormSearch extends Component {
 	
@@ -16,8 +17,13 @@ export default class FormSearch extends Component {
         this.setState({searchVal : e.target.value})
     }
 
-    fnSearch () {
-        this.context.router.push(`/songDetail?songName=${this.state.searchVal}`);
+    fnSearch (e) {
+        e.preventDefault();
+        HttpService.get("v1/song/name/" + this.state.searchVal)
+        .then((response) => {
+            this.context.router.push(`/songDetail?id=${response[0]._id}`);
+        });
+        
     }
     
     render () {
