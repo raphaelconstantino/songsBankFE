@@ -13,12 +13,20 @@ class App extends Component {
 
   handleToggle = () => this.setState({open: true});
 
+  closeMenu (e) {
+    let bodyClass = document.querySelector('html').classList;
+    
+    bodyClass.remove("nav-open");
+  }
+
   render() {
     return (
 
         <div className="wrapper">           
 
           <Menu open={this.state.open} handleToggle={this.handleToggle} pathName={this.props.location.pathname} />
+
+          <div className="transparent-layer" onClick={this.closeMenu}></div>
 
           {this.props.children}
            

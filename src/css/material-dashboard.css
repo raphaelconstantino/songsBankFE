@@ -4832,6 +4832,23 @@ footer .btn {
     transform: translate3d(0, 0, 0);
   }
 
+.transparent-layer {
+  display : none;
+}
+
+.nav-open .transparent-layer {
+    content: "";
+    display: block;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background: rgba(0,0,0,0.4);
+}
+
   .close-layer {
     height: 100%;
     width: 100%;
