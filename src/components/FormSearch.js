@@ -21,7 +21,12 @@ export default class FormSearch extends Component {
         e.preventDefault();
         HttpService.get("v1/song/name/" + this.state.searchVal)
         .then((response) => {
-            this.context.router.push(`/songDetail?id=${response[0]._id}`);
+            if (response.length)
+            {
+                this.context.router.push(`/songDetail?id=${response[0]._id}`);
+            } else {
+                this.context.router.push(`/songs?songName=Song ${this.state.searchVal} not found.`);
+            } 
         });
         
     }
