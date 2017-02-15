@@ -7,6 +7,7 @@ export default class DashboardCardStats extends Component {
         icon : PropTypes.string.isRequired,
         title : PropTypes.string.isRequired,
         text : PropTypes.object.isRequired,
+        desc : PropTypes.object
     }
 
     render () {
@@ -20,9 +21,7 @@ export default class DashboardCardStats extends Component {
                     {this.props.text}
                 </div>
                 <div className="card-footer">
-                    <div className="stats">
-                        
-                    </div>
+                    {this.props.desc}
                 </div>
             </div>
         );

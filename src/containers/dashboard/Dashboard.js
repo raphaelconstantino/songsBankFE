@@ -13,13 +13,16 @@ export default class DashboardBox extends Component {
 
 	constructor () {
 		super();
-		this.state = { gendersCount : [], instrummentCount : [], statusCount : [], topSongs : []};
+		this.state = { gendersCount : [], instrummentCount : [], statusCount : [], topSongs : [], listPlayedByDate : []};
 	}
 
 	componentDidMount() {
 		
 		HttpService.get("v1/topPlayed")
 			.then(response => this.setState({topSongs : response}));
+
+		HttpService.get("v1/listPlayedByDate")
+			.then(response => this.setState({listPlayedByDate : response}));
 
 		HttpService.get("v1/statusCount")
 			.then(response => this.setState({statusCount : response}));
@@ -53,14 +56,23 @@ export default class DashboardBox extends Component {
 		return obj.map((o, i) => { return {name : SongsUtil.getStatusLabel(o._id), y : o.count} });
 	}
 
-	fnCreateCardVal () {
+	fnCreateLearnedCardVal () {
 		return (
-			<h3 className="title">{this.fnTotalLearned() }/{ this.fnTotalSongs() }<small>songs</small></h3>
+			<h3 className="title">{this.fnTotalLearned() }/{ this.fnTotalSongs() }<small> songs</small></h3>
 		)
 	}
 
-    render () {
+	fnCreateCountCardVal () {
+		return (
+			<h3 className="title">{this.state.listPlayedByDate} songs</h3>
+		)
+	}
 
+	fnCreateCountDesc () {
+		return (<div className="stats"><i className="material-icons">date_range</i> Last 30 Days</div>);
+	}
+
+    render () {
 		return (
 			<div className="main-panel" id="page-wrapper">
 
@@ -74,13 +86,14 @@ export default class DashboardBox extends Component {
 								color="orange" 
 								icon="content_copy" 
 								title="Learned Songs" 
-								text={this.fnCreateCardVal()} />
+								text={this.fnCreateLearnedCardVal()} />
 
 							<DashboardCardStats 
 								color="green" 
 								icon="store" 
 								title="Played Songs" 
-								text={(<h3 className="title">231x</h3>)} />								
+								text={this.fnCreateCountCardVal()} 
+								desc={this.fnCreateCountDesc()} />								
 
 					</div>
 
