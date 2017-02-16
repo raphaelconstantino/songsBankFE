@@ -90,7 +90,7 @@ export default class DashboardBox extends Component {
 
 							<DashboardCardStats 
 								color="green" 
-								icon="store" 
+								icon="assessment" 
 								title="Played Songs" 
 								text={this.fnCreateCountCardVal()} 
 								desc={this.fnCreateCountDesc()} />								
