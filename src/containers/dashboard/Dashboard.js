@@ -98,28 +98,30 @@ export default class DashboardBox extends Component {
 					</div>
 
 					<DashboardTopPlayed topSongs={this.state.topSongs} />
-
-					<div className="col-md-4">
-						<div className="card">	
-							<CardHeader title="Status" category="Number of Status" color="purple"/>
-							{/*<BarChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></BarChart>*/}
-							<PieChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></PieChart>																	
-						</div>	
-					</div>
-
-					<div className="col-md-4">
-						<div className="card">
-							<CardHeader title="Genders" category="Number of Genders" color="red"/>
-							<PieChart data={this.fnConvertToPieGraphObj(this.state.gendersCount, 'genders')} name="Genders"></PieChart>																	
+					
+					<div className="row">
+						<div className="col-md-4">
+							<div className="card">	
+								<CardHeader title="Status" category="Number of Status" color="purple"/>
+								{/*<BarChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></BarChart>*/}
+								<PieChart data={this.fnConvertToBarGraphObj(this.state.statusCount)} name="Status"></PieChart>																	
+							</div>	
 						</div>
-					</div>
 
-					<div className="col-md-4">
-						<div className="card">
-							<CardHeader title="Instruments" category="Number of Instruments" color="orange"/>
-							<PieChart data={this.fnConvertToPieGraphObj(this.state.instrummentCount, 'instrumments')} name="Instrumments"></PieChart>
+						<div className="col-md-4">
+							<div className="card">
+								<CardHeader title="Genders" category="Number of Genders" color="red"/>
+								<PieChart data={this.fnConvertToPieGraphObj(this.state.gendersCount, 'genders')} name="Genders"></PieChart>																	
+							</div>
 						</div>
-					</div>
+
+						<div className="col-md-4">
+							<div className="card">
+								<CardHeader title="Instruments" category="Number of Instruments" color="orange"/>
+								<PieChart data={this.fnConvertToPieGraphObj(this.state.instrummentCount, 'instrumments')} name="Instrumments"></PieChart>
+							</div>
+						</div>
+					</div>	
 
 				</Content>
 
