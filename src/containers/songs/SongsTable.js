@@ -20,7 +20,7 @@ export default class SongsTable extends Component {
 	fnCreateReviewButton (row) {
 		if (row.status === "2")
 		{
-			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Review</MenuItem>);
+			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row._id, row.reviewCount)} >Review</MenuItem>);
 		}
 
 		return "";	
@@ -38,7 +38,7 @@ export default class SongsTable extends Component {
 	fnCreateLearnedButton (row) {
 		if (row.status !== "2")
 		{
-			return (<MenuItem eventKey="1" onClick={this.markLearned.bind(this, row)} >Mark as Learned</MenuItem>)
+			return (<MenuItem eventKey="1" onClick={this.markLearned.bind(this, row._id)} >Mark as Learned</MenuItem>)
 		}
 		
 		return "";
@@ -54,33 +54,30 @@ export default class SongsTable extends Component {
 
 	}
 
-	markLearned (obj) {
-	
-		obj.status = "2";
+	markLearned (id) {
 
-		HttpService.put("v1/songs/" + obj._id, obj)
+		HttpService.put("v1/songs/" + id, {status : "2"})
 			.then(response => {
-				this.props.setMsgSuccess(`Song ${obj.name} marked as learned succesfully.`);
+				this.props.setMsgSuccess(`Song ${response.name} marked as learned succesfully.`);
 				return this.props.refreshTable(response) 
 			});	
 
 	}
 	
-	reviewSong (obj) {
-		
-		let reviewCount = obj.reviewCount;
+	reviewSong (id, reviewCount) {
 
 		if (reviewCount === null || reviewCount === undefined)
 		{
 			reviewCount = 0;
 		}
 
+		var obj = {};
 		obj.lastReview = new Date();
 		obj.reviewCount = ++reviewCount;
 
-		HttpService.put("v1/songs/" + obj._id, obj)
+		HttpService.put("v1/songs/" + id, obj)
 			.then(response => {
-				this.props.setMsgSuccess(`Song ${obj.name} reviwed succesfully.`);
+				this.props.setMsgSuccess(`Song ${response.name} reviwed succesfully.`);
 				return this.props.refreshTable(response) 
 			});	
 
