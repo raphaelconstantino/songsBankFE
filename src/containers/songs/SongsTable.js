@@ -29,7 +29,7 @@ export default class SongsTable extends Component {
 	fnCreatePracticeButton (row) {
 		if (row.status === "1")
 		{
-			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row)} >Practice</MenuItem>);
+			return (<MenuItem eventKey="1" onClick={this.reviewSong.bind(this, row._id, row.reviewCount)} >Practice</MenuItem>);
 		}
 
 		return "";	
