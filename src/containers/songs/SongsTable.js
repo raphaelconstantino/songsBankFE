@@ -152,12 +152,12 @@ export default class SongsTable extends Component {
 				<CustomTable list={this.props.songs} trClassName={ this.fnStatus.bind(this) }>
 					<TableHeaderColumn columnClassName="song-chart" dataFormat={this.createProgressPie.bind(this)} ></TableHeaderColumn>
 					<TableHeaderColumn dataFormat={this.createDetailLink.bind(this)}>Song</TableHeaderColumn>
-					<TableHeaderColumn dataField='artist'>Artist</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataField='artist'>Artist</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getGenders} >Gender</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass("colLvl") } dataField="complexity">Lvl</TableHeaderColumn>
-					<TableHeaderColumn dataFormat={this.getStatus.bind(this)}>Status</TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getStatus.bind(this)}>Status</TableHeaderColumn>
 					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.getInstrumments} >Instrumment</TableHeaderColumn>
-					<TableHeaderColumn dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
+					<TableHeaderColumn className={Util.fnGetHideSmClass} columnClassName={ Util.fnGetHideSmClass } dataFormat={this.createButtons.bind(this)} ></TableHeaderColumn>
 				</CustomTable>   
 			</div>         
 		);
