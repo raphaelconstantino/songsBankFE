@@ -83,9 +83,33 @@ export default class SongsTable extends Component {
 
 	}
 
+	toggleFavorite (id, favorite) {
+		
+		if (favorite === null || favorite === undefined || favorite === false)
+		{
+			favorite = true;
+		} else {
+			favorite = false;
+		}
+		
+		HttpService.put("v1/songs/" + id, {favorite : favorite})
+			.then(response => this.props.refreshTable(response) );	
+	}
+
 	createDetailLink (cell, row) {
+		
+		let classVal = "glyphicon glyphicon-heart-empty";
+
+		if (row.favorite === true)
+		{
+			classVal = "glyphicon glyphicon-heart";
+		}
+		
 		return (
-			<Link to={"/songDetail?id=" + row._id}>{row.name}</Link>
+			<span>
+				<span className={classVal} onClick={this.toggleFavorite.bind(this, row._id, row.favorite )} ></span> 
+				<Link to={"/songDetail?id=" + row._id}> {row.name}</Link>
+			</span>	
 		)
 	}
 
