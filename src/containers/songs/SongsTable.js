@@ -98,16 +98,16 @@ export default class SongsTable extends Component {
 
 	createDetailLink (cell, row) {
 		
-		let classVal = "glyphicon glyphicon-heart-empty";
+		/*let classVal = "glyphicon glyphicon-heart-empty";
 
 		if (row.favorite === true)
 		{
 			classVal = "glyphicon glyphicon-heart";
-		}
+		}*/
 		
 		return (
 			<span>
-				<span className={classVal} onClick={this.toggleFavorite.bind(this, row._id, row.favorite )} ></span> 
+				{/*<span className={classVal} onClick={this.toggleFavorite.bind(this, row._id, row.favorite )} ></span> */}
 				<Link to={"/songDetail?id=" + row._id}> {row.name}</Link>
 			</span>	
 		)
