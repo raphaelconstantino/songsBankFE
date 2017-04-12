@@ -8,16 +8,24 @@ export default class HttpService {
 
     static get (url) {
 
-        return fetch("/" + url)
-            .then(res => this._handleErrors(res))
-            .then(res => res.json());
-        
+        return fetch("/" + url, {
+            headers : {
+                'x-access-token' : localStorage.getItem('auth-token')
+            },
+            method: 'get'
+        })
+        .then(res => this._handleErrors(res))
+        .then(res => res.json());
+    
     }
     
     static post(url, data) {
 
         return fetch("/" + url, {
-            headers: { 'Content-type' : 'application/json'},
+            headers: { 
+                'Content-type' : 'application/json',
+                'x-access-token' : localStorage.getItem('auth-token')             
+            },
             method: 'post',
             body: JSON.stringify(data)
         })
@@ -29,6 +37,10 @@ export default class HttpService {
     static del(url) {
 
         return fetch("/" + url, {
+            headers: { 
+                'Content-type' : 'application/json',
+                'x-access-token' : localStorage.getItem('auth-token')             
+            },            
             method: 'delete'
         })
         .then(res => this._handleErrors(res))
@@ -39,7 +51,10 @@ export default class HttpService {
     static put(url, data) {
 
         return fetch("/" + url, {
-            headers: { 'Content-type' : 'application/json'},
+            headers: { 
+                'Content-type' : 'application/json',
+                'x-access-token' : localStorage.getItem('auth-token')             
+            },
             method: 'put',
             body: JSON.stringify(data)
         })
