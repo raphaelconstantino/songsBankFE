@@ -27,6 +27,7 @@ export default class TopNavBar extends Component {
                         <ul className="nav navbar-nav navbar-right">
                             <Notifications />                           
                             <User />
+                            <Link to="/logout">Logout</Link>
                         </ul>
                         
                         <FormSearch />

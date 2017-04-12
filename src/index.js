@@ -8,6 +8,7 @@ import InsertSongBox from './containers/songs/InsertSong';
 import GendersBox from './containers/genders/Genders';
 import InstrumentsBox from './containers/instruments/Instruments';
 import Login from './containers/auth/Login';
+import Logout from './containers/auth/Logout';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -29,6 +30,7 @@ ReactDOM.render(
   <MuiThemeProvider>	
   	<Router history={browserHistory}>
 	  	<Route path="/login" component={Login} />
+			<Route path="/logout" component={Logout}/>
 			<Route path="/" component={App} onEnter={verififyAuth}>
 		  	<IndexRoute component={DashboardBox} onEnter={verififyAuth}/>
 				<Route path="/songs" component={SongsBox} onEnter={verififyAuth}/>
