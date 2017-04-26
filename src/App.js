@@ -1,10 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Menu from './components/Menu';
+import Login from './containers/auth/Login';
+import { loginUser } from './actions/authActionCreator';
 import './css/bootstrap.min.css';
 import './css/material-dashboard.css';
 import './css/app.css';
-import Menu from './components/Menu';
 
 class App extends Component {   
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    auth : PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string
+  }
 
   constructor(props) {
     super(props);
@@ -20,19 +30,47 @@ class App extends Component {
   }
 
   render() {
+    const { dispatch, isAuthenticated, errorMessage, auth } = this.props
     return (
+      <div>
 
-        <div className="wrapper">           
+          {!isAuthenticated &&
+            <Login
+              auth={auth}
+              errorMessage={errorMessage}
+              onLoginClick={ creds => dispatch(loginUser(creds)) }
+            />
+          }
 
-          <Menu open={this.state.open} handleToggle={this.handleToggle} pathName={this.props.location.pathname} />
+          {isAuthenticated &&
+            <div className="wrapper">           
 
-          <div className="transparent-layer" onClick={this.closeMenu}></div>
+              <Menu dispatch={dispatch} open={this.state.open} handleToggle={this.handleToggle} pathName={this.props.location.pathname} />
 
-          {this.props.children}
-           
-        </div>    
+              <div className="transparent-layer" onClick={this.closeMenu}></div>
+
+              {React.cloneElement(this.props.children, { dispatch})}
+              
+            </div>
+          }
+
+      </div>        
     );
   }
 }
 
-export default App;
+// These props come from the application's
+// state when it is started
+function mapStateToProps(state) {
+
+  const { auth } = state;
+  const { isAuthenticated, errorMessage } = auth;
+
+  return {
+    auth,
+    isAuthenticated,
+    errorMessage
+  }
+}
+
+export default connect(mapStateToProps)(App)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import GendersTable from './GendersTable';
 import UpsertDialog from './UpsertDialog';
 import HttpService from '../../util/HttpService';
@@ -10,6 +10,10 @@ import CardHeader from '../../components/CardHeader';
 
 export default class GendersBox extends Component {
 	
+	static propTypes = {
+		dispatch: PropTypes.func,
+	}
+
 	constructor () {
 		super();
 		this.state = { genders : [], msgSuccess : ""};
@@ -45,10 +49,11 @@ export default class GendersBox extends Component {
 	}	
 
 	render () {
+		const { dispatch } = this.props;
 		return (
 			<div className="main-panel" id="page-wrapper">
 				
-				<TopNavBar title="Gender List" url="/genders"/>
+				<TopNavBar dispatch={dispatch} title="Gender List" url="/genders"/>
 
 				<Card>
 

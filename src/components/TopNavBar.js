@@ -4,15 +4,19 @@ import Notifications from './Notifications.js';
 import User from './User.js';
 import FormSearch from './FormSearch.js';
 import NavBarToggle from './NavBarToggle.js';
+import Logout from '../containers/auth/Logout';
+import { logoutUser } from '../actions/authActionCreator';
 
 export default class TopNavBar extends Component {
 	
   static propTypes = {
     title : PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
     url : PropTypes.string.isRequired,
   }    
     
     render () {
+        const { dispatch } = this.props
 		return (
             <nav className="navbar navbar-transparent navbar-absolute">
                 
@@ -27,7 +31,8 @@ export default class TopNavBar extends Component {
                         <ul className="nav navbar-nav navbar-right">
                             <Notifications />                           
                             <User />
-                            <Link to="/logout">Logout</Link>
+                            <Logout onLogoutClick={() => dispatch(logoutUser())} />
+            
                         </ul>
                         
                         <FormSearch />

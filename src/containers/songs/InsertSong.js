@@ -9,6 +9,7 @@ import CardHeader from '../../components/CardHeader';
 
 export default class InsertSongBox extends Component {
 	
+	
 	constructor () {
 		super();
 		this.state = { 
@@ -40,7 +41,8 @@ export default class InsertSongBox extends Component {
     }
 
     static propTypes = {
-		name: PropTypes.string
+		name: PropTypes.string,
+		dispatch: PropTypes.func
     }
 
 	validate () {
@@ -175,10 +177,11 @@ export default class InsertSongBox extends Component {
 	} 
 
 	render () {
+		const { dispatch } = this.props;
 		return (
 			<div className="main-panel" id="page-wrapper">
 
-				<TopNavBar title="Songs List" url="/songs" />
+				<TopNavBar dispatch={dispatch} title="Songs List" url="/songs" />
 
 				<Card>
 

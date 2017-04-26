@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import HttpService from '../../util/HttpService';
 import InstrumentTable from './InstrumentTable';
 import UpsertDialog from './UpsertDialog';
@@ -10,6 +10,10 @@ import CardHeader from '../../components/CardHeader';
 
 export default class GendersBox extends Component {
 	
+	static propTypes = {
+		dispatch: PropTypes.func
+	}
+
 	constructor () {
 		super();
 		this.state = { instrumments : [], msgSuccess : ""};
@@ -44,10 +48,11 @@ export default class GendersBox extends Component {
 	}	
 
 	render () {
+		const { dispatch } = this.props;
 		return (
 			<div className="main-panel" id="page-wrapper">
 
-				<TopNavBar title="Instruments List" url="/instruments"/>
+				<TopNavBar dispatch={dispatch} title="Instruments List" url="/instruments"/>
 
 				<Card>
 

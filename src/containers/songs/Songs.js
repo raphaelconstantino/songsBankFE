@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
 import SongsFilter from './SongsFilter';
@@ -12,6 +12,10 @@ import {Link} from 'react-router'
 
 export default class SongsBox extends Component {
 	
+	static propTypes = {
+		dispatch: PropTypes.func,
+	}
+
 	constructor () {
 		super();
 		this.state = { songs : [], gendersList : [], genders : "", instrummentsList : [], instrumments : "",  complexityList : [], complexity : "", statusList : [], status : "", msgSuccess : ""};
@@ -112,11 +116,11 @@ export default class SongsBox extends Component {
 	}
 
 	render () {
-
+		const { dispatch } = this.props
 		return (
 			<div className="main-panel" id="page-wrapper">
 				
-				<TopNavBar title="Songs List" url="/songs" />
+				<TopNavBar dispatch={dispatch} title="Songs List" url="/songs" />
 
 				<Card>
 					

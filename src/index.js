@@ -1,46 +1,54 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+// Redux
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import auth from './reducers/auth';
+import authApi from './middleware/authApi';
+// Components
 import DashboardBox from './containers/dashboard/Dashboard';
 import SongsBox from './containers/songs/Songs';
 import SongDetailBox from './containers/songs/SongDetail';
 import InsertSongBox from './containers/songs/InsertSong';
 import GendersBox from './containers/genders/Genders';
 import InstrumentsBox from './containers/instruments/Instruments';
-import Login from './containers/auth/Login';
-import Logout from './containers/auth/Logout';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import './index.css';
+// Ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import './index.css';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-function verififyAuth(nextState,replace) {
-  if(localStorage.getItem('auth-token') === null)
-	{
-    replace('/login?msg=You need to login');
-  }
-}
+// Combine APP reducers
+const listApp = combineReducers({
+  auth
+})
+
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, authApi)(createStore);
+let store = createStoreWithMiddleware(listApp);
 
 ReactDOM.render(
   (
   <MuiThemeProvider>	
-  	<Router history={browserHistory}>
-	  	<Route path="/login" component={Login} />
-			<Route path="/logout" component={Logout}/>
-			<Route path="/" component={App} onEnter={verififyAuth}>
-		  	<IndexRoute component={DashboardBox} onEnter={verififyAuth}/>
-				<Route path="/songs" component={SongsBox} onEnter={verififyAuth}/>
-				<Route path="/songDetail" component={SongDetailBox} onEnter={verififyAuth}/>
-				<Route path="/insertSong" component={InsertSongBox} onEnter={verififyAuth}/>
-		  	<Route path="/dashboard" component={DashboardBox} onEnter={verififyAuth}/>
-		  	<Route path="/genders" component={GendersBox} onEnter={verififyAuth}/>
-		  	<Route path="/instruments" component={InstrumentsBox} onEnter={verififyAuth}/>
-		</Route>  	
-	  </Router>
+		<Provider store={store}> 
+			<Router history={browserHistory}>
+				<Route path="/" component={App}>
+					<IndexRoute component={DashboardBox} />
+					<Route path="/songs" component={SongsBox} />
+					<Route path="/songDetail" component={SongDetailBox} />
+					<Route path="/insertSong" component={InsertSongBox} />
+					<Route path="/dashboard" component={DashboardBox} />
+					<Route path="/genders" component={GendersBox} />
+					<Route path="/instruments" component={InstrumentsBox} />
+			</Route>  	
+			</Router>
+		</Provider>	
 	</MuiThemeProvider>  
 	),
   document.getElementById('root')

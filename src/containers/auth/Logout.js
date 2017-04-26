@@ -1,14 +1,20 @@
-import { Component } from 'react';
-import {browserHistory} from  'react-router';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Logout extends Component {
 
-    componentWillMount(){
-        localStorage.removeItem('auth-token');
-        browserHistory.push('/');
-    }
+  static propTypes = {
+    onLogoutClick: PropTypes.func.isRequired
+  }
 
-    render(){
-        return null;
-    }
+  render() {
+    const { onLogoutClick } = this.props
+
+    return (
+      <button onClick={() => onLogoutClick()} className="btn btn-primary">
+        <span className="glyphicon glyphicon-log-out"></span> Logout
+      </button>
+    )
+  }
+
 }

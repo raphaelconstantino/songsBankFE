@@ -15,6 +15,10 @@ export default class SongDetailBox extends Component {
         this.state = { song : {} };
     }
 
+    static propTypes = {
+		dispatch: PropTypes.func
+	}
+
     static contextTypes = {
         router: PropTypes.object.isRequired
     }    
@@ -29,11 +33,11 @@ export default class SongDetailBox extends Component {
     }
 
     render () {
-
+        const { dispatch } = this.props;
 		return (
             <div className="main-panel" id="page-wrapper">
 
-                <TopNavBar title="Songs List" url="/songs" />
+                <TopNavBar dispatch={dispatch} title="Songs List" url="/songs" />
                 
                 <Card>
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SongsUtil from '../songs/SongsUtil'
 import DashboardTopPlayed from './DashboardTopPlayed'
 import DashboardCardStats from './DashboardCardStats'
@@ -10,6 +10,10 @@ import CardHeader from '../../components/CardHeader';
 import Content from '../../components/Content';
 
 export default class DashboardBox extends Component {
+
+	static propTypes = {
+		dispatch: PropTypes.func,
+	}
 
 	constructor () {
 		super();
@@ -73,10 +77,11 @@ export default class DashboardBox extends Component {
 	}
 
     render () {
+		const { dispatch } = this.props
 		return (
 			<div className="main-panel" id="page-wrapper">
 
-				<TopNavBar title="Dashboard" url="/dashboard" />
+				<TopNavBar dispatch={dispatch} title="Dashboard" url="/dashboard" />
 
 				<Content>
 

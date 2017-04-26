@@ -1,38 +1,45 @@
-import React, { Component } from 'react';
-import {browserHistory} from  'react-router';
-import HttpService from '../../util/HttpService';
-import '../../css/login.css';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 export default class Login extends Component {
 
-    constructor(props){
-        super(props);        
-        this.state = {msg:this.props.location.query.msg};
+  static propTypes = {
+    auth : PropTypes.object.isRequired,
+    onLoginClick: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string
+  }
+
+  btnLabel (isFetching) {
+    if (isFetching)
+    {
+      return "Processing...";
     }
 
-    envia(event){
-        event.preventDefault();
+    return "Login";
+  }
 
-        HttpService.post("authenticate", {login: this.login.value, password: this.senha.value})
-        .then(response => {
-                localStorage.setItem('auth-token', response['x-access-token']);
-                browserHistory.push('/');
-            });
+  render() {
+    const { errorMessage, auth } = this.props
 
+    return (
+      <div>
+        <input type='text' ref='username' className="form-control" placeholder='Username'/>
+        <input type='password' ref='password' className="form-control" placeholder='Password'/>
+        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
+          {this.btnLabel(auth.isFetching)}
+        </button>
 
-    }
+        {errorMessage &&
+          <p>{errorMessage}</p>
+        }
+      </div>
+    )
+  }
 
-    render(){
-        return (
-            <div className="login-box">
-                <h1 className="header-logo">Song Bank</h1>
-                <span>{this.state.msg}</span>
-                <form onSubmit={this.envia.bind(this)}>
-                    <input type="text" ref={(input) => this.login = input}/>
-                    <input type="password" ref={(input) => this.senha = input}/>
-                    <input type="submit" value="login"/>
-                </form>
-            </div>
-        );
-    }
+  handleClick(event) {
+    const username = this.refs.username
+    const password = this.refs.password
+    const creds = { username: username.value.trim(), password: password.value.trim() }
+    this.props.onLoginClick(creds)
+  }
 }

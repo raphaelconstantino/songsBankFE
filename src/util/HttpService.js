@@ -1,3 +1,5 @@
+import * as constants from './constants';
+
 export default class HttpService {
 
     static _handleErrors(res) {
@@ -10,7 +12,7 @@ export default class HttpService {
 
         return fetch("/" + url, {
             headers : {
-                'x-access-token' : localStorage.getItem('auth-token')
+                'x-access-token' : localStorage.getItem(constants.TOKEN)
             },
             method: 'get'
         })
@@ -24,7 +26,7 @@ export default class HttpService {
         return fetch("/" + url, {
             headers: { 
                 'Content-type' : 'application/json',
-                'x-access-token' : localStorage.getItem('auth-token')             
+                'x-access-token' : localStorage.getItem(constants.TOKEN)             
             },
             method: 'post',
             body: JSON.stringify(data)
@@ -39,7 +41,7 @@ export default class HttpService {
         return fetch("/" + url, {
             headers: { 
                 'Content-type' : 'application/json',
-                'x-access-token' : localStorage.getItem('auth-token')             
+                'x-access-token' : localStorage.getItem(constants.TOKEN)             
             },            
             method: 'delete'
         })
@@ -53,7 +55,7 @@ export default class HttpService {
         return fetch("/" + url, {
             headers: { 
                 'Content-type' : 'application/json',
-                'x-access-token' : localStorage.getItem('auth-token')             
+                'x-access-token' : localStorage.getItem(constants.TOKEN)             
             },
             method: 'put',
             body: JSON.stringify(data)
