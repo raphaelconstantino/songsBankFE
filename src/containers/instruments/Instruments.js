@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import HttpService from '../../util/HttpService';
 import InstrumentTable from './InstrumentTable';
 import UpsertDialog from './UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -7,11 +6,14 @@ import { Alert } from 'react-bootstrap';
 import TopNavBar from '../../components/TopNavBar';
 import Card from '../../components/Card';
 import CardHeader from '../../components/CardHeader';
+import { fetchInstruments } from '../../actions/instrumentsActionCreator';
+
 
 export default class GendersBox extends Component {
 	
 	static propTypes = {
-		dispatch: PropTypes.func
+		dispatch: PropTypes.func,
+		instruments : PropTypes.object
 	}
 
 	constructor () {
@@ -22,9 +24,8 @@ export default class GendersBox extends Component {
 	}
 
 	componentDidMount() {
-		
-		HttpService.get("v1/instrumments")
-			.then(response => this.setState({instrumments : response}));
+		const { dispatch } = this.props;
+		dispatch(fetchInstruments());
 	} 
 
 	setMsgSuccess (val) {
@@ -48,7 +49,8 @@ export default class GendersBox extends Component {
 	}	
 
 	render () {
-		const { dispatch } = this.props;
+		const { dispatch, instruments } = this.props;
+		
 		return (
 			<div className="main-panel" id="page-wrapper">
 
@@ -64,7 +66,7 @@ export default class GendersBox extends Component {
 								<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
 							</div>	
 							<div>
-								<InstrumentTable instrumments={this.state.instrumments} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
+								<InstrumentTable instrumments={instruments.response} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
 							</div> 
 						</div>	
 				</Card>

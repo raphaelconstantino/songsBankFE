@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   render() {
-    const { dispatch, isAuthenticated, errorMessage, auth } = this.props
+    const { dispatch, isAuthenticated, errorMessage, auth, instruments } = this.props
     return (
       <div>
 
@@ -49,7 +49,7 @@ class App extends Component {
 
               <div className="transparent-layer" onClick={this.closeMenu}></div>
 
-              {React.cloneElement(this.props.children, { dispatch})}
+              {React.cloneElement(this.props.children, { dispatch, instruments })}
               
             </div>
           }
@@ -63,10 +63,11 @@ class App extends Component {
 // state when it is started
 function mapStateToProps(state) {
 
-  const { auth } = state;
+  const { auth, instruments } = state;
   const { isAuthenticated, errorMessage } = auth;
 
   return {
+    instruments,
     auth,
     isAuthenticated,
     errorMessage
