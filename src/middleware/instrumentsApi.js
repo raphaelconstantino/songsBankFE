@@ -11,9 +11,18 @@ export default store => next => action => {
     return next(action);
   }
 
-  let { endpoint, types, authenticated, method } = callAPI;
+  let { endpoint, types, authenticated, method, preLoaded } = callAPI;
 
   const [ requestType, successType, errorType ] = types;
+
+  if (preLoaded) 
+  {
+      next({
+        preLoaded,
+        authenticated,
+        type: successType
+      })
+  }
 
   // Request Type
   next({type: requestType});

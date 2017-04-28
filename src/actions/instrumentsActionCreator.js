@@ -10,10 +10,11 @@ export const INSTRUMENT_DELETE_REQUEST = 'INSTRUMENT_DELETE_REQUEST'
 export const INSTRUMENT_DELETE_SUCCESS = 'INSTRUMENT_DELETE_SUCCESS'
 export const INSTRUMENT_DELETE_FAILURE = 'INSTRUMENT_DELETE_FAILURE'
 
-export function fetchInstruments() {
+export function fetchInstruments(oPreLoaded) {
   return {
     [CALL_INSTRUMENTS_API]: {
       endpoint: 'v1/instrumments',
+      preLoaded : oPreLoaded,
       method : "get",
       authenticated: true,
       types: [INSTRUMENT_LIST_REQUEST, INSTRUMENT_LIST_SUCCESS, INSTRUMENT_LIST_FAILURE]

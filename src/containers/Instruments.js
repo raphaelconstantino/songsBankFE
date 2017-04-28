@@ -25,8 +25,8 @@ class InstrumentsBox extends Component {
 	}
 
 	componentDidMount() {
-		const { dispatch } = this.props;
-		dispatch(fetchInstruments());
+		const { fetchInstruments } = this.props;
+		fetchInstruments();
 	} 
 
 	setMsgSuccess (val) {
@@ -80,8 +80,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
     deleteInstruments : (url) => {
-      dispatch(deleteInstruments(url));
-    }
+      dispatch(deleteInstruments(url))
+		.then(res => {
+			fetchInstruments(res);
+		});
+    },
+
+	fetchInstruments : preLoaded => {
+		dispatch(fetchInstruments());
+	}	
 
   }
 }
