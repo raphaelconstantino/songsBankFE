@@ -17,7 +17,7 @@ import SongsBox from './containers/songs/Songs';
 import SongDetailBox from './containers/songs/SongDetail';
 import InsertSongBox from './containers/songs/InsertSong';
 import GendersBox from './containers/genders/Genders';
-import InstrumentsBox from './containers/instruments/Instruments';
+import InstrumentsBox from './containers/Instruments';
 // Ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';

@@ -11,7 +11,7 @@ export default store => next => action => {
     return next(action);
   }
 
-  let { endpoint, types, authenticated } = callAPI;
+  let { endpoint, types, authenticated, method } = callAPI;
 
   const [ requestType, successType, errorType ] = types;
 
@@ -19,7 +19,7 @@ export default store => next => action => {
   next({type: requestType});
 
   // Passing the authenticated boolean back in our data will let us distinguish between normal and secret quotes
-  return HttpService.get(endpoint).then(
+  return HttpService[method](endpoint).then(
     response =>
       next({
         response,

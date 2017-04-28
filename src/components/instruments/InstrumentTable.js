@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import CustomTable from '../../components/CustomTable';
-import HttpService from '../../util/HttpService';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 export default class InstrumentTable extends Component {
@@ -14,11 +13,13 @@ export default class InstrumentTable extends Component {
 
 	deleteInstrument (_id, name) {
 
-		HttpService.del("v1/instrumments/" + _id)
+		this.props.deleteInstruments("v1/instrumments/" + _id)
+
+		/*HttpService.del()
 		   .then(response => {
 			  this.props.setMsgSuccess(`Instrumment ${name} deleted succesfully.`);
 			  return this.props.refreshTable(response) 
-			}); 
+			}); */
 
 	}
 

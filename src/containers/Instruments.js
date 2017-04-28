@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import InstrumentTable from './InstrumentTable';
-import UpsertDialog from './UpsertDialog';
+import { connect } from 'react-redux';
+import InstrumentTable from '../components/instruments/InstrumentTable';
+import UpsertDialog from '../components/instruments/UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
-import TopNavBar from '../../components/TopNavBar';
-import Card from '../../components/Card';
-import CardHeader from '../../components/CardHeader';
-import { fetchInstruments } from '../../actions/instrumentsActionCreator';
+import TopNavBar from '../components/TopNavBar';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
+import { fetchInstruments, deleteInstruments } from '../actions/instrumentsActionCreator';
 
 
-export default class GendersBox extends Component {
+class InstrumentsBox extends Component {
 	
 	static propTypes = {
 		dispatch: PropTypes.func,
@@ -49,8 +50,7 @@ export default class GendersBox extends Component {
 	}	
 
 	render () {
-		const { dispatch, instruments } = this.props;
-		
+		const { dispatch, instruments, deleteInstruments } = this.props;
 		return (
 			<div className="main-panel" id="page-wrapper">
 
@@ -66,7 +66,7 @@ export default class GendersBox extends Component {
 								<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
 							</div>	
 							<div>
-								<InstrumentTable instrumments={instruments.response} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
+								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
 							</div> 
 						</div>	
 				</Card>
@@ -75,3 +75,27 @@ export default class GendersBox extends Component {
 	}
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    deleteInstruments : (url) => {
+      dispatch(deleteInstruments(url));
+    }
+
+  }
+}
+
+
+// These props come from the application's
+// state when it is started
+function mapStateToProps(state) {
+
+  const { instruments } = state;
+
+  return {
+    instruments
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InstrumentsBox)
