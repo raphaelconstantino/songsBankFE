@@ -7,7 +7,7 @@ import { Alert } from 'react-bootstrap';
 import TopNavBar from '../components/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
-import { fetchInstruments, deleteInstruments } from '../actions/instrumentsActionCreator';
+import { fetchInstruments, deleteInstruments, insertIntrument } from '../actions/instrumentsActionCreator';
 
 
 class InstrumentsBox extends Component {
@@ -20,7 +20,6 @@ class InstrumentsBox extends Component {
 	constructor () {
 		super();
 		this.state = { instrumments : [], msgSuccess : ""};
-		this.refreshTable = this.refreshTable.bind(this);
 		this.setMsgSuccess = this.setMsgSuccess.bind(this);
 	}
 
@@ -31,10 +30,6 @@ class InstrumentsBox extends Component {
 
 	setMsgSuccess (val) {
 		this.setState({msgSuccess : val});
-	}
-
-	refreshTable (response) {
-		this.setState({instrumments : response});
 	}	
 
 	fnCreateMessage () {
@@ -50,7 +45,7 @@ class InstrumentsBox extends Component {
 	}	
 
 	render () {
-		const { dispatch, instruments, deleteInstruments } = this.props;
+		const { dispatch, instruments, deleteInstruments, insertIntrument } = this.props;
 		return (
 			<div className="main-panel" id="page-wrapper">
 
@@ -63,10 +58,10 @@ class InstrumentsBox extends Component {
 						<div className="card-content table-responsive">
 							{this.fnCreateMessage()}	
 							<div className="margin-vert">	
-								<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
+								<UpsertDialog insertIntrument={insertIntrument} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
 							</div>	
 							<div>
-								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
+								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} setMsgSuccess={this.setMsgSuccess}/>    
 							</div> 
 						</div>	
 				</Card>
@@ -83,9 +78,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deleteInstruments(url));
     },
 
-	fetchInstruments : preLoaded => {
+	fetchInstruments : () => {
 		dispatch(fetchInstruments());
-	}	
+	},
+
+	insertIntrument : (url, oData) => {
+		dispatch(insertIntrument(url, oData));
+	} 
 
   }
 }

@@ -6,7 +6,6 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 export default class InstrumentTable extends Component {
 
 	static propTypes = {
-		refreshTable : PropTypes.func.isRequired,
 		setMsgSuccess : PropTypes.func.isRequired,
 		instrumments : PropTypes.array.isRequired
 	}

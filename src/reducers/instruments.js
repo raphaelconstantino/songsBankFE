@@ -1,6 +1,7 @@
 import {
   INSTRUMENT_LIST_REQUEST, INSTRUMENT_LIST_SUCCESS, INSTRUMENT_LIST_FAILURE,
-  INSTRUMENT_DELETE_REQUEST, INSTRUMENT_DELETE_SUCCESS, INSTRUMENT_DELETE_FAILURE
+  INSTRUMENT_DELETE_REQUEST, INSTRUMENT_DELETE_SUCCESS, INSTRUMENT_DELETE_FAILURE,
+  INSTRUMENT_INSERT_REQUEST, INSTRUMENT_INSERT_SUCCESS, INSTRUMENT_INSERT_FAILURE
 } from '../actions/instrumentsActionCreator'
 
 let initState = {
@@ -40,7 +41,21 @@ export default function list(state = initState, action) {
     case INSTRUMENT_DELETE_FAILURE:
       return Object.assign({}, state, {
         isFetching: true
-      })        
+      })     
+    case INSTRUMENT_INSERT_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case INSTRUMENT_INSERT_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        response: action.response,
+        authenticated: action.authenticated || false
+      })  
+    case INSTRUMENT_INSERT_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: true
+      })              
     default:
       return state
     }
