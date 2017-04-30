@@ -24,7 +24,8 @@ export default function list(state = initState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         response: action.response,
-        authenticated: action.authenticated || false
+        authenticated: action.authenticated || false,
+        message : null
       })
     case INSTRUMENT_LIST_FAILURE:
       return Object.assign({}, state, {
