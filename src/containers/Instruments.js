@@ -80,10 +80,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
     deleteInstruments : (url) => {
-      dispatch(deleteInstruments(url))
-		.then(res => {
-			fetchInstruments(res);
-		});
+      dispatch(deleteInstruments(url));
     },
 
 	fetchInstruments : preLoaded => {
