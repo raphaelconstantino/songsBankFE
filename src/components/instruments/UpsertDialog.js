@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import InstrumentForm from './InstrumentForm';
 import CustomDialog from '../../components/CustomDialog';
-import HttpService from '../../util/HttpService';
 
 export default class UpsertDialog extends Component {
 	
@@ -16,7 +15,6 @@ export default class UpsertDialog extends Component {
 	}
 	
 	static propTypes = {
-		setMsgSuccess : PropTypes.func.isRequired,
 		insertIntrument : PropTypes.func.isRequired,
 		obj : PropTypes.object
 	}
@@ -46,26 +44,7 @@ export default class UpsertDialog extends Component {
 
 		let oData = {name : this.state.name};
 
-		if (this.props.obj)
-		{
-		    HttpService.put("v1/instrumments/" + this.props.obj._id, oData)
-		      .then(response => {
-				  this.props.setMsgSuccess(`Instrument ${oData.name} updated succesfully.`);
-					//this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
-				}); 
-		} else
-		{
-
-			this.props.insertIntrument("v1/instrumments", oData);
-
-			/*HttpService.post("v1/instrumments", oData)
-				.then(response => {
-					this.props.setMsgSuccess(`Instrument ${oData.name} added succesfully.`);
-					this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
-				});	*/	
-		}		
+		this.props.insertIntrument("v1/instrumments", oData);
 
 		return true;
 
@@ -79,8 +58,7 @@ export default class UpsertDialog extends Component {
 		return (
 			<CustomDialog title="Insert Instrument" sendData={this.sendData} button={this.props.button}>
 				 <InstrumentForm name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
-			</CustomDialog>			
-		
+			</CustomDialog>				
 	    );
 	}
 

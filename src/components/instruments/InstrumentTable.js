@@ -6,19 +6,12 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 export default class InstrumentTable extends Component {
 
 	static propTypes = {
-		setMsgSuccess : PropTypes.func.isRequired,
 		instrumments : PropTypes.array.isRequired
 	}
 
 	deleteInstrument (_id, name) {
 
-		this.props.deleteInstruments("v1/instrumments/" + _id)
-
-		/*HttpService.del()
-		   .then(response => {
-			  this.props.setMsgSuccess(`Instrumment ${name} deleted succesfully.`);
-			  return this.props.refreshTable(response) 
-			}); */
+		this.props.deleteInstruments("v1/instrumments/" + _id);
 
 	}
 

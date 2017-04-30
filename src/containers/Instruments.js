@@ -17,26 +17,16 @@ class InstrumentsBox extends Component {
 		instruments : PropTypes.object
 	}
 
-	constructor () {
-		super();
-		this.state = { instrumments : [], msgSuccess : ""};
-		this.setMsgSuccess = this.setMsgSuccess.bind(this);
-	}
-
 	componentDidMount() {
 		const { fetchInstruments } = this.props;
 		fetchInstruments();
 	} 
 
-	setMsgSuccess (val) {
-		this.setState({msgSuccess : val});
-	}	
-
-	fnCreateMessage () {
-		if (this.state.msgSuccess)
+	fnCreateMessage (message) {
+		if (message)
 		{	
-			return (<Alert bsStyle="success">
-				{this.state.msgSuccess}
+			return (<Alert bsStyle={message.status}>
+				{message.text}
 			</Alert>);
 		}
 
@@ -56,12 +46,12 @@ class InstrumentsBox extends Component {
 					<CardHeader title="Instruments List" category="List of instruments" />
 
 						<div className="card-content table-responsive">
-							{this.fnCreateMessage()}	
+							{this.fnCreateMessage(instruments.message)}	
 							<div className="margin-vert">	
-								<UpsertDialog insertIntrument={insertIntrument} button={ <RaisedButton label="Insert Instrument" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
+								<UpsertDialog insertIntrument={insertIntrument} button={ <RaisedButton label="Insert Instrument" primary={true}/> } />
 							</div>	
 							<div>
-								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} setMsgSuccess={this.setMsgSuccess}/>    
+								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} />    
 							</div> 
 						</div>	
 				</Card>
@@ -89,9 +79,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-// These props come from the application's
-// state when it is started
 function mapStateToProps(state) {
 
   const { instruments } = state;
