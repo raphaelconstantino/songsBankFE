@@ -48,6 +48,13 @@ td {
 	padding-top : 1.5em;
 }
 
+.loading {
+	background : url('../img/loading.gif');
+	width : 221px;
+	height : 221px;
+	margin: 50px auto;
+}
+
 /* Song Detail */
 #detail-items dt {
 	text-align : left;

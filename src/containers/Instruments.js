@@ -22,6 +22,13 @@ class InstrumentsBox extends Component {
 		fetchInstruments();
 	} 
 
+	fnLoading (isFetching) {
+		if (isFetching)
+		{
+			return (<div className="loading"></div>);
+		}
+	}
+
 	fnCreateMessage (message) {
 		if (message)
 		{	
@@ -37,6 +44,7 @@ class InstrumentsBox extends Component {
 	render () {
 		const { dispatch, instruments, deleteInstruments, insertIntrument } = this.props;
 		return (
+			
 			<div className="main-panel" id="page-wrapper">
 
 				<TopNavBar dispatch={dispatch} title="Instruments List" url="/instruments"/>
@@ -44,7 +52,10 @@ class InstrumentsBox extends Component {
 				<Card>
 
 					<CardHeader title="Instruments List" category="List of instruments" />
+					
+					{this.fnLoading(instruments.isFetching)}
 
+					{!instruments.isFetching &&
 						<div className="card-content table-responsive">
 							{this.fnCreateMessage(instruments.message)}	
 							<div className="margin-vert">	
@@ -54,8 +65,11 @@ class InstrumentsBox extends Component {
 								<InstrumentTable deleteInstruments={deleteInstruments} instrumments={instruments.response} />    
 							</div> 
 						</div>	
-				</Card>
-	        </div>
+					}
+
+				</Card>	
+
+	    </div>
 		);
 	}
 
