@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import HttpService from '../../util/HttpService';
 import SongsTable from './SongsTable';
 import SongsFilter from './SongsFilter';
-import TopNavBar from '../../components/TopNavBar';
+import TopNavBar from '../../components/header/TopNavBar';
 import Card from '../../components/Card';
 import CardHeader from '../../components/CardHeader';
 import RaisedButton from 'material-ui/RaisedButton';

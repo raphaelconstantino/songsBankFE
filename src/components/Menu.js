@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavLink from './NavLink.js';
+import NavLink from './header/NavLink.js';
 
 export default class Menu extends Component {
 

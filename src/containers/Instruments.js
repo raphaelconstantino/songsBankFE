@@ -5,7 +5,7 @@ import UpsertDialog from '../components/instruments/UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import MessageBox from '../components/MessageBox';
 import Loading from '../components/Loading';
-import TopNavBar from '../components/TopNavBar';
+import TopNavBar from '../components/header/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import { fetchInstruments, deleteInstruments, insertIntrument } from '../actions/instrumentsActionCreator';

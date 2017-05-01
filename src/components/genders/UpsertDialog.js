@@ -51,8 +51,8 @@ export default class UpsertDialog extends Component {
 
 	}
 
-	setName(evento) {
-		this.setState({name:evento.target.value});
+	setName(event) {
+		this.setState({name:event.target.value});
 	}
  
 

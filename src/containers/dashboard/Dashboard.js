@@ -5,7 +5,7 @@ import DashboardCardStats from './DashboardCardStats'
 import PieChart from '../../components/PieChart'
 //import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
-import TopNavBar from '../../components/TopNavBar';
+import TopNavBar from '../../components/header/TopNavBar';
 import CardHeader from '../../components/CardHeader';
 import Content from '../../components/Content';
 

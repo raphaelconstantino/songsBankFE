@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import GendersTable from '../components/genders/GendersTable';
 import UpsertDialog from '../components/genders/UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import TopNavBar from '../components/TopNavBar';
+import TopNavBar from '../components/header/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
 import MessageBox from '../components/MessageBox';

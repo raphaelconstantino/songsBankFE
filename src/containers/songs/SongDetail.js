@@ -3,7 +3,7 @@ import moment from 'moment';
 import ProgressPie from '../../components/ProgressPie';
 import HttpService from '../../util/HttpService';
 import SongsUtil from './SongsUtil';
-import TopNavBar from '../../components/TopNavBar';
+import TopNavBar from '../../components/header/TopNavBar';
 import Card from '../../components/Card';
 import CardHeader from '../../components/CardHeader';
 

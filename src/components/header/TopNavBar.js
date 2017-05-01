@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 import Notifications from './Notifications.js';
 import User from './User.js';
-import FormSearch from './FormSearch.js';
+import FormSearch from '../FormSearch.js';
 import NavBarToggle from './NavBarToggle.js';
-import Logout from '../containers/auth/Logout';
-import { logoutUser } from '../actions/authActionCreator';
+import Logout from '../../containers/auth/Logout';
+import { logoutUser } from '../../actions/authActionCreator';
 
 export default class TopNavBar extends Component {
 	

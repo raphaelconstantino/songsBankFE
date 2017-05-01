@@ -3,7 +3,7 @@ import SongsForm from './SongsForm';
 import SongsUtil from './SongsUtil';
 import HttpService from '../../util/HttpService';
 import moment from 'moment';
-import TopNavBar from '../../components/TopNavBar';
+import TopNavBar from '../../components/header/TopNavBar';
 import Card from '../../components/Card';
 import CardHeader from '../../components/CardHeader';
 
