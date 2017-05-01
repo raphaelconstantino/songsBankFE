@@ -1,10 +1,10 @@
 import HttpService from '../util/HttpService';
 
-export const CALL_INSTRUMENTS_API = Symbol('Call API');
+export const CALL_HTTP_API = Symbol('Call API');
 
 export default store => next => action => {
 
-  const callAPI = action[CALL_INSTRUMENTS_API]
+  const callAPI = action[CALL_HTTP_API]
 
   // So the middleware doesn't get applied to every single action
   if (typeof callAPI === 'undefined') {

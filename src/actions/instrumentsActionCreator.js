@@ -1,5 +1,5 @@
 // The middleware to call the API for quotes
-import { CALL_INSTRUMENTS_API } from '../middleware/instrumentsApi'
+import { CALL_HTTP_API } from '../middleware/httpApi'
 
 // LIST
 export const INSTRUMENT_LIST_REQUEST = 'INSTRUMENT_LIST_REQUEST'
@@ -16,7 +16,7 @@ export const INSTRUMENT_INSERT_FAILURE = 'INSTRUMENT_INSERT_FAILURE'
 
 export function fetchInstruments(oPreLoaded) {
   return {
-    [CALL_INSTRUMENTS_API]: {
+    [CALL_HTTP_API]: {
       endpoint: 'v1/instrumments',
       preLoaded : oPreLoaded,
       method : "get",
@@ -28,7 +28,7 @@ export function fetchInstruments(oPreLoaded) {
 
 export function deleteInstruments (url) {
     return {
-    [CALL_INSTRUMENTS_API]: {
+    [CALL_HTTP_API]: {
       endpoint: url,
       method : "del",
       authenticated: true,
@@ -39,7 +39,7 @@ export function deleteInstruments (url) {
 
 export function insertIntrument (url, oData) {
     return {
-    [CALL_INSTRUMENTS_API]: {
+    [CALL_HTTP_API]: {
       endpoint: url,
       method : "post",
       oData,

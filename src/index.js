@@ -9,9 +9,10 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import auth from './reducers/auth';
 import instruments from './reducers/instruments';
+import genders from './reducers/genders';
 import authApi from './middleware/authApi';
-import instrumentsApi from './middleware/instrumentsApi';
-// Components
+import httpApi from './middleware/httpApi';
+// Containers
 import DashboardBox from './containers/dashboard/Dashboard';
 import SongsBox from './containers/songs/Songs';
 import SongDetailBox from './containers/songs/SongDetail';
@@ -30,10 +31,11 @@ injectTapEventPlugin();
 // Combine APP reducers
 const listApp = combineReducers({
   auth,
-  instruments
+  instruments,
+  genders
 })
 
-let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, authApi, instrumentsApi)(createStore);
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, authApi, httpApi)(createStore);
 let store = createStoreWithMiddleware(listApp);
 
 ReactDOM.render(
