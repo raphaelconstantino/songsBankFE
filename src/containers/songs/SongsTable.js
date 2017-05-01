@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import {Link} from 'react-router';
 import {TableHeaderColumn} from 'react-bootstrap-table';
-import ProgressPie from '../../components/ProgressPie';
+import ProgressPie from '../../components/charts/ProgressPie';
 import CustomTable from '../../components/CustomTable';
 import HttpService from '../../util/HttpService';
 import Util from '../../util/Util';

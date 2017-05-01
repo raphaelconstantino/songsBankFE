@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import ProgressPie from '../../components/ProgressPie';
+import ProgressPie from '../../components/charts/ProgressPie';
 import HttpService from '../../util/HttpService';
 import SongsUtil from './SongsUtil';
 import TopNavBar from '../../components/header/TopNavBar';

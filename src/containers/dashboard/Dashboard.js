@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import SongsUtil from '../songs/SongsUtil'
 import DashboardTopPlayed from './DashboardTopPlayed'
 import DashboardCardStats from './DashboardCardStats'
-import PieChart from '../../components/PieChart'
+import PieChart from '../../components/charts/PieChart'
 //import BarChart from '../../components/BarChart'
 import HttpService from '../../util/HttpService';
 import TopNavBar from '../../components/header/TopNavBar';
