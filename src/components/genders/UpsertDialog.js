@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import GendersForm from './GendersForm';
-import CustomDialog from '../../components/CustomDialog';
+import CustomDialog from '../CustomDialog';
 import HttpService from '../../util/HttpService';
 
 export default class UpsertDialog extends Component {

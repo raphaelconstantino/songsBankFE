@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {TableHeaderColumn} from 'react-bootstrap-table';
-import CustomTable from '../../components/CustomTable';
+import CustomTable from '../CustomTable';
 import HttpService from '../../util/HttpService';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 

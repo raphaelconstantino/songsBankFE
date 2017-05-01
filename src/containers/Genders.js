@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import GendersTable from './GendersTable';
-import UpsertDialog from './UpsertDialog';
-import HttpService from '../../util/HttpService';
+import GendersTable from '../components/genders/GendersTable';
+import UpsertDialog from '../components/genders/UpsertDialog';
+import HttpService from '../util/HttpService';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
-import TopNavBar from '../../components/TopNavBar';
-import Card from '../../components/Card';
-import CardHeader from '../../components/CardHeader';
+import TopNavBar from '../components/TopNavBar';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 
 export default class GendersBox extends Component {
 	

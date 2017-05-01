@@ -16,7 +16,7 @@ import DashboardBox from './containers/dashboard/Dashboard';
 import SongsBox from './containers/songs/Songs';
 import SongDetailBox from './containers/songs/SongDetail';
 import InsertSongBox from './containers/songs/InsertSong';
-import GendersBox from './containers/genders/Genders';
+import GendersBox from './containers/Genders';
 import InstrumentsBox from './containers/Instruments';
 // Ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
