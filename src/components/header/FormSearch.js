@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import HttpService from '../util/HttpService';
+import HttpService from '../../util/HttpService';
 
 export default class FormSearch extends Component {
 	
