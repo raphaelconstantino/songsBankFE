@@ -6,13 +6,12 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 export default class InstrumentTable extends Component {
 
 	static propTypes = {
-		instrumments : PropTypes.array.isRequired
+		instrumments : PropTypes.array.isRequired,
+		deleteInstruments : PropTypes.func.isRequired
 	}
 
 	deleteInstrument (_id, name) {
-
 		this.props.deleteInstruments("v1/instrumments/" + _id);
-
 	}
 
 	createButtons (cell, row, obj) {

@@ -1,25 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import {TableHeaderColumn} from 'react-bootstrap-table';
 import CustomTable from '../CustomTable';
-import HttpService from '../../util/HttpService';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 export default class GendersTable extends Component {
 
 	static propTypes = {
-		refreshTable : PropTypes.func.isRequired,
-		setMsgSuccess : PropTypes.func.isRequired,
-		genders : PropTypes.array.isRequired
+		genders : PropTypes.array.isRequired,
+		deleteGenders : PropTypes.func.isRequired
 	}
 
 	deleteGender (_id, name) {
-
-		HttpService.del("v1/genders/" + _id)
-		  .then(response => {
-			  this.props.setMsgSuccess(`Gender ${name} deleted succesfully.`);
-			  return this.props.refreshTable(response) 
-			}); 
-
+		this.props.deleteGenders("v1/genders/" + _id);
 	}
 
 	createButtons (cell, row, obj) {

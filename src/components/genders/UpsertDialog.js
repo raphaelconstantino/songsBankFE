@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import GendersForm from './GendersForm';
 import CustomDialog from '../CustomDialog';
-import HttpService from '../../util/HttpService';
 
 export default class UpsertDialog extends Component {
 	
@@ -16,8 +15,7 @@ export default class UpsertDialog extends Component {
 	}
 
 	static propTypes = {
-		refreshTable : PropTypes.func.isRequired,
-		setMsgSuccess : PropTypes.func.isRequired,
+		insertGender : PropTypes.func.isRequired,
 		obj : PropTypes.object
 	}
 		
@@ -47,23 +45,7 @@ export default class UpsertDialog extends Component {
 
 		let oData = {name : this.state.name};
 
-		if (this.props.obj)
-		{
-		    HttpService.put("v1/genders/" + this.props.obj._id, oData)
-		      .then(response => {
-					this.props.setMsgSuccess(`Gender ${oData.name} updated succesfully.`);
-					this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
-				}); 
-		} else
-		{
-			HttpService.post("v1/genders", oData)
-				.then(response => {
-					this.props.setMsgSuccess(`Gender ${oData.name} added succesfully.`);
-					this.props.refreshTable(response);
-					this.setState({ name : "", errorMsg : {} });
-				});		
-		}		
+		this.props.insertGender("v1/genders", oData);
 
 		return true;
 
@@ -77,7 +59,7 @@ export default class UpsertDialog extends Component {
 	render() {
 		return (
 			<CustomDialog title="Insert Gender" sendData={this.sendData} button={this.props.button}>
-				 <GendersForm refreshTable={this.props.refreshTable} name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
+				 <GendersForm  name={this.state.name} setName={this.setName} errorMsg={this.state.errorMsg} />
 			</CustomDialog>
 	    );
 	}

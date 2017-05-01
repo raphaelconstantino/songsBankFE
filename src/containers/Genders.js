@@ -1,56 +1,49 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import GendersTable from '../components/genders/GendersTable';
 import UpsertDialog from '../components/genders/UpsertDialog';
-import HttpService from '../util/HttpService';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
 import TopNavBar from '../components/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
+import { fetchGenders, deleteGenders, insertGender } from '../actions/gendersActionCreator';
 
-export default class GendersBox extends Component {
+class GendersBox extends Component {
 	
 	static propTypes = {
 		dispatch: PropTypes.func,
-	}
-
-	constructor () {
-		super();
-		this.state = { genders : [], msgSuccess : ""};
-		this.refreshTable = this.refreshTable.bind(this);
-		this.setMsgSuccess = this.setMsgSuccess.bind(this);
+		genders : PropTypes.object
 	}
 
 	componentDidMount() {
-		
-		HttpService.get("v1/genders")
-			.then(response => this.setState({genders : response}));
-
+		const { fetchGenders } = this.props;
+		fetchGenders();
 	} 
 
-	setMsgSuccess (val) {
-		this.setState({msgSuccess : val});
+	fnLoading (isFetching) {
+		if (isFetching)
+		{
+			return (<div className="loading"></div>);
+		}
 	}
 
-	refreshTable (response) {
-		this.setState({genders : response});
-	}
-
-	fnCreateMessage () {
-		if (this.state.msgSuccess)
+	fnCreateMessage (message) {
+		if (message)
 		{	
-			return (<Alert bsStyle="success">
-				{this.state.msgSuccess}
+			return (<Alert bsStyle={message.status}>
+				{message.text}
 			</Alert>);
 		}
 
 		return "";	
 		
-	}	
+	}		
 
 	render () {
-		const { dispatch } = this.props;
+		const { dispatch, genders, deleteGenders, insertGender } = this.props;
 		return (
+
 			<div className="main-panel" id="page-wrapper">
 				
 				<TopNavBar dispatch={dispatch} title="Gender List" url="/genders"/>
@@ -59,19 +52,54 @@ export default class GendersBox extends Component {
 
 					<CardHeader title="Genders List" category="List of genders" />
 
-					<div className="card-content table-responsive">
-						{this.fnCreateMessage()}	
-						<div className="margin-vert">	
-							<UpsertDialog refreshTable={this.refreshTable} button={ <RaisedButton label="Insert Gender" primary={true}/> } setMsgSuccess={this.setMsgSuccess}/>
-						</div>	
-						<div>
-							<GendersTable genders={this.state.genders} refreshTable={this.refreshTable} setMsgSuccess={this.setMsgSuccess}/>    
-						</div>    
-					</div>	
+					{this.fnLoading(genders.isFetching)}
+
+					{!genders.isFetching &&
+
+						<div className="card-content table-responsive">
+							{this.fnCreateMessage(genders.message)}	
+							<div className="margin-vert">	
+								<UpsertDialog insertGender={insertGender} button={ <RaisedButton label="Insert Gender" primary={true}/> } />
+							</div>	
+							<div>
+								<GendersTable deleteGenders={deleteGenders} genders={genders.response} />    
+							</div>    
+						</div>
+					}		
 
 				</Card>
 	        </div>
+
 		);
 	}
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    deleteGenders : (url) => {
+      dispatch(deleteGenders(url));
+    },
+
+	fetchGenders : () => {
+		dispatch(fetchGenders());
+	},
+
+	insertGender : (url, oData) => {
+		dispatch(insertGender(url, oData));
+	} 
+
+  }
+}
+
+function mapStateToProps(state) {
+
+  const { genders } = state;
+
+  return {
+    genders
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GendersBox)
