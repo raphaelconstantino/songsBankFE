@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import InstrumentTable from '../components/instruments/InstrumentTable';
 import UpsertDialog from '../components/instruments/UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Alert } from 'react-bootstrap';
+import MessageBox from '../components/MessageBox';
+import Loading from '../components/Loading';
 import TopNavBar from '../components/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
@@ -22,27 +23,9 @@ class InstrumentsBox extends Component {
 		fetchInstruments();
 	} 
 
-	fnLoading (isFetching) {
-		if (isFetching)
-		{
-			return (<div className="loading"></div>);
-		}
-	}
-
-	fnCreateMessage (message) {
-		if (message)
-		{	
-			return (<Alert bsStyle={message.status}>
-				{message.text}
-			</Alert>);
-		}
-
-		return "";	
-		
-	}	
-
 	render () {
 		const { dispatch, instruments, deleteInstruments, insertIntrument } = this.props;
+		
 		return (
 			
 			<div className="main-panel" id="page-wrapper">
@@ -53,11 +36,13 @@ class InstrumentsBox extends Component {
 
 					<CardHeader title="Instruments List" category="List of instruments" />
 					
-					{this.fnLoading(instruments.isFetching)}
+					<Loading isFetching={instruments.isFetching} />
 
 					{!instruments.isFetching &&
 						<div className="card-content table-responsive">
-							{this.fnCreateMessage(instruments.message)}	
+
+							<MessageBox message={instruments.message} />
+
 							<div className="margin-vert">	
 								<UpsertDialog insertIntrument={insertIntrument} button={ <RaisedButton label="Insert Instrument" primary={true}/> } />
 							</div>	

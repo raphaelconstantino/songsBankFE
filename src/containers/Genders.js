@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import GendersTable from '../components/genders/GendersTable';
 import UpsertDialog from '../components/genders/UpsertDialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Alert } from 'react-bootstrap';
 import TopNavBar from '../components/TopNavBar';
 import Card from '../components/Card';
 import CardHeader from '../components/CardHeader';
+import MessageBox from '../components/MessageBox';
+import Loading from '../components/Loading';
 import { fetchGenders, deleteGenders, insertGender } from '../actions/gendersActionCreator';
 
 class GendersBox extends Component {
@@ -21,25 +22,6 @@ class GendersBox extends Component {
 		fetchGenders();
 	} 
 
-	fnLoading (isFetching) {
-		if (isFetching)
-		{
-			return (<div className="loading"></div>);
-		}
-	}
-
-	fnCreateMessage (message) {
-		if (message)
-		{	
-			return (<Alert bsStyle={message.status}>
-				{message.text}
-			</Alert>);
-		}
-
-		return "";	
-		
-	}		
-
 	render () {
 		const { dispatch, genders, deleteGenders, insertGender } = this.props;
 		return (
@@ -52,12 +34,14 @@ class GendersBox extends Component {
 
 					<CardHeader title="Genders List" category="List of genders" />
 
-					{this.fnLoading(genders.isFetching)}
+					<Loading isFetching={genders.isFetching} />
 
 					{!genders.isFetching &&
 
 						<div className="card-content table-responsive">
-							{this.fnCreateMessage(genders.message)}	
+							
+							<MessageBox message={genders.message} />
+
 							<div className="margin-vert">	
 								<UpsertDialog insertGender={insertGender} button={ <RaisedButton label="Insert Gender" primary={true}/> } />
 							</div>	
