@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import SongsUtil from '../songs/SongsUtil'
-import DashboardTopPlayed from './DashboardTopPlayed'
-import DashboardCardStats from './DashboardCardStats'
-import PieChart from '../../components/charts/PieChart'
+import SongsUtil from './songs/SongsUtil'
+import DashboardTopPlayed from '../components/dashboard/DashboardTopPlayed'
+import DashboardCardStats from '../components/dashboard/DashboardCardStats'
+import PieChart from '../components/charts/PieChart'
 //import BarChart from '../../components/BarChart'
-import HttpService from '../../util/HttpService';
-import TopNavBar from '../../components/header/TopNavBar';
-import CardHeader from '../../components/CardHeader';
-import Content from '../../components/Content';
+import HttpService from '../util/HttpService';
+import TopNavBar from '../components/header/TopNavBar';
+import CardHeader from '../components/CardHeader';
+import Content from '../components/Content';
 
 export default class DashboardBox extends Component {
 

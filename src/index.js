@@ -13,7 +13,7 @@ import genders from './reducers/genders';
 import authApi from './middleware/authApi';
 import httpApi from './middleware/httpApi';
 // Containers
-import DashboardBox from './containers/dashboard/Dashboard';
+import DashboardBox from './containers/Dashboard';
 import SongsBox from './containers/songs/Songs';
 import SongDetailBox from './containers/songs/SongDetail';
 import InsertSongBox from './containers/songs/InsertSong';
