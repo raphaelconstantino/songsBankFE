@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export default class SongsUtil {
+export default class songsUtil {
 
     static getStatus () {
         return [

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SongsUtil from '../../containers/songs/SongsUtil';
+import SongsUtil from '../../util/songsUtil';
 import CardHeader from '../CardHeader';
 
 export default class DashboardTopPlayed extends Component {

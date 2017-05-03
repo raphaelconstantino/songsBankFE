@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import SongsForm from './SongsForm';
-import SongsUtil from './SongsUtil';
-import HttpService from '../../util/HttpService';
+import SongsForm from '../components/songs/SongsForm';
+import SongsUtil from '../util/songsUtil';
+import HttpService from '../util/HttpService';
 import moment from 'moment';
-import TopNavBar from '../../components/header/TopNavBar';
-import Card from '../../components/Card';
-import CardHeader from '../../components/CardHeader';
+import TopNavBar from '../components/header/TopNavBar';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 
 export default class InsertSongBox extends Component {
 	

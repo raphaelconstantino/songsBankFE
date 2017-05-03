@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import {Link} from 'react-router';
 import {TableHeaderColumn} from 'react-bootstrap-table';
-import ProgressPie from '../../components/charts/ProgressPie';
-import CustomTable from '../../components/CustomTable';
+import ProgressPie from '../charts/ProgressPie';
+import CustomTable from '../CustomTable';
 import HttpService from '../../util/HttpService';
 import Util from '../../util/Util';
-import SongsUtil from './SongsUtil';
+import SongsUtil from '../../util/songsUtil';
 
 
 export default class SongsTable extends Component {

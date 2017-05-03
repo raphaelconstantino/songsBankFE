@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import ProgressPie from '../../components/charts/ProgressPie';
-import HttpService from '../../util/HttpService';
-import SongsUtil from './SongsUtil';
-import TopNavBar from '../../components/header/TopNavBar';
-import Card from '../../components/Card';
-import CardHeader from '../../components/CardHeader';
+import ProgressPie from '../components/charts/ProgressPie';
+import HttpService from '../util/HttpService';
+import SongsUtil from '../util/songsUtil';
+import TopNavBar from '../components/header/TopNavBar';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 
 export default class SongDetailBox extends Component {
 

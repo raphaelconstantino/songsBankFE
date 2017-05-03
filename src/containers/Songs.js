@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import HttpService from '../../util/HttpService';
-import SongsTable from './SongsTable';
-import SongsFilter from './SongsFilter';
-import TopNavBar from '../../components/header/TopNavBar';
-import Card from '../../components/Card';
-import CardHeader from '../../components/CardHeader';
+import HttpService from '../util/HttpService';
+import SongsTable from '../components/songs/SongsTable';
+import SongsFilter from '../components/songs/SongsFilter';
+import TopNavBar from '../components/header/TopNavBar';
+import Card from '../components/Card';
+import CardHeader from '../components/CardHeader';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Alert } from 'react-bootstrap';
-import SongsUtil from './SongsUtil';
+import SongsUtil from '../util/songsUtil';
 import {Link} from 'react-router'
 
 export default class SongsBox extends Component {

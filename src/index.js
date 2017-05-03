@@ -14,9 +14,9 @@ import authApi from './middleware/authApi';
 import httpApi from './middleware/httpApi';
 // Containers
 import DashboardBox from './containers/Dashboard';
-import SongsBox from './containers/songs/Songs';
-import SongDetailBox from './containers/songs/SongDetail';
-import InsertSongBox from './containers/songs/InsertSong';
+import SongsBox from './containers/Songs';
+import SongDetailBox from './containers/SongDetail';
+import InsertSongBox from './containers/InsertSong';
 import GendersBox from './containers/Genders';
 import InstrumentsBox from './containers/Instruments';
 // Ui

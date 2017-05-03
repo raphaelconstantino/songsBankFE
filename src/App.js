@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Menu from './components/Menu';
-import Login from './containers/auth/Login';
+import Login from './containers/Login';
 import { loginUser } from './actions/authActionCreator';
 import './css/bootstrap.min.css';
 import './css/material-dashboard.css';

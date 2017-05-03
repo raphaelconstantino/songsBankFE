@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SongsUtil from './songs/SongsUtil'
+import SongsUtil from '../util/songsUtil'
 import DashboardTopPlayed from '../components/dashboard/DashboardTopPlayed'
 import DashboardCardStats from '../components/dashboard/DashboardCardStats'
 import PieChart from '../components/charts/PieChart'
